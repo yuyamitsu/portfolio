@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yuya Mitsugi Portfolio</title>
+  <link rel="stylesheet" href="styles/reset.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/style.css" />
+
+</head>
+
+<body>
+  <header>
+    <div class="siteLogo">Yuya Mitsugi</div>
+    <!-- ハンバーガーボタン -->
+    <button class="navToggle" aria-label="メニューを開閉する">
+      <span class="navToggleBar"></span>
+      <span class="navToggleBar"></span>
+      <span class="navToggleBar"></span>
+    </button>
+    <nav class="navWrapper">
+      <ul class="navList">
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#skills">SKILLS</a></li>
+        <li><a href="#works">WORKS</a></li>
+        <li><a href="#contact">CONTACT</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="heroSection">
+    <h1>Yuya Mitsugiの<br>ポートフォリオサイト</h1>
+  </section>
+  <section id="about" class="contentSection">
+    <h2>About Me</h2>
+    <p>HTML&CSSやJavaScriptを使用しゲームやインタラクティブなコンテンツの開発をしています。</p>
+  </section>
+  <section id="skills" class="contentSection">
+    <h2>Skills</h2>
+    <ul class="skillsList">
+      <li>HTML5</li>
+      <li>CSS3</li>
+      <li>JavaScript</li>
+      <li>GitHub</li>
+    </ul>
+  </section>
+
+  <section id="works" class="contentSection">
+    <h2>My Works</h2>
+    <div class="worksGrid">
+      <div class="worksCategory">
+        <h3 class="worksCategoryTitle">Games</h3>
+        <div class="categoryGrid">
+          <div class="workCard">
+            <img src="images/pokerGame.png" alt="ポーカーゲーム" />
+            <h4>Poker</h4>
+            <p>JavaScriptで作ったシングルプレイポーカー</p>
+            <a href="works/games/pokerGame.html">View Detail</a>
+          </div>
+          <div class="workCard">
+            <img src="images/memoryGame.png" alt="神経衰弱ゲーム" />
+            <h4>神経衰弱</h4>
+            <p>JavaScriptで作った神経衰弱ゲーム</p>
+            <a href="works/games/memoryGame.html">View Detail</a>
+          </div>
+          <div class="workCard">
+            <img src="images/highLowGame.png" alt="High&Lowゲーム" />
+            <h4>High&Low</h4>
+            <p>JavaScriptで作ったHigh&Lowゲーム</p>
+            <a href="works/games/highLow.html">View Detail</a>
+          </div>
+        </div>
+      </div>
+      <div class="worksCategory">
+        <h3 class="worksCategoryTitle">Utilities</h3>
+        <div class="categoryGrid">
+          <div class="workCard">
+            <img src="images/caluculator.png" alt="計算機" />
+            <h4>計算機</h4>
+            <p>HTML&CSS、JavaScriptで作ったブラウザ上の計算機</p>
+            <a href="works/utilities/caluculator.html">View Detail</a>
+          </div>
+          <div class="workCard">
+            <img src="images/baseConverter.png" alt="基数変換" />
+            <h4>基数変換機</h4>
+            <p>HTML&CSS、JavaScriptで作ったブラウザ上の基数変換機</p>
+            <a href="works/utilities/baseConverter.html">View Detail</a>
+          </div>
+          <div class="workCard">
+            <img src="images/prime.png" alt="素数を求めるページ" />
+            <h4>素数を求める</h4>
+            <p>HTML&CSS、JavaScriptで作った、入力した数字までの素数を求めるページ</p>
+            <a href="works/utilities/prime.html">View Detail</a>
+          </div>
+        </div>
+      </div>
+      <div class="worksCategory">
+        <h3 class="worksCategoryTitle">Others</h3>
+        <div class="categoryGrid">
+          <div class="workCard">
+            <img src="images/designCompany.png" alt="架空の施工会社HP" />
+            <h4>企業HP</h4>
+            <p>HTML&CSSで作った架空の施工会社HP</p>
+            <p>作成時間:20時間</p>
+            <p>ソースコードは<a href="https://github.com/yuyamitsu/yuyaripo/tree/main/designHouse" target="_blank"
+                rel="noopener">こちら</a></p>
+            <a href="works/others/designHouse/index.html">View Detail</a>
+          </div>
+          <div class="workCard">
+            <img src="images/taiwanTravel.png" alt="台湾旅行" />
+            <h4>台湾旅行</h4>
+            <p>HTML&CSS、JavaScriptのグループ制作で作った架空の台湾旅行紹介サイト</p>
+            <p>作成時間:40時間×4人</p>
+            <p>ソースコードは
+              <a href="https://github.com/yuyamitsu/yuyaripo/tree/main/taiwanTourism" target="_blank"
+                rel="noopener">こちら</a>
+            </p>
+            <a href="works/others/taiwanTourism/index.html">View Detail</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+
+  <section id="contact" class="contentSection">
+    <h2>Contact</h2>
+    <p>ご連絡は<a href="https://github.com/yuyamitsu" target="_blank">GitHub</a>
+      まで</p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Yuya Mitsugi</p>
+  </footer>
+  <script src="javascript/script.js"></script>
+</body>
+
+</html>

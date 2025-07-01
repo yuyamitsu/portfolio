@@ -1,0 +1,265 @@
+@charset "utf-8";
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  min-width: 375px;
+  margin: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.6;
+  background-color: #f9f9f9;
+  color: #333;
+}
+img {
+  max-width: 100%;
+  display: block;
+}
+a {
+  color: #007acc;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ヘッダー */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+.siteLogo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+
+
+/* ハンバーガーボタン初期状態（PCでは非表示） */
+.navToggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  position: relative;
+  width: 30px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+.navToggleBar {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  left: 0;
+  transition: all 0.3s ease;
+}
+/* 3本線の位置調整 */
+.navToggleBar:nth-child(1) {
+  top: 0;
+}
+.navToggleBar:nth-child(2) {
+  top: 10px;
+}
+.navToggleBar:nth-child(3) {
+  top: 20px;
+}
+
+/* アクティブ時に「×」に変形 */
+.navToggle.active .navToggleBar:nth-child(1) {
+  top: 10px;
+  transform: rotate(45deg);
+}
+.navToggle.active .navToggleBar:nth-child(2) {
+  opacity: 0;
+}
+.navToggle.active .navToggleBar:nth-child(3) {
+  top: 10px;
+  transform: rotate(-45deg);
+}
+
+
+.navList {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+.navList li {
+  margin: 0;
+}
+
+/* ヒーローセクション */
+.heroSection {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: linear-gradient(to right, #007acc, #00bcd4);
+  color: #fff;
+}
+.heroSection h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+/* セクション共通 */
+.contentSection {
+  padding: 3rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  scroll-margin-top: 40px;
+}
+.contentSection h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #007acc;
+  display: inline-block;
+}
+
+/* スキル一覧 */
+.skillsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  list-style: none;
+  padding: 0;
+}
+.skillsList li {
+  background: #e0f7fa;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+}
+
+/* 作品一覧 */
+.workCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+  height: 100%; /* グリッドでも高さ統一されやすくする */
+  padding-bottom: 1rem; /* 下に余白確保 */
+}
+.worksCategory {
+  margin-bottom: 3rem;
+}
+
+.worksCategoryTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #007acc;
+  border-left: 4px solid #007acc;
+  padding-left: 0.5rem;
+}
+
+.categoryGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+
+.workCard:hover {
+  transform: translateY(-5px);
+}
+
+.workCard img {
+  width: 100%;
+  height: auto;
+}
+.workCard h4 {
+  font-weight: bold;
+}
+.workCard h4,
+.workCard p {
+  margin: 0.5rem;
+}
+
+.workCard a {
+  align-self: flex-end;
+  margin: 0 1rem;
+  margin-top: auto; /* 下に押し下げる効果 */
+  font-weight: bold;
+  text-align: right;
+}
+
+
+/* フッター */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #f1f1f1;
+  font-size: 0.9rem;
+}
+
+
+/* レスポンシブ対応 */
+@media screen and (max-width: 768px) {
+  header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+
+  .heroSection,
+  .contentSection {
+    padding-top: 6rem; /* ハンバーガーがheader分かぶらないように調整（必要に応じて） */
+  }
+
+  .navToggle {
+    display: flex;
+    margin-left: auto;
+    z-index: 1100;
+  }
+
+  .navWrapper {
+    display: none;
+    position: fixed;
+    top: 60px; /* headerの高さと合わせて調整 */
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    border-top: 1px solid #ddd;
+    flex-direction: column;
+  }
+
+  .navWrapper.active {
+    display: flex;
+  }
+
+  .navList {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navList li {
+    border-bottom: 1px solid #eee;
+  }
+
+  .navList li a {
+    display: block;
+    padding: 1rem;
+    text-align: center;
+  }
+}
