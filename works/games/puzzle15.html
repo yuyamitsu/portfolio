@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>画像15パズル</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin: 1rem;
+    }
+    #controls, #info {
+      margin: 1rem 0;
+    }
+    #board {
+      display: grid;
+      gap: 4px;
+      margin: auto;
+      max-width: 90vw;
+      touch-action: manipulation;
+    }
+    .tile {
+      background-color: #ccc;
+      border-radius: 8px;
+      aspect-ratio: 1;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      user-select: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+    }
+    .blank {
+      background: #eee;
+    }
+    #imageSelector label {
+      margin: 0 5px;
+    }
+    #imageInput {
+      margin-top: 5px;
+    }
+    @media (max-width: 600px) {
+      .tile {
+        font-size: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>画像15パズル</h1>
+
+  <div id="controls">
+    <label for="sizeSelect">サイズ:</label>
+    <select id="sizeSelect"></select>
+    <button id="startBtn">スタート</button>
+  </div>
+
+  <div id="imageSelector">
+    <p>画像選択:</p>
+    <label><input type="radio" name="imageOption" value="youth.jpg" checked> 画像1</label>
+    <label><input type="radio" name="imageOption" value="img2.jpg"> 画像2</label>
+    <label><input type="radio" name="imageOption" value="img3.jpg"> 画像3</label>
+    <label><input type="radio" name="imageOption" value="custom"> 自分の画像</label><br>
+    <input type="file" id="imageInput" accept="image/*" style="display:none;">
+  </div>
+
+  <div id="info">
+    手数: <span id="moveCount">0</span> / タイマー: <span id="timer">0</span>s
+  </div>
+
+  <div id="board"></div>
+
+  <script>
+    const sizeSelect = document.getElementById("sizeSelect");
+    const startBtn = document.getElementById("startBtn");
+    const boardEl = document.getElementById("board");
+    const moveCountEl = document.getElementById("moveCount");
+    const timerEl = document.getElementById("timer");
+    const imageInput = document.getElementById("imageInput");
+
+    let size = 4;
+    let board = [];
+    let moveCount = 0;
+    let timer = 0;
+    let timerInterval = null;
+    let selectedImageURL = "youth.jpg";
+
+    for (let i = 3; i <= 15; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `${i}×${i}`;
+      if (i === 4) option.selected = true;
+      sizeSelect.append(option);
+    }
+
+    document.querySelectorAll("input[name='imageOption']").forEach(radio => {
+      radio.addEventListener("change", () => {
+        if (radio.value === "custom") {
+          imageInput.style.display = "inline";
+        } else {
+          imageInput.style.display = "none";
+          selectedImageURL = radio.value;
+        }
+      });
+    });
+
+    imageInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        selectedImageURL = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    startBtn.addEventListener("click", () => {
+      size = parseInt(sizeSelect.value);
+      resetGame();
+    });
+
+    function resetGame() {
+      clearInterval(timerInterval);
+      timer = 0;
+      moveCount = 0;
+      moveCountEl.textContent = "0";
+      timerEl.textContent = "0";
+      createSolvableBoard();
+      renderBoardWithImage(selectedImageURL);
+      timerInterval = setInterval(() => {
+        timer++;
+        timerEl.textContent = timer;
+      }, 1000);
+    }
+
+    function createSolvableBoard() {
+      do {
+        board = [...Array(size * size - 1).keys()].map(n => n + 1);
+        board.push(null);
+        shuffle(board);
+      } while (!isSolvable(board));
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function isSolvable(arr) {
+      let invCount = 0;
+      const flat = arr.filter(n => n !== null);
+      for (let i = 0; i < flat.length - 1; i++) {
+        for (let j = i + 1; j < flat.length; j++) {
+          if (flat[i] > flat[j]) invCount++;
+        }
+      }
+      const blankIndex = arr.indexOf(null);
+      const blankRowFromBottom = size - Math.floor(blankIndex / size);
+      return size % 2 === 1 ? invCount % 2 === 0 : (invCount + blankRowFromBottom) % 2 === 0;
+    }
+
+    function renderBoardWithImage(imgURL) {
+      boardEl.innerHTML = "";
+      boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+      board.forEach((val, i) => {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+        if (val === null) {
+          tile.classList.add("blank");
+        } else {
+          const row = Math.floor((val - 1) / size);
+          const col = (val - 1) % size;
+          tile.style.backgroundImage = `url(${imgURL})`;
+          tile.style.backgroundSize = `${size * 100}% ${size * 100}%`;
+          tile.style.backgroundPosition = `${(col / (size - 1)) * 100}% ${(row / (size - 1)) * 100}%`;
+          tile.addEventListener("click", () => tryMove(i));
+          tile.addEventListener("touchstart", () => tryMove(i));
+        }
+        boardEl.appendChild(tile);
+      });
+    }
+
+    function tryMove(index) {
+      const blankIndex = board.indexOf(null);
+      const [r1, c1] = [Math.floor(index / size), index % size];
+      const [r2, c2] = [Math.floor(blankIndex / size), blankIndex % size];
+      if (Math.abs(r1 - r2) + Math.abs(c1 - c2) === 1) {
+        [board[index], board[blankIndex]] = [board[blankIndex], board[index]];
+        moveCount++;
+        moveCountEl.textContent = moveCount;
+        renderBoardWithImage(selectedImageURL);
+        if (isSolved()) {
+          clearInterval(timerInterval);
+          alert("クリア！ 🎉");
+        }
+      }
+    }
+
+    function isSolved() {
+      for (let i = 0; i < size * size - 1; i++) {
+        if (board[i] !== i + 1) return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>

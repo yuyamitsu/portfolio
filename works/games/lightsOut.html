@@ -50,12 +50,12 @@
 			size = Number(gridSizeSelect.value);
 			createSolvableBoard(size);
 			stepCounter = 0;
-			stepCounterElem.textContent = `現在ステップ数${stepCounter}手`; 
+			stepCounterElem.textContent = `現在ステップ数${stepCounter}手`;
 		});
 
 		toggleHintBtn.addEventListener('click', () => {
 			hintOn = !hintOn;
-			toggleHintBtn.textContent = hintOn ? 'ヒント OFF' : 'ヒント ON';
+			toggleHintBtn.textContent = hintOn ? 'ヒント ON' : 'ヒント OFF';
 			updateHintDisplay();
 		});
 
