@@ -6,12 +6,31 @@
   <title>画像15パズル</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: 'Segoe UI', sans-serif;
       text-align: center;
       margin: 1rem;
+      background-color: #fdfdfd;
     }
-    #controls, #info {
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #336699;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    }
+    #controls, #info, #imageSelector, #hintToggle {
       margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+    #controls select, #controls button {
+      font-size: 1rem;
+      padding: 0.4rem 0.6rem;
+      margin-left: 0.5rem;
+    }
+    #imageSelector label {
+      margin: 0 5px;
+    }
+    #imageInput {
+      margin-top: 5px;
     }
     #board {
       display: grid;
@@ -35,22 +54,20 @@
       align-items: center;
       justify-content: center;
       transition: background-color 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .blank {
       background: #eee;
     }
-    #imageSelector label {
-      margin: 0 5px;
-    }
-    #imageInput {
-      margin-top: 5px;
-    }
-    #hintToggle {
-      margin-top: 1rem;
-    }
     @media (max-width: 600px) {
+      h1 {
+        font-size: 2rem;
+      }
       .tile {
         font-size: 1.2rem;
+      }
+      #controls, #info, #imageSelector, #hintToggle {
+        font-size: 1rem;
       }
     }
   </style>
