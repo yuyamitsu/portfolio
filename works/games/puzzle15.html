@@ -66,9 +66,9 @@
 
   <div id="imageSelector">
     <p>画像選択:</p>
-    <label><input type="radio" name="imageOption" value="img1.jpg" checked> 画像1</label>
-    <label><input type="radio" name="imageOption" value="img2.jpg"> 画像2</label>
-    <label><input type="radio" name="imageOption" value="img3.jpg"> 画像3</label>
+    <label><input type="radio" name="imageOption" value="img/sky.png" checked> 青空</label>
+    <label><input type="radio" name="imageOption" value="img/onsen.png"> 冬の温泉</label>
+    <label><input type="radio" name="imageOption" value="img/redman.png"> ホラー</label>
     <label><input type="radio" name="imageOption" value="custom"> 自分の画像</label><br>
     <input type="file" id="imageInput" accept="image/*" style="display:none;">
   </div>
@@ -79,7 +79,7 @@
 
   <div>
     <label id="hintToggle">
-      <input type="checkbox" id="showHint"> ヒント（番号）を表示
+      <input type="checkbox" id="showHint"> 番号を表示
     </label>
   </div>
 
@@ -99,7 +99,7 @@
     let moveCount = 0;
     let timer = 0;
     let timerInterval = null;
-    let selectedImageURL = "img1.jpg";
+    let selectedImageURL = "img/sky.png";
     let hasJustCleared = false;
     let gameCleared = false;
 
