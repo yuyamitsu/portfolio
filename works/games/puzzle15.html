@@ -45,6 +45,9 @@
     #imageInput {
       margin-top: 5px;
     }
+    #hintToggle {
+      margin-top: 1rem;
+    }
     @media (max-width: 600px) {
       .tile {
         font-size: 1.2rem;
@@ -63,7 +66,7 @@
 
   <div id="imageSelector">
     <p>画像選択:</p>
-    <label><input type="radio" name="imageOption" value="youth.jpg" checked> 画像1</label>
+    <label><input type="radio" name="imageOption" value="img1.jpg" checked> 画像1</label>
     <label><input type="radio" name="imageOption" value="img2.jpg"> 画像2</label>
     <label><input type="radio" name="imageOption" value="img3.jpg"> 画像3</label>
     <label><input type="radio" name="imageOption" value="custom"> 自分の画像</label><br>
@@ -72,6 +75,12 @@
 
   <div id="info">
     手数: <span id="moveCount">0</span> / タイマー: <span id="timer">0</span>s
+  </div>
+
+  <div>
+    <label id="hintToggle">
+      <input type="checkbox" id="showHint"> ヒント（番号）を表示
+    </label>
   </div>
 
   <div id="board"></div>
@@ -83,13 +92,16 @@
     const moveCountEl = document.getElementById("moveCount");
     const timerEl = document.getElementById("timer");
     const imageInput = document.getElementById("imageInput");
+    const showHint = document.getElementById("showHint");
 
     let size = 4;
     let board = [];
     let moveCount = 0;
     let timer = 0;
     let timerInterval = null;
-    let selectedImageURL = "youth.jpg";
+    let selectedImageURL = "img1.jpg";
+    let hasJustCleared = false;
+    let gameCleared = false;
 
     for (let i = 3; i <= 15; i++) {
       const option = document.createElement("option");
@@ -113,6 +125,11 @@
     imageInput.addEventListener("change", function () {
       const file = this.files[0];
       if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        alert("画像ファイルを選択してください（JPG/PNGなど）！");
+        this.value = "";
+        return;
+      }
       const reader = new FileReader();
       reader.onload = function (e) {
         selectedImageURL = e.target.result;
@@ -125,6 +142,10 @@
       resetGame();
     });
 
+    showHint.addEventListener("change", () => {
+      renderBoardWithImage(selectedImageURL);
+    });
+
     function resetGame() {
       clearInterval(timerInterval);
       timer = 0;
@@ -132,6 +153,8 @@
       moveCountEl.textContent = "0";
       timerEl.textContent = "0";
       createSolvableBoard();
+      hasJustCleared = false;
+      gameCleared = false;
       renderBoardWithImage(selectedImageURL);
       timerInterval = setInterval(() => {
         timer++;
@@ -174,17 +197,24 @@
       board.forEach((val, i) => {
         const tile = document.createElement("div");
         tile.className = "tile";
-        if (val === null) {
-          tile.classList.add("blank");
-        } else {
-          const row = Math.floor((val - 1) / size);
-          const col = (val - 1) % size;
+
+        const row = val !== null ? Math.floor((val - 1) / size) : size - 1;
+        const col = val !== null ? (val - 1) % size : size - 1;
+
+        if (val !== null || gameCleared) {
           tile.style.backgroundImage = `url(${imgURL})`;
           tile.style.backgroundSize = `${size * 100}% ${size * 100}%`;
           tile.style.backgroundPosition = `${(col / (size - 1)) * 100}% ${(row / (size - 1)) * 100}%`;
+        }
+
+        if (val === null) {
+          tile.classList.add("blank");
+        } else {
           tile.addEventListener("click", () => tryMove(i));
           tile.addEventListener("touchstart", () => tryMove(i));
+          if (showHint.checked) tile.textContent = val;
         }
+
         boardEl.appendChild(tile);
       });
     }
@@ -197,10 +227,14 @@
         [board[index], board[blankIndex]] = [board[blankIndex], board[index]];
         moveCount++;
         moveCountEl.textContent = moveCount;
-        renderBoardWithImage(selectedImageURL);
-        if (isSolved()) {
+        if (isSolved() && !hasJustCleared) {
+          hasJustCleared = true;
+          gameCleared = true;
           clearInterval(timerInterval);
-          alert("クリア！ 🎉");
+          renderBoardWithImage(selectedImageURL);
+          setTimeout(() => alert("クリア！ 🎉"), 100);
+        } else {
+          renderBoardWithImage(selectedImageURL);
         }
       }
     }
