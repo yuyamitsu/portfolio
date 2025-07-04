@@ -3,6 +3,7 @@
 html {
   scroll-behavior: smooth;
 }
+
 body {
   min-width: 375px;
   margin: 0;
@@ -11,13 +12,16 @@ body {
   background-color: #f9f9f9;
   color: #333;
 }
+
 img {
   max-width: 100%;
   display: block;
 }
+
 a {
   color: #007acc;
 }
+
 a:hover {
   text-decoration: underline;
 }
@@ -34,6 +38,7 @@ header {
   top: 0;
   z-index: 1000;
 }
+
 .siteLogo {
   font-weight: bold;
   font-size: 1.5rem;
@@ -55,6 +60,7 @@ header {
   cursor: pointer;
   padding: 0.5rem;
 }
+
 .navToggleBar {
   width: 25px;
   height: 3px;
@@ -67,13 +73,16 @@ header {
   left: 0;
   transition: all 0.3s ease;
 }
+
 /* 3本線の位置調整 */
 .navToggleBar:nth-child(1) {
   top: 0;
 }
+
 .navToggleBar:nth-child(2) {
   top: 10px;
 }
+
 .navToggleBar:nth-child(3) {
   top: 20px;
 }
@@ -83,9 +92,11 @@ header {
   top: 10px;
   transform: rotate(45deg);
 }
+
 .navToggle.active .navToggleBar:nth-child(2) {
   opacity: 0;
 }
+
 .navToggle.active .navToggleBar:nth-child(3) {
   top: 10px;
   transform: rotate(-45deg);
@@ -98,6 +109,7 @@ header {
   gap: 1.5rem;
   justify-content: center;
 }
+
 .navList li {
   margin: 0;
 }
@@ -106,11 +118,16 @@ header {
 .heroSection {
   text-align: center;
   padding: 4rem 2rem;
-  background: linear-gradient(to right, #007acc, #00bcd4);
+  background-image: url('../images/heroBike.jpg');
+  background-size: cover;
+  background-position: center;
+  /* background: linear-gradient(to right, #007acc, #00bcd4); */
   color: #fff;
 }
+
 .heroSection h1 {
   font-size: 2.5rem;
+  text-align: left;
   margin-bottom: 1rem;
 }
 
@@ -121,6 +138,7 @@ header {
   margin: 0 auto;
   scroll-margin-top: 40px;
 }
+
 .contentSection h2 {
   font-size: 2rem;
   margin-bottom: 1.5rem;
@@ -136,6 +154,7 @@ header {
   list-style: none;
   padding: 0;
 }
+
 .skillsList li {
   background: #e0f7fa;
   padding: 0.5rem 1rem;
@@ -151,11 +170,14 @@ header {
   border: 1px solid #ddd;
   border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s;
-  height: 100%; /* グリッドでも高さ統一されやすくする */
-  padding-bottom: 1rem; /* 下に余白確保 */
+  height: 100%;
+  /* グリッドでも高さ統一されやすくする */
+  padding-bottom: 1rem;
+  /* 下に余白確保 */
 }
+
 .worksCategory {
   margin-bottom: 3rem;
 }
@@ -183,9 +205,11 @@ header {
   width: 100%;
   height: auto;
 }
+
 .workCard h4 {
   font-weight: bold;
 }
+
 .workCard h4,
 .workCard p {
   margin: 0.5rem;
@@ -194,7 +218,8 @@ header {
 .workCard a {
   align-self: flex-end;
   margin: 0 1rem;
-  margin-top: auto; /* 下に押し下げる効果 */
+  margin-top: auto;
+  /* 下に押し下げる効果 */
   font-weight: bold;
   text-align: right;
 }
@@ -223,7 +248,8 @@ footer {
 
   .heroSection,
   .contentSection {
-    padding-top: 6rem; /* ハンバーガーがheader分かぶらないように調整（必要に応じて） */
+    padding-top: 6rem;
+    /* ハンバーガーがheader分かぶらないように調整（必要に応じて） */
   }
 
   .navToggle {
@@ -235,7 +261,8 @@ footer {
   .navWrapper {
     display: none;
     position: fixed;
-    top: 60px; /* headerの高さと合わせて調整 */
+    top: 60px;
+    /* headerの高さと合わせて調整 */
     left: 0;
     width: 100%;
     background-color: #fff;
