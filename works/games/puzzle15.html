@@ -36,13 +36,16 @@
       display: grid;
       gap: 4px;
       margin: auto;
-      max-width: 90vw;
+      width: 90vw;
+      max-width: 600px;
+      aspect-ratio: 1 / 1;
       touch-action: manipulation;
     }
     .tile {
+      width: 100%;
+      aspect-ratio: 1;
       background-color: #ccc;
       border-radius: 8px;
-      aspect-ratio: 1;
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center;
@@ -86,6 +89,7 @@
     <label><input type="radio" name="imageOption" value="img/sky.png" checked> 青空</label>
     <label><input type="radio" name="imageOption" value="img/onsen.png"> 冬の温泉</label>
     <label><input type="radio" name="imageOption" value="img/redman.png"> ホラー</label>
+    <label><input type="radio" name="imageOption" value="img/boy.jpg"> 男の子</label>
     <label><input type="radio" name="imageOption" value="custom"> 自分の画像</label><br>
     <input type="file" id="imageInput" accept="image/*" style="display:none;">
   </div>
@@ -203,8 +207,14 @@
         }
       }
       const blankIndex = arr.indexOf(null);
-      const blankRowFromBottom = size - Math.floor(blankIndex / size);
-      return size % 2 === 1 ? invCount % 2 === 0 : (invCount + blankRowFromBottom) % 2 === 0;
+      const rowFromTop = Math.floor(blankIndex / size);
+      const blankRowFromBottom = size - rowFromTop;
+
+      if (size % 2 === 1) {
+        return invCount % 2 === 0;
+      } else {
+        return (invCount + blankRowFromBottom) % 2 === 1;
+      }
     }
 
     function renderBoardWithImage(imgURL) {
