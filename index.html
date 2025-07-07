@@ -53,6 +53,7 @@
   <section id="works" class="contentSection">
     <h2>My Works</h2>
     <div class="worksGrid">
+      <!-- Games カテゴリ -->
       <div class="worksCategory">
         <h3 class="worksCategoryTitle">Games</h3>
         <div class="categoryGrid">
@@ -60,49 +61,36 @@
             <img src="images/pokerGame.png" alt="ポーカーゲーム" />
             <h4>Poker</h4>
             <p>JavaScriptで作ったシングルプレイポーカー</p>
-            <p>ソースコードは
-              <a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/games" target="_blank" rel="noopener">こちら</a>
-            </p>
-            <a href="works/games/pokerGame.html">View Detail</a>
+            <button class="viewDetailBtn" data-id="poker">View Detail</button>
           </div>
           <div class="workCard">
             <img src="images/memoryGame.png" alt="神経衰弱ゲーム" />
             <h4>神経衰弱</h4>
             <p>JavaScriptで作った神経衰弱ゲーム</p>
-            <p>ソースコードは
-              <a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/games" target="_blank" rel="noopener">こちら</a>
-            </p>
-            <a href="works/games/memoryGame.html">View Detail</a>
+            <button class="viewDetailBtn" data-id="memory">View Detail</button>
           </div>
           <div class="workCard">
             <img src="images/highLowGame.png" alt="High&Lowゲーム" />
             <h4>High&Low</h4>
             <p>JavaScriptで作ったHigh&Lowゲーム</p>
-            <p>ソースコードは
-              <a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/games" target="_blank" rel="noopener">こちら</a>
-            </p>
-            <a href="works/games/highLow.html">View Detail</a>
+            <button class="viewDetailBtn" data-id="highlow">View Detail</button>
           </div>
           <div class="workCard">
             <img src="images/puzzle15.png" alt="15パズルゲーム" />
             <h4>15パズルゲーム</h4>
             <p>JavaScriptで作った15パズルゲーム</p>
-            <p>ソースコードは
-              <a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/games" target="_blank" rel="noopener">こちら</a>
-            </p>
-            <a href="works/games/puzzle15.html">View Detail</a>
+            <button class="viewDetailBtn" data-id="puzzle15">View Detail</button>
           </div>
           <div class="workCard">
             <img src="images/lightsOut.png" alt="ライツアウトゲーム" />
             <h4>ライツアウト</h4>
             <p>JavaScriptで作ったライツアウトゲーム</p>
-            <p>ソースコードは
-              <a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/games" target="_blank" rel="noopener">こちら</a>
-            </p>
-            <a href="works/games/lightsOut.html">View Detail</a>
+            <button class="viewDetailBtn" data-id="lightsout">View Detail</button>
           </div>
         </div>
       </div>
+
+      <!-- Utilities カテゴリ -->
       <div class="worksCategory">
         <h3 class="worksCategoryTitle">Utilities</h3>
         <div class="categoryGrid">
@@ -110,34 +98,24 @@
             <img src="images/caluculator.png" alt="計算機" />
             <h4>計算機</h4>
             <p>HTML&CSS、JavaScriptで作ったブラウザ上の計算機</p>
-            <p>ソースコードは
-              <a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/utilities" target="_blank"
-                rel="noopener">こちら</a>
-            </p>
-            <a href="works/utilities/caluculator.html">View Detail</a>
+            <button class="viewDetailBtn" data-id="calculator">View Detail</button>
           </div>
           <div class="workCard">
             <img src="images/baseConverter.png" alt="基数変換" />
             <h4>基数変換機</h4>
-            <p>HTML&CSS、JavaScriptで作ったブラウザ上の基数変換機</p>
-            <p>ソースコードは
-              <a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/utilities" target="_blank"
-                rel="noopener">こちら</a>
-            </p>
-            <a href="works/utilities/baseConverter.html">View Detail</a>
+            <p>HTML&CSS、JavaScriptで作った基数変換ツール</p>
+            <button class="viewDetailBtn" data-id="baseConverter">View Detail</button>
           </div>
           <div class="workCard">
             <img src="images/prime.png" alt="素数を求めるページ" />
             <h4>素数を求める</h4>
-            <p>HTML&CSS、JavaScriptで作った、入力した数字までの素数を求めるページ</p>
-            <p>ソースコードは
-              <a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/utilities" target="_blank"
-                rel="noopener">こちら</a>
-            </p>
-            <a href="works/utilities/prime.html">View Detail</a>
+            <p>HTML&CSS、JavaScriptで作った素数判定ページ</p>
+            <button class="viewDetailBtn" data-id="prime">View Detail</button>
           </div>
         </div>
       </div>
+
+      <!-- Others カテゴリ -->
       <div class="worksCategory">
         <h3 class="worksCategoryTitle">Others</h3>
         <div class="categoryGrid">
@@ -145,24 +123,17 @@
             <img src="images/designCompany.png" alt="架空の施工会社HP" />
             <h4>企業HP</h4>
             <p>HTML&CSSで作った架空の施工会社HP</p>
-            <p>作成時間:20時間</p>
-            <p>ソースコードは<a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/others" target="_blank"
-                rel="noopener">こちら</a></p>
-            <a href="works/others/designHouse/index.html">View Detail</a>
+            <button class="viewDetailBtn" data-id="designHouse">View Detail</button>
           </div>
           <div class="workCard">
             <img src="images/taiwanTravel.png" alt="台湾旅行" />
             <h4>台湾旅行</h4>
-            <p>HTML&CSS、JavaScriptのグループ制作で作った架空の台湾旅行紹介サイト</p>
-            <p>作成時間:40時間×4人</p>
-            <p>ソースコードは
-              <a href="https://github.com/yuyamitsu/portfolio/tree/28dafc422bcc60b5e85f77d12f8f2856e11f624e/works/others" target="_blank"
-                rel="noopener">こちら</a>
-            </p>
-            <a href="works/others/taiwanTourism/index.html">View Detail</a>
+            <p>グループ制作で作った架空の台湾旅行紹介サイト</p>
+            <button class="viewDetailBtn" data-id="taiwanTravel">View Detail</button>
           </div>
         </div>
       </div>
+
     </div>
 
   </section>

@@ -18,13 +18,15 @@ img {
   display: block;
 }
 
-a {
+a,button{
   color: #007acc;
 }
 
-a:hover {
+a:hover,button:hover {
   text-decoration: underline;
 }
+
+
 
 /* ヘッダー */
 header {
@@ -171,10 +173,8 @@ header {
   overflow: hidden;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s;
-  height: 100%;
-  /* グリッドでも高さ統一されやすくする */
+  height: 100%; 
   padding-bottom: 1rem;
-  /* 下に余白確保 */
 }
 
 .worksCategory {
@@ -214,7 +214,8 @@ header {
   margin: 0.5rem;
 }
 
-.workCard a {
+.workCard a,
+.workCard button {
   align-self: flex-end;
   margin: 0 1rem;
   margin-top: auto;
@@ -232,6 +233,53 @@ footer {
   font-size: 0.9rem;
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2000;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0,0,0,0.6);
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+}
+
+.closeModal {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.modalTitle {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.modalDesc {
+  margin-bottom: 1rem;
+}
+
+.modalLink, .modalGitHub {
+  margin-top: 0.5rem;
+  color: #007acc;
+}
+
+
 
 /* レスポンシブ対応 */
 @media screen and (max-width: 768px) {
@@ -248,7 +296,7 @@ footer {
   .heroSection,
   .contentSection {
     padding-top: 6rem;
-    /* ハンバーガーがheader分かぶらないように調整（必要に応じて） */
+    /* ハンバーガーがheader分かぶらないように調整 */
   }
 
   .navToggle {
