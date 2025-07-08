@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>画像15パズル</title>
+  <title>画像8~224パズル</title>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
@@ -76,7 +76,7 @@
   </style>
 </head>
 <body>
-  <h1>画像15パズル</h1>
+  <h1>画像8~224パズル</h1>
 
   <div id="controls">
     <label for="sizeSelect">サイズ:</label>
@@ -102,6 +102,16 @@
     <label id="hintToggle">
       <input type="checkbox" id="showHint"> 番号を表示
     </label>
+    <label for="hintColor">文字色:</label>
+    <select id="hintColor">
+      <option value="white" selected>white</option>
+      <option value="black">black</option>
+      <option value="red">red</option>
+      <option value="blue">blue</option>
+      <option value="yellow">yellow</option>
+      <option value="navy">navy</option>
+      <option value="aqua">aqua</option>
+    </select>
   </div>
 
   <div id="board"></div>
@@ -114,6 +124,7 @@
     const timerEl = document.getElementById("timer");
     const imageInput = document.getElementById("imageInput");
     const showHint = document.getElementById("showHint");
+    const hintColor = document.getElementById("hintColor");
 
     let size = 4;
     let board = [];
@@ -164,6 +175,10 @@
     });
 
     showHint.addEventListener("change", () => {
+      renderBoardWithImage(selectedImageURL);
+    });
+
+    hintColor.addEventListener("change", () => {
       renderBoardWithImage(selectedImageURL);
     });
 
@@ -239,7 +254,10 @@
         } else {
           tile.addEventListener("click", () => tryMove(i));
           tile.addEventListener("touchstart", () => tryMove(i));
-          if (showHint.checked) tile.textContent = val;
+          if (showHint.checked) {
+            tile.textContent = val;
+            tile.style.color = hintColor.value;
+          }
         }
 
         boardEl.appendChild(tile);
