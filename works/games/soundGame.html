@@ -1,38 +1,128 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
-  <title>音をボタンで変える</title>
+  <title>音記憶ゲーム</title>
+  <style>
+    .none {
+      display: none;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>音を選んで鳴らそう</h1>
-  <button onclick="playTone(261.63)">ド（C）</button>
-  <button onclick="playTone(293.66)">レ（D）</button>
-  <button onclick="playTone(329.63)">ミ（E）</button>
-  <button onclick="playTone(349.23)">ファ（F）</button>
-  <button onclick="playTone(392.00)">ソ（G）</button>
-  <button onclick="playTone(440)">ラ（A）</button>
-  <button onclick="playTone(493.90)">シ（B）</button>
-  <button onclick="playTone(523.25)">高いド（C）</button>
+  <h1>音の順番を覚えよう！</h1>
+
+  <!-- 波形の選択 -->
+  <form>
+    <label><input type="radio" name="wave" value="sine" checked> sine（やさしい）</label><br>
+    <label><input type="radio" name="wave" value="square"> square（ピコピコ）</label><br>
+    <label><input type="radio" name="wave" value="triangle"> triangle（少し硬い）</label><br>
+    <label><input type="radio" name="wave" value="sawtooth"> sawtooth（金属的）</label><br>
+  </form>
+
+  <button onclick="startGame()">スタート</button>
+  <button onclick="retryGame()" id="retryBtn" class="none">正解確認</button>
+
+  <div id="buttons">
+    <button onclick="userInput(0)">ド（C）</button>
+    <button onclick="userInput(1)">ミ（E）</button>
+    <button onclick="userInput(2)">ソ（G）</button>
+    <button onclick="userInput(3)">シ（B）</button>
+  </div>
+
+  <p id="message"></p>
 
   <script>
+    'use strict';
+
+    const retryBtn = document.getElementById("retryBtn");
+    const frequencies = [261.63, 329.63, 392.00, 493.90]; // ドミソシ
+    let sequence = [];     // 正解の音の順番
+    let userSequence = []; // ユーザーの入力
+    let inputEnabled = false;
+
     function playTone(frequency) {
+      const selectedWave = document.querySelector('input[name="wave"]:checked').value;
       const ctx = new (window.AudioContext || window.webkitAudioContext)();
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
 
-      osc.type = "sine"; // 正弦波
-      osc.frequency.setValueAtTime(frequency, ctx.currentTime); // 渡された周波数を使う
+      osc.type = selectedWave;
+      osc.frequency.setValueAtTime(frequency, ctx.currentTime);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
 
       gain.gain.setValueAtTime(1.0, ctx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.0, ctx.currentTime + 1); // 1秒でフェードアウト
+      gain.gain.linearRampToValueAtTime(0.0, ctx.currentTime + 0.4);
 
       osc.start();
-      osc.stop(ctx.currentTime+0.4);
+      osc.stop(ctx.currentTime + 0.4);
     }
+
+    function startGame() {
+      sequence = [];
+      userSequence = [];
+      inputEnabled = false;
+      retryBtn.classList.add("none");
+      document.getElementById('message').textContent = '再生中… 覚えてね！';
+
+      // ランダムに4つの音を選ぶ（重複あり）
+      for (let i = 0; i < 4; i++) {
+        const randomIndex = Math.floor(Math.random() * frequencies.length);
+        sequence.push(randomIndex);
+      }
+
+      // 音を順番に鳴らす（時間差をつける）
+      sequence.forEach((index, i) => {
+        setTimeout(() => {
+          playTone(frequencies[index]);
+          if (i === sequence.length - 1) {
+            // 最後の音のあと、入力受付開始
+            setTimeout(() => {
+              inputEnabled = true;
+              document.getElementById('message').textContent = '順番に押してね！';
+            }, 500);
+          }
+        }, i * 700); // 0.7秒ずつずらして鳴らす
+      });
+    }
+
+    function userInput(index) {
+      if (!inputEnabled) return;
+
+      playTone(frequencies[index]);
+      userSequence.push(index);
+
+      // 今の入力が正しいかチェック
+      const currentStep = userSequence.length - 1;
+      if (userSequence[currentStep] !== sequence[currentStep]) {
+        document.getElementById('message').textContent = '❌ まちがい！もう一度！';
+        inputEnabled = false;
+        retryBtn.classList.remove("none");
+        return;
+      }
+
+      // 全部正しく入力できた？
+      if (userSequence.length === sequence.length) {
+        document.getElementById('message').textContent = '🎉 正解！すごい！';
+        inputEnabled = false;
+      }
+    }
+
+
+    retryBtn.addEventListener('click', () => {
+      // 音を順番に鳴らす（時間差をつける）
+      sequence.forEach((index, i) => {
+        setTimeout(() => {
+          playTone(frequencies[index]);
+        }, i * 700); // 0.7秒ずつずらして鳴らす
+      });
+
+    })
   </script>
 </body>
+
 </html>

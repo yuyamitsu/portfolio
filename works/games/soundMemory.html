@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>音をボタンで変える</title>
+</head>
+<body>
+  <h1>音を選んで鳴らそう</h1>
+  <button onclick="playTone(261.63)">ド（C）</button>
+  <button onclick="playTone(293.66)">レ（D）</button>
+  <button onclick="playTone(329.63)">ミ（E）</button>
+  <button onclick="playTone(349.23)">ファ（F）</button>
+  <button onclick="playTone(392.00)">ソ（G）</button>
+  <button onclick="playTone(440)">ラ（A）</button>
+  <button onclick="playTone(493.90)">シ（B）</button>
+  <button onclick="playTone(523.25)">高いド（C）</button>
+
+  <script>
+    function playTone(frequency) {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = "sine"; // 正弦波
+      osc.frequency.setValueAtTime(frequency, ctx.currentTime); // 渡された周波数を使う
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      gain.gain.setValueAtTime(1.0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.0, ctx.currentTime + 1); // 1秒でフェードアウト
+
+      osc.start();
+      osc.stop(ctx.currentTime+0.4);
+    }
+  </script>
+</body>
+</html>
