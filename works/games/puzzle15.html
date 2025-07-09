@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,27 +12,37 @@
       margin: 1rem;
       background-color: #fdfdfd;
     }
+
     h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
       color: #336699;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
     }
-    #controls, #info, #imageSelector, #hintToggle {
+
+    #controls,
+    #info,
+    #imageSelector,
+    #hintToggle {
       margin: 1rem 0;
       font-size: 1.1rem;
     }
-    #controls select, #controls button {
+
+    #controls select,
+    #controls button {
       font-size: 1rem;
       padding: 0.4rem 0.6rem;
       margin-left: 0.5rem;
     }
+
     #imageSelector label {
       margin: 0 5px;
     }
+
     #imageInput {
       margin-top: 5px;
     }
+
     #board {
       display: grid;
       gap: 4px;
@@ -41,6 +52,7 @@
       aspect-ratio: 1 / 1;
       touch-action: manipulation;
     }
+
     .tile {
       width: 100%;
       aspect-ratio: 1;
@@ -57,24 +69,32 @@
       align-items: center;
       justify-content: center;
       transition: background-color 0.2s;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
+
     .blank {
       background: #eee;
     }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 2rem;
       }
+
       .tile {
         font-size: 1.2rem;
       }
-      #controls, #info, #imageSelector, #hintToggle {
+
+      #controls,
+      #info,
+      #imageSelector,
+      #hintToggle {
         font-size: 1rem;
       }
     }
   </style>
 </head>
+
 <body>
   <h1>画像8~224パズル</h1>
 
@@ -292,4 +312,5 @@
     }
   </script>
 </body>
+
 </html>
