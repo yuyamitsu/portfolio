@@ -37,6 +37,13 @@ const workDetails = {
     link: "works/games/lightsOut.html",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
+  soundGame: {
+    title: "soundGame",
+    duration: "作業時間：2時間",
+    description: "soundGame",
+    link: "works/games/soundGame.html",
+    github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
+  },
   calculator: {
     title: "計算機",
     duration: "作業時間：10時間",
