@@ -79,7 +79,7 @@
       inputEnabled = false;
       startButton.classList.add("none");
       checkButton.classList.add("none");
-      v.textContent = '再生中… ';
+      message.textContent = '再生中… ';
 
       // ランダムに音を選ぶ（重複あり）
       for (let i = 0; i < gameCount; i++) {
@@ -96,7 +96,7 @@
             // 最後の音のあと、入力受付開始
             setTimeout(() => {
               inputEnabled = true;
-              document.getElementById('message').textContent = '順番に押してね！';
+              message.textContent = '順番に押してね！';
             }, 500);
           }
         }, i * 700); // 0.7秒ずつずらして鳴らす
@@ -112,9 +112,10 @@
       // 今の入力が正しいかチェック
       const currentStep = userSequence.length - 1;
       if (userSequence[currentStep] !== sequence[currentStep]) {
-        document.getElementById('message').textContent = '❌ 残念！';
+        message.textContent = '❌ 残念！';
         inputEnabled = false;
         checkButton.classList.remove("none");
+        startButton.classList.remove("none");
         startButton.textContent = "最初から";
         gameCount = firstGameCount;
         return;
@@ -122,9 +123,10 @@
 
       // 全部正しく入力できた？
       if (userSequence.length === sequence.length) {
-        document.getElementById('message').textContent = '🎉 正解！！';
+        message.textContent = '🎉 正解！！';
         inputEnabled = false;
         gameCount++;
+        startButton.classList.remove("none");
         startButton.textContent = "次のゲームへ";
       }
     }
@@ -143,6 +145,7 @@
       sequence.forEach((index, i) => {
         setTimeout(() => {
           playTone(frequencies[index]);
+          flashButton(index);
         }, i * 700);
       });
     }
