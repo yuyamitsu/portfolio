@@ -106,8 +106,8 @@ document.querySelectorAll('.viewDetailBtn').forEach(btn => {
     const detail = workDetails[id];
     if (detail) {
       // 画像を取得（button の親 .workCard の中の <img>）
-      const workCard = btn.closest('.workCard');
-      const img = workCard.querySelector('img');
+      const img = btn.closest('.workCard').querySelector('img');
+
       // モーダルに画像を設定
       const modalImg = modal.querySelector('.modalImage');
       modalImg.src = img.src;
