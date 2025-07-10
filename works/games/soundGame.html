@@ -27,7 +27,8 @@
     <label><input type="radio" name="wave" value="sawtooth"> sawtooth（金属的）</label><br>
   </form>
 
-  <button onclick="startGame()">スタート</button>
+  <button onclick="startGame()" id="startButton">スタート</button>
+  <!-- <button onclick="nextGame()" id="nextButton" class="none">次のゲーム</button> -->
   <button onclick="check()" id="checkButton" class="none">正解確認</button>
 
   <div id="buttons">
@@ -42,11 +43,16 @@
   <script>
     'use strict';
 
+    const startButton = document.getElementById("startButton");
+    const nextButton = document.getElementById("nextButton");
     const checkButton = document.getElementById("checkButton");
     const frequencies = [261.63, 329.63, 392.00, 493.90]; // ドミソシ
+    const message = document.getElementById('message');
     let sequence = [];     // 正解の音の順番
     let userSequence = []; // ユーザーの入力
     let inputEnabled = false;
+    const firstGameCount = 4;
+    let gameCount = firstGameCount;
 
     function playTone(frequency) {
       const selectedWave = document.querySelector('input[name="wave"]:checked').value;
@@ -71,11 +77,12 @@
       sequence = [];
       userSequence = [];
       inputEnabled = false;
+      startButton.classList.add("none");
       checkButton.classList.add("none");
-      document.getElementById('message').textContent = '再生中… 覚えてね！';
+      v.textContent = '再生中… ';
 
-      // ランダムに4つの音を選ぶ（重複あり）
-      for (let i = 0; i < 4; i++) {
+      // ランダムに音を選ぶ（重複あり）
+      for (let i = 0; i < gameCount; i++) {
         const randomIndex = Math.floor(Math.random() * frequencies.length);
         sequence.push(randomIndex);
       }
@@ -108,13 +115,17 @@
         document.getElementById('message').textContent = '❌ 残念！';
         inputEnabled = false;
         checkButton.classList.remove("none");
+        startButton.textContent = "最初から";
+        gameCount = firstGameCount;
         return;
       }
 
       // 全部正しく入力できた？
       if (userSequence.length === sequence.length) {
-        document.getElementById('message').textContent = '🎉 正解！すごい！';
+        document.getElementById('message').textContent = '🎉 正解！！';
         inputEnabled = false;
+        gameCount++;
+        startButton.textContent = "次のゲームへ";
       }
     }
 
@@ -134,7 +145,6 @@
           playTone(frequencies[index]);
         }, i * 700);
       });
-
     }
     // checkButton.addEventListener('click', () => {
     //   // 音を順番に鳴らす（時間差をつける）
