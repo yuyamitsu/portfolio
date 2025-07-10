@@ -8,6 +8,11 @@
     .none {
       display: none;
     }
+
+    .flash {
+      background-color: yellow;
+      transition: background-color 0.2s;
+    }
   </style>
 </head>
 
@@ -23,13 +28,13 @@
   </form>
 
   <button onclick="startGame()">スタート</button>
-  <button onclick="retryGame()" id="retryBtn" class="none">正解確認</button>
+  <button onclick="check()" id="checkButton" class="none">正解確認</button>
 
   <div id="buttons">
-    <button onclick="userInput(0)">ド（C）</button>
-    <button onclick="userInput(1)">ミ（E）</button>
-    <button onclick="userInput(2)">ソ（G）</button>
-    <button onclick="userInput(3)">シ（B）</button>
+    <button class="soundButton" onclick="userInput(0)">ド（C）</button>
+    <button class="soundButton" onclick="userInput(1)">ミ（E）</button>
+    <button class="soundButton" onclick="userInput(2)">ソ（G）</button>
+    <button class="soundButton" onclick="userInput(3)">シ（B）</button>
   </div>
 
   <p id="message"></p>
@@ -37,7 +42,7 @@
   <script>
     'use strict';
 
-    const retryBtn = document.getElementById("retryBtn");
+    const checkButton = document.getElementById("checkButton");
     const frequencies = [261.63, 329.63, 392.00, 493.90]; // ドミソシ
     let sequence = [];     // 正解の音の順番
     let userSequence = []; // ユーザーの入力
@@ -66,7 +71,7 @@
       sequence = [];
       userSequence = [];
       inputEnabled = false;
-      retryBtn.classList.add("none");
+      checkButton.classList.add("none");
       document.getElementById('message').textContent = '再生中… 覚えてね！';
 
       // ランダムに4つの音を選ぶ（重複あり）
@@ -79,6 +84,7 @@
       sequence.forEach((index, i) => {
         setTimeout(() => {
           playTone(frequencies[index]);
+          flashButton(index);
           if (i === sequence.length - 1) {
             // 最後の音のあと、入力受付開始
             setTimeout(() => {
@@ -99,9 +105,9 @@
       // 今の入力が正しいかチェック
       const currentStep = userSequence.length - 1;
       if (userSequence[currentStep] !== sequence[currentStep]) {
-        document.getElementById('message').textContent = '❌ まちがい！もう一度！';
+        document.getElementById('message').textContent = '❌ 残念！';
         inputEnabled = false;
-        retryBtn.classList.remove("none");
+        checkButton.classList.remove("none");
         return;
       }
 
@@ -112,16 +118,33 @@
       }
     }
 
+    function flashButton(index) {
+      const buttons = document.querySelectorAll("#buttons button");
+      const btn = buttons[index];
+      btn.classList.add("flash");
+      setTimeout(() => {
+        btn.classList.remove("flash");
+      }, 300);
+    }
 
-    retryBtn.addEventListener('click', () => {
-      // 音を順番に鳴らす（時間差をつける）
+
+    function check() {
       sequence.forEach((index, i) => {
         setTimeout(() => {
           playTone(frequencies[index]);
-        }, i * 700); // 0.7秒ずつずらして鳴らす
+        }, i * 700);
       });
 
-    })
+    }
+    // checkButton.addEventListener('click', () => {
+    //   // 音を順番に鳴らす（時間差をつける）
+    //   sequence.forEach((index, i) => {
+    //     setTimeout(() => {
+    //       playTone(frequencies[index]);
+    //     }, i * 700); // 0.7秒ずつずらして鳴らす
+    //   });
+
+    // })
   </script>
 </body>
 
