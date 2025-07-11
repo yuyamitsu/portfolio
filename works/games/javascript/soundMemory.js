@@ -3,7 +3,7 @@
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
 const checkButton = document.getElementById("checkButton");
-const frequencies = [261.63, 329.63, 392.00, 493.90]; // ドミソシ
+const frequencies = [261.63, 293.66, 329.63, 349.23, 392.00, 440, 493.90, 523.25]; // 
 const message = document.getElementById('message');
 const currentScoreMessage = document.getElementById('currentScoreMessage');
 const maxScoreMessage = document.getElementById("maxScoreMessage");
