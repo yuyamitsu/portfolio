@@ -1,170 +1,38 @@
 <!DOCTYPE html>
 <html lang="ja">
-
 <head>
   <meta charset="UTF-8">
-  <title>音記憶ゲーム</title>
-  <style>
-    body {
-      background: linear-gradient(to bottom, #f0f8ff, #ffffff);
-      font-family: 'Arial', sans-serif;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-      color: #333;
-    }
-
-    h1 {
-      font-size: 2em;
-      color: #007acc;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 2px #aaa;
-    }
-
-    .innerWrap {
-      max-width: 600px;
-      margin: 0 auto;
-      padding: 20px;
-      border-radius: 16px;
-      background: #ffffffcc;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .soundType {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    .soundType label {
-      background: #e0f0ff;
-      padding: 8px 12px;
-      border-radius: 10px;
-      border: 1px solid #90caf9;
-      cursor: pointer;
-      font-size: 0.9em;
-      transition: background 0.3s;
-    }
-
-    .soundType input[type="radio"] {
-      margin-right: 4px;
-    }
-
-    .soundType label:hover {
-      background: #bbdefb;
-    }
-
-    #soudsButtonsArea {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 20px;
-    }
-
-    .soundButton {
-      font-size: 1.2em;
-      padding: 15px 25px;
-      border-radius: 12px;
-      border: none;
-      background-color: #ffcc80;
-      cursor: pointer;
-      box-shadow: 0 4px #f57c00;
-      transition: transform 0.1s, background-color 0.3s;
-    }
-
-    .soundButton:hover {
-      background-color: #ffe0b2;
-    }
-
-    .soundButton:active {
-      transform: scale(0.95);
-      box-shadow: 0 2px #e65100;
-    }
-
-@keyframes flashEffect {
-  0% { transform: scale(1); background-color: #fff176; box-shadow: 0 0 10px 5px #fff176; }
-  50% { transform: scale(1.2); background-color: #ffff00; box-shadow: 0 0 30px 10px #ffff00; }
-  100% { transform: scale(1); background-color: #ffcc80; box-shadow: none; }
-}
-
-    .flash {
-      animation: flashEffect 0.4s ease-out;
-    }
-
-    #operationButtonArea {
-      margin-top: 20px;
-    }
-
-    #operationButtonArea button {
-      font-size: 1em;
-      padding: 10px 20px;
-      border-radius: 10px;
-      margin: 0 10px;
-      background-color: #64b5f6;
-      border: none;
-      color: white;
-      cursor: pointer;
-      box-shadow: 0 4px #1e88e5;
-      transition: background-color 0.3s, transform 0.1s;
-    }
-
-    #operationButtonArea button:hover {
-      background-color: #90caf9;
-    }
-
-    #operationButtonArea button:active {
-      transform: scale(0.96);
-      box-shadow: 0 2px #1976d2;
-    }
-
-    #messageDisplay {
-      margin-top: 20px;
-      font-size: 1.1em;
-      color: #333;
-    }
-
-    .none {
-      display: none;
-    }
-  </style>
-
+  <title>音をボタンで変える</title>
 </head>
-
 <body>
-  <div class="innnerWrap">
-    <h1>音の順番を覚えよう！</h1>
+  <h1>音を選んで鳴らそう</h1>
+  <button onclick="playTone(261.63)">ド（C）</button>
+  <button onclick="playTone(293.66)">レ（D）</button>
+  <button onclick="playTone(329.63)">ミ（E）</button>
+  <button onclick="playTone(349.23)">ファ（F）</button>
+  <button onclick="playTone(392.00)">ソ（G）</button>
+  <button onclick="playTone(440)">ラ（A）</button>
+  <button onclick="playTone(493.90)">シ（B）</button>
+  <button onclick="playTone(523.25)">高いド（C）</button>
 
-    <!-- 波形の選択 -->
-    <form class="soundType">
-      <label><input type="radio" name="wave" value="sine" checked> sine（やさしい）</label><br>
-      <label><input type="radio" name="wave" value="square"> square（ピコピコ）</label><br>
-      <label><input type="radio" name="wave" value="triangle"> triangle（少し硬い）</label><br>
-      <label><input type="radio" name="wave" value="sawtooth"> sawtooth（金属的）</label><br>
-    </form>
+  <script>
+    function playTone(frequency) {
+      const ctx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
 
+      osc.type = "sine"; // 正弦波
+      osc.frequency.setValueAtTime(frequency, ctx.currentTime); // 渡された周波数を使う
 
-    <div id="soudsButtonsArea">
-      <button class="soundButton" onclick="userInput(0)">ド（C）</button>
-      <button class="soundButton" onclick="userInput(1)">ミ（E）</button>
-      <button class="soundButton" onclick="userInput(2)">ソ（G）</button>
-      <button class="soundButton" onclick="userInput(3)">シ（B）</button>
-    </div>
+      osc.connect(gain);
+      gain.connect(ctx.destination);
 
-    <div id="operationButtonArea">
-      <button onclick="startGame()" id="startButton">スタート</button>
-      <button onclick="check()" id="checkButton" class="none">正解確認</button>
-    </div>
+      gain.gain.setValueAtTime(1.0, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.0, ctx.currentTime + 1); // 1秒でフェードアウト
 
-    <div id="messageDisplay">
-      <p id="message"></p>
-      <p>現在<span id="currentScoreMessage"></span>連勝中</p>
-      <p>最高記録:<span id="maxScoreMessage"></span>連勝</p>
-    </div>
-  </div>
-  <script src="javascript/soundGame.js"></script>
+      osc.start();
+      osc.stop(ctx.currentTime+0.4);
+    }
+  </script>
 </body>
-
 </html>

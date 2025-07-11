@@ -1,0 +1,215 @@
+@charset "utf-8";
+
+body {
+  background: linear-gradient(to bottom, #f0f8ff, #ffffff);
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  color: #333;
+}
+
+h1 {
+  font-size: 2em;
+  color: #007acc;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px #aaa;
+}
+
+.innerWrap {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 16px;
+  background: #ffffffcc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.soundType {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.soundType label {
+  background: #e0f0ff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid #90caf9;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background 0.3s;
+}
+
+.soundType label:hover {
+  background: #bbdefb;
+}
+
+#soudsButtonsArea {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.soundButton {
+  font-size: 1.2em;
+  padding: 15px 25px;
+  border-radius: 12px;
+  border: none;
+  background-color: #ffcc80;
+  cursor: pointer;
+  box-shadow: 0 4px #f57c00;
+  transition: transform 0.1s, background-color 0.3s;
+}
+
+.soundButton:hover {
+  background-color: #ffe0b2;
+}
+
+.soundButton:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px #e65100;
+}
+
+@keyframes flashEffect {
+  0% {
+    transform: scale(1);
+    background-color: #fff176;
+    box-shadow: 0 0 10px 5px #fff176;
+  }
+
+  50% {
+    transform: scale(1.2);
+    background-color: #ffff00;
+    box-shadow: 0 0 30px 10px #ffff00;
+  }
+
+  100% {
+    transform: scale(1);
+    background-color: #ffcc80;
+    box-shadow: none;
+  }
+}
+
+.flash {
+  animation: flashEffect 0.4s ease-out;
+}
+
+#operationButtonArea {
+  margin-top: 20px;
+}
+
+#operationButtonArea button {
+  font-size: 1em;
+  padding: 10px 20px;
+  border-radius: 10px;
+  margin: 0 10px;
+  background-color: #64b5f6;
+  border: none;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 4px #1e88e5;
+  transition: background-color 0.3s, transform 0.1s;
+}
+
+#operationButtonArea button:hover {
+  background-color: #90caf9;
+}
+
+#operationButtonArea button:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px #1976d2;
+}
+
+#messageDisplay {
+  margin-top: 20px;
+  font-size: 1.1em;
+  color: #333;
+}
+
+.none {
+  display: none;
+}
+
+.soundType select {
+  font-size: 1em;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #90caf9;
+  background-color: #e0f7fa;
+  color: #333;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.soundType select:hover {
+  background-color: #b2ebf2;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.soundType select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #81d4fa;
+}
+
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .innerWrap {
+    padding: 10px;
+    margin: 0 10px;
+  }
+
+  .soundType {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .soundType select {
+    width: 90%;
+    font-size: 1.1em;
+    padding: 12px;
+  }
+
+  .soundType label {
+    font-size: 1em;
+    width: 90%;
+    text-align: left;
+  }
+
+  #soudsButtonsArea {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .soundButton {
+    width: 90%;
+    font-size: 1.4em;
+    padding: 20px 0;
+  }
+
+  #operationButtonArea {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #operationButtonArea button {
+    width: 90%;
+    font-size: 1.2em;
+    padding: 15px;
+    margin: 0 auto;
+  }
+
+  #messageDisplay {
+    font-size: 1em;
+  }
+}

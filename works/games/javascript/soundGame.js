@@ -1,7 +1,7 @@
 'use strict'
 
 const startButton = document.getElementById("startButton");
-const nextButton = document.getElementById("nextButton");
+const resetButton = document.getElementById("resetButton");
 const checkButton = document.getElementById("checkButton");
 const frequencies = [261.63, 329.63, 392.00, 493.90]; // ドミソシ
 const message = document.getElementById('message');
@@ -15,11 +15,12 @@ let gameCount = firstGameCount;
 let score = 0;
 
 maxScoreMessage.textContent = localStorage.getItem("maxScore");
-
+currentScoreMessage.textContent = score;
+message.textContent = "音が鳴って光った順にボタンをおしてね！";
 
 
 function playTone(frequency) {
-  const selectedWave = document.querySelector('input[name="wave"]:checked').value;
+  const selectedWave = document.getElementById('waveSelect').value;
   const ctx = new (window.AudioContext || window.webkitAudioContext)();
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
@@ -60,11 +61,19 @@ function startGame() {
         // 最後の音のあと、入力受付開始
         setTimeout(() => {
           inputEnabled = true;
-          message.textContent = '順番に押してね！';
+          message.textContent = '順番におしてね！';
         }, 500);
       }
-    }, i * 500); // 0.7秒ずつずらして鳴らす
+    }, i * 500); // 0.5秒ずつずらして鳴らす
   });
+}
+
+function resetGame() {
+  startButton.classList.remove("none");
+  resetButton.classList.add("none");
+  gameCount = firstGameCount;
+  score = 0;
+  currentScoreMessage.textContent = score;
 }
 
 function userInput(index) {
@@ -80,10 +89,8 @@ function userInput(index) {
     message.textContent = '❌ 残念！';
     inputEnabled = false;
     checkButton.classList.remove("none");
-    startButton.classList.remove("none");
-    startButton.textContent = "最初から";
-    gameCount = firstGameCount;
-    score = 0;
+    resetButton.classList.remove("none");
+
     return;
   }
 
