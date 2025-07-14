@@ -3,7 +3,15 @@
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
 const checkButton = document.getElementById("checkButton");
-const frequencies = [261.63, 293.66, 329.63, 349.23, 392.00, 440, 493.90, 523.25]; // 
+const difficultySelect = document.getElementById("difficultySelect");
+const difficulty = {
+  easy: [261.63, 523.25],
+  nomal: [261.63, 329.63, 392.00, 493.90],
+  hard: [261.63, 293.66, 349.23, 392.00, 493.90, 523.25],
+  veryHard: [261.63, 293.66, 329.63, 349.23, 392.00, 440, 493.90, 523.25]
+}
+
+// const frequencies = [261.63, 293.66, 329.63, 349.23, 392.00, 440, 493.90, 523.25];
 const message = document.getElementById('message');
 const currentScoreMessage = document.getElementById('currentScoreMessage');
 const maxScoreMessage = document.getElementById("maxScoreMessage");
@@ -13,6 +21,14 @@ let inputEnabled = false;
 const firstGameCount = 4;
 let gameCount = firstGameCount;
 let score = 0;
+let frequencies = difficulty.nomal;
+
+difficultySelect.addEventListener("change",(e)=>{
+  const selectedKey = e.target.value;
+  frequencies = difficulty[selectedKey];
+})
+
+
 
 maxScoreMessage.textContent = localStorage.getItem("maxScore");
 currentScoreMessage.textContent = score;

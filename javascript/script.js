@@ -30,7 +30,7 @@ const workDetails = {
     link: "works/games/puzzle15.html",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
-  lightsout: {
+  lightsOut: {
     title: "ライツアウト",
     duration: "作業時間：2時間",
     description: "ChatGPTでの作成の練習で作ったゲーム。生成されたコードの意味を理解するのに時間がかかりました。",
@@ -83,7 +83,7 @@ const workDetails = {
 
 // カテゴリ分け
 const categoryMap = {
-  Games: ["pokerGame", "memoryGame", "highLowGame", "puzzle15", "lightsout", "soundMemory"],
+  Games: ["pokerGame", "memoryGame", "highLowGame", "puzzle15", "lightsOut", "soundMemory"],
   Utilities: ["calculator", "baseConverter", "prime"],
   Others: ["designHouse", "taiwanTravel"]
 };
