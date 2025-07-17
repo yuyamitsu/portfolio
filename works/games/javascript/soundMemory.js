@@ -10,8 +10,13 @@ const difficulty = {
   hard: [261.63, 293.66, 349.23, 392.00, 493.90, 523.25],
   veryHard: [261.63, 293.66, 329.63, 349.23, 392.00, 440, 493.90, 523.25]
 }
-
-// const frequencies = [261.63, 293.66, 329.63, 349.23, 392.00, 440, 493.90, 523.25];
+// 各難易度に対応する音名配列を定義
+const soundNames = {
+  easy: ['ド（C）', '高いド（C）'],
+  nomal: ['ド（C）', 'ミ（E）', 'ソ（G）', '高いド（C）'],
+  hard: ['ド（C）', 'レ（D）', 'ファ（F）', 'ソ（G）', 'シ（B）', '高いド（C）'],
+  veryHard: ['ド（C）', 'レ（D）', 'ミ（E）', 'ファ（F）', 'ソ（G）', 'ラ（A）', 'シ（B）', '高いド（C）']
+};
 const message = document.getElementById('message');
 const currentScoreMessage = document.getElementById('currentScoreMessage');
 const maxScoreMessage = document.getElementById("maxScoreMessage");
@@ -21,19 +26,44 @@ let inputEnabled = false;
 const firstGameCount = 4;
 let gameCount = firstGameCount;
 let score = 0;
-let frequencies = difficulty.nomal;
+let currentfrequencies = difficulty.nomal;
+let currentSoundNames = soundNames.nomal; // 現在の音名配列を保持する変数
 
-difficultySelect.addEventListener("change",(e)=>{
+difficultySelect.addEventListener("change", (e) => {
   const selectedKey = e.target.value;
-  frequencies = difficulty[selectedKey];
+  currentfrequencies = difficulty[selectedKey];
+  currentSoundNames = soundNames[selectedKey];
+  updateSoundButtons();
 })
-
-
 
 maxScoreMessage.textContent = localStorage.getItem("maxScore");
 currentScoreMessage.textContent = score;
 message.textContent = "音が鳴って光った順にボタンをおしてね！";
 
+const soudsButtonsArea = document.getElementById("soudsButtonsArea");
+updateSoundButtons();
+
+
+function updateSoundButtons() {
+  // ボタンエリアを一旦空にする
+  soudsButtonsArea.innerHTML = '';
+
+  // 現在の難易度に応じた frequencies を使ってボタンを生成
+  currentfrequencies.forEach((_, index) => {
+    const btn = document.createElement('button');
+    btn.className = 'soundButton';
+    btn.textContent = currentSoundNames[index];
+    btn.onclick = () => userInput(index);
+    soudsButtonsArea.appendChild(btn);
+  });
+}
+
+// 難易度が変わったときの処理
+difficultySelect.addEventListener("change", (e) => {
+  const selectedKey = e.target.value;
+  currentfrequencies = difficulty[selectedKey];
+  updateSoundButtons();
+});
 
 function playTone(frequency) {
   const selectedWave = document.getElementById('waveSelect').value;
@@ -53,6 +83,26 @@ function playTone(frequency) {
   osc.start();
   osc.stop(ctx.currentTime + 0.4);
 }
+function playFailureSound() {
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const osc = ctx.createOscillator();
+  const gain = ctx.createGain();
+
+  // 低い周波数（失敗感のある音）
+  osc.frequency.setValueAtTime(100, ctx.currentTime);
+  // タイプはノイズ感を出すために"sawtooth"や"square"も良いかもしれません
+  osc.type = 'sawtooth';
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  gain.gain.setValueAtTime(0.5, ctx.currentTime); // 少し音量を下げる
+  gain.gain.linearRampToValueAtTime(0.0, ctx.currentTime + 0.3); // 短く減衰させる
+
+  osc.start();
+  osc.stop(ctx.currentTime + 0.3); // 短くする
+}
+
 
 function startGame() {
   sequence = [];
@@ -65,13 +115,13 @@ function startGame() {
 
   // ランダムに音を選ぶ（重複あり）
   for (let i = 0; i < gameCount; i++) {
-    const randomIndex = Math.floor(Math.random() * frequencies.length);
+    const randomIndex = Math.floor(Math.random() * currentfrequencies.length);
     sequence.push(randomIndex);
   }
   // 音を順番に鳴らす（時間差をつける）
   sequence.forEach((index, i) => {
     setTimeout(() => {
-      playTone(frequencies[index]);
+      playTone(currentfrequencies[index]);
       flashButton(index);
       if (i === sequence.length - 1) {
         // 最後の音のあと、入力受付開始
@@ -87,6 +137,7 @@ function startGame() {
 function resetGame() {
   startButton.classList.remove("none");
   resetButton.classList.add("none");
+  checkButton.classList.add("none");
   gameCount = firstGameCount;
   score = 0;
   currentScoreMessage.textContent = score;
@@ -95,13 +146,14 @@ function resetGame() {
 function userInput(index) {
   if (!inputEnabled) return;
 
-  playTone(frequencies[index]);
+  playTone(currentfrequencies[index]);
   flashButton(index);
   userSequence.push(index);
 
   // 今の入力が正しいかチェック
   const currentStep = userSequence.length - 1;
   if (userSequence[currentStep] !== sequence[currentStep]) {
+    playFailureSound();
     message.textContent = '❌ 残念！';
     inputEnabled = false;
     checkButton.classList.remove("none");
@@ -141,7 +193,7 @@ function flashButton(index) {
 function check() {
   sequence.forEach((index, i) => {
     setTimeout(() => {
-      playTone(frequencies[index]);
+      playTone(currentfrequencies[index]);
       flashButton(index);
     }, i * 500);
   });
