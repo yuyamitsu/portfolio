@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-body {
-  background-color: #87cefa;
-}
-
 #chipStatus {
   background: linear-gradient(to bottom, #ffffff, #e0f0ff);
   padding: 16px 24px;
@@ -104,9 +100,6 @@ body {
   border-color: #2980b9;
 }
 
-
-
-
 #gameTable {
   display: flex;
   gap: 20px;
@@ -116,7 +109,6 @@ body {
   justify-content: center;
   margin: 10px 5px;
   padding: 10px 0 10px 0;
-
 }
 
 #originDeck img {
@@ -274,11 +266,6 @@ main {
   width: 100%;
   margin: 0 auto;
 }
-
-.popFont {
-  font-family: 'Rounded Mplus 1c', 'Hiragino Maru Gothic ProN', sans-serif;
-}
-
 /* ラジオボタン群の装飾 */
 #messageSelect {
   padding: 1rem;
@@ -343,8 +330,10 @@ main {
 
   /* ↓ ここを修正：横並びに */
   #betControl {
-    flex-direction: row; /* column → row に */
-    flex-wrap: wrap; /* スマホで折り返し可能に */
+    flex-direction: row;
+    /* column → row に */
+    flex-wrap: wrap;
+    /* スマホで折り返し可能に */
     align-items: center;
     justify-content: space-between;
     padding: 6px 12px;
@@ -353,14 +342,16 @@ main {
 
   #betControl label {
     font-size: 1rem;
-    flex: 1 1 auto; /* 幅を自動調整しつつ、折り返し対応 */
+    flex: 1 1 auto;
+    /* 幅を自動調整しつつ、折り返し対応 */
     min-width: 45%;
   }
 
   #betSelect {
     flex: 1 1 auto;
     min-width: 45%;
-    margin-top: 0; /* すでに横並びなので余計な margin-top を削除 */
+    margin-top: 0;
+    /* すでに横並びなので余計な margin-top を削除 */
     padding: 8px 12px;
     font-size: 1rem;
     text-align: center;

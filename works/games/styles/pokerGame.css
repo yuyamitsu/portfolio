@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-body {
-  background-color: #87cefa;
-}
-
 main {
   border-radius: 10px;
   background-color: #ffffff;
@@ -19,11 +15,8 @@ main {
 #scoreSheet {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* 2列 */
   gap: 0.5rem 0.5rem;
-  /* 行間0.5、列間0.5 */
   background-color: #fffaf2;
-  /* ミルクティーベージュ */
   border: 2px solid #e5d9c5;
   border-radius: 16px;
   padding: 0.5rem 0.5rem;
@@ -56,7 +49,6 @@ main {
   font-size: 1rem;
   color: #5a4a42;
   min-width: 180px;
-  /* 幅そろえ */
 }
 
 
@@ -64,7 +56,6 @@ main {
 .scoreName {
   display: flex;
   justify-content: space-between;
-  /* 左右に分ける */
   background-color: #fefcf8;
   border: 1px solid #e5d9c5;
   border-radius: 12px;
@@ -77,8 +68,6 @@ main {
   font-size: 0.9rem;
   color: #8b7e6b;
 }
-
-
 
 #roleName {
   font-family: 'Rounded Mplus 1c', 'Hiragino Maru Gothic ProN', sans-serif;
@@ -225,6 +214,7 @@ main {
   justify-content: space-evenly;
   user-select: none;
 }
+
 #startBtn,
 #change,
 #reset {
@@ -263,17 +253,6 @@ main {
 #reset:hover {
   background-color: #c0392b;
 }
-
-
-
-.popFont {
-  font-family: 'Rounded Mplus 1c', 'Hiragino Maru Gothic ProN', sans-serif;
-}
-
-
-
-
-
 
 @media screen and (max-width: 768px) {
   #gameTable {
@@ -325,6 +304,4 @@ main {
     width: 90%;
     margin: 1rem auto;
   }
-
-  
 }

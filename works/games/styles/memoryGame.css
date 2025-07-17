@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-body {
-  background-color: #87cefa;
-  }
-
 #gameTable {
   display: grid;
   gap: 20px;
@@ -93,10 +89,6 @@ main {
   width: 100%;
   margin: 0 auto;
 }
-.popFont {
-  font-family: 'Rounded Mplus 1c', 'Hiragino Maru Gothic ProN', sans-serif;
-}
-
 @media screen and (max-width: 768px) {
 
   #gameTable {
