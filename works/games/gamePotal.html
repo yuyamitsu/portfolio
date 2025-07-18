@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/reset.css">
+  <title>ステータス画面</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f0f8ff;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 30px;
+    }
+
+    .gameList {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .gameCard {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 375px;
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .gameCard:hover {
+      transform: translateY(-5px);
+    }
+
+    .gameCard a {
+      text-decoration: none;
+      color: #007acc;
+      font-weight: bold;
+      display: block;
+      margin: 10px 0;
+    }
+
+    .gameImage {
+      width: 100%;
+      height: auto;
+    }
+
+    .score {
+      font-size: 1.2em;
+      color: #333;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        min-width: 375px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>My Game Portal</h1>
+  </header>
+  <div class="innerWrap">
+    <!-- テンプレート定義 -->
+    <template id="gameCardTemplate">
+      <div class="gameCard">
+        <img class="gameImage" src="" alt="">
+        <h2 class="title"></h2>
+        <a class="link">▶ ゲームスタート</a>
+        <div class="score"></div>
+      </div>
+    </template>
+    <div class="gameList" id="gameList">
+      <!-- ゲームカードがここに挿入される -->
+    </div>
+  </div>
+  <footer>
+    <p>&copy; 2025 Yuya Mitsugi</p>
+  </footer>
+  <script>
+    // ゲームデータ（リンクは仮）
+    const games = [
+      { id: 'pokerGame', name: 'ポーカー', link: 'pokerGame.html' },
+      { id: 'memoryGame', name: '神経衰弱', link: 'memoryGame.html' },
+      { id: 'highlowGame', name: 'ハイ&ロー', link: 'highlow.html' },
+      { id: 'puzzle15', name: '15パズル', link: 'puzzle15.html' },
+      { id: 'lightsOut', name: 'ライツアウト', link: 'lightsOut.html' },
+      { id: 'soundMemory', name: '記憶ゲーム', link: 'soundMemory.html' }
+    ];
+
+
+    const template = document.getElementById('gameCardTemplate');
+    const gameList = document.getElementById('gameList');
+
+    games.forEach(game => {
+      const score = localStorage.getItem(`${game.id}`) || 0;
+      const clone = template.content.cloneNode(true);
+      const imagePath = `img/${game.id}.png`;
+      const gameImage = clone.querySelector('.gameImage');
+      gameImage.src = imagePath;
+      gameImage.alt = game.name;
+      clone.querySelector('.title').textContent = game.name;
+      const link = clone.querySelector('.link');
+      link.href = game.link;
+      link.textContent = '▶ GameStart';
+
+      clone.querySelector('.score').textContent = `HighScore：${score}`;
+
+      // 表示用に挿入
+      gameList.appendChild(clone);
+    });
+  </script>
+
+</body>
+
+</html>

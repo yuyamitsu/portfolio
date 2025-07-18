@@ -4,23 +4,39 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="stylesheet" href="styles/reset.css">
 	<link rel="stylesheet" href="styles/common.css">
 	<link rel="stylesheet" href="styles/lightsOut.css">
 	<title>Lights Out Game</title>
 </head>
 
-<body>
-	<h1>Lights Out</h1>
-	<div id="controls">
-		<label for="gridSize">サイズ選択:</label>
-		<select id="gridSize"></select>
-		<button id="startBtn">スタート</button>
-		<button id="toggleHintBtn">ヒント OFF</button>
+<body class="puzzleGameStyle">
+	<header>
+		<h1>Lights Out</h1>
+	</header>
+	<div class="innerWrap">
+		<div id="controls">
+			<label for="gridSize">サイズ選択:</label>
+			<select id="gridSize"></select>
+			<button id="startBtn">スタート</button>
+			<button id="toggleHintBtn">ヒント OFF</button>
+		</div>
+		<div id="board"></div>
+		<p id="message"></p>
+		<p id="minStep"></p>
+		<p id="stepCounter"></p>
+		<nav class="pageNav">
+			<h2 class="navTitle">他のゲームへ</h2>
+			<ul>
+				<li><a href="highLow.html">High&Low</a></li>
+				<li><a href="pokerGame.html">ポーカー</a></li>
+				<li><a href="memoryGame.html">神経衰弱</a></li>
+				<li><a href="puzzle15.html">15パズル</a></li>
+				<li><a href="soundMemory.html">soundMemory</a></li>
+				<li><a href="../../index.html">ポートフォリオトップへ</a></li>
+			</ul>
+		</nav>
 	</div>
-	<div id="board"></div>
-	<p id="message"></p>
-	<p id="minStep"></p>
-	<p id="stepCounter"></p>
 	<footer>
 		<p>&copy; 2025 Yuya Mitsugi</p>
 	</footer>

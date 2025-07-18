@@ -6,21 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles/reset.css">
   <link rel="stylesheet" href="styles/common.css">
-  <title>画像8~224パズル</title>
+  <title>15パズル</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      margin: 1rem;
-      background-color: #fdfdfd;
-    }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #336699;
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-    }
 
     #controls,
     #info,
@@ -78,28 +66,15 @@
       background: #eee;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 2rem;
-      }
-
-      .tile {
-        font-size: 1.2rem;
-      }
-
-      #controls,
-      #info,
-      #imageSelector,
-      #hintToggle {
-        font-size: 1rem;
-      }
+    @media (max-width: 768px) {
     }
   </style>
 </head>
 
-<body>
-  <h1>画像8~224パズル</h1>
-
+<body class="puzzleGameStyle">
+  <header>
+    <h1>15パズル</h1>
+  </header>
   <div id="controls">
     <label for="sizeSelect">サイズ:</label>
     <select id="sizeSelect"></select>
@@ -112,6 +87,7 @@
     <label><input type="radio" name="imageOption" value="img/onsen.png"> 冬の温泉</label>
     <label><input type="radio" name="imageOption" value="img/redman.png"> ホラー</label>
     <label><input type="radio" name="imageOption" value="img/boy.jpg"> 男の子</label>
+    <label><input type="radio" name="imageOption" value="img/cats.png"> 子猫</label>
     <label><input type="radio" name="imageOption" value="custom"> 自分の画像</label><br>
     <input type="file" id="imageInput" accept="image/*" style="display:none;">
   </div>
@@ -150,7 +126,7 @@
       <li><a href="../../index.html">ポートフォリオトップへ</a></li>
     </ul>
   </nav>
-    <footer>
+  <footer>
     <p>&copy; 2025 Yuya Mitsugi</p>
   </footer>
   <script>
