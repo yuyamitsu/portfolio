@@ -1,3 +1,12 @@
+<?php
+  session_start();
+  echo 12356;
+  if(!isset($_SESSION[player])){
+    
+  }
+
+
+?>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -91,7 +100,7 @@
     const games = [
       { id: 'pokerGame', name: 'ポーカー', link: 'pokerGame.html' },
       { id: 'memoryGame', name: '神経衰弱', link: 'memoryGame.html' },
-      { id: 'highlowGame', name: 'ハイ&ロー', link: 'highlow.html' },
+      { id: 'highLowGame', name: 'ハイ&ロー', link: 'highlow.html' },
       { id: 'puzzle15', name: '15パズル', link: 'puzzle15.html' },
       { id: 'lightsOut', name: 'ライツアウト', link: 'lightsOut.html' },
       { id: 'soundMemory', name: '記憶ゲーム', link: 'soundMemory.html' }
