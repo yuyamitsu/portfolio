@@ -39,8 +39,8 @@ const workDetails = {
   },
   soundMemory: {
     title: "soundMemory",
-    duration: "作業時間：2時間",
-    description: "soundMemory",
+    duration: "作業時間：30時間",
+    description: "気軽に遊べるサイモンゲーム。mp3ではなくWebAudioAPIを使っての制作に挑戦しました。難易度選択でのHzの調整等に苦労しました。",
     link: "works/games/soundMemory.html",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
