@@ -1,11 +1,11 @@
 <?php
   session_start();
-  echo 12356;
-  if(!isset($_SESSION[player])){
-    
+  if(!isset($_SESSION['player'])){
+    $_SESSION['player'] = [
+      'name' => 'ゲスト', // 将来的にプレイヤー名を追加できるようにしておく
+      'highScores' => [] // ゲームごとのハイスコアを保存する配列
+    ];
   }
-
-
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -14,6 +14,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/gamePotal.css">
   <title>ステータス画面</title>
   <style>
     body {
@@ -78,8 +79,8 @@
   <header>
     <h1>My Game Portal</h1>
   </header>
+  <button onclick="resetAllScore()">初期化する</button>
   <div class="innerWrap">
-    <!-- テンプレート定義 -->
     <template id="gameCardTemplate">
       <div class="gameCard">
         <img class="gameImage" src="" alt="">
@@ -89,45 +90,12 @@
       </div>
     </template>
     <div class="gameList" id="gameList">
-      <!-- ゲームカードがここに挿入される -->
     </div>
   </div>
   <footer>
     <p>&copy; 2025 Yuya Mitsugi</p>
   </footer>
-  <script>
-    // ゲームデータ（リンクは仮）
-    const games = [
-      { id: 'pokerGame', name: 'ポーカー', link: 'pokerGame.html' },
-      { id: 'memoryGame', name: '神経衰弱', link: 'memoryGame.html' },
-      { id: 'highLowGame', name: 'ハイ&ロー', link: 'highlow.html' },
-      { id: 'puzzle15', name: '15パズル', link: 'puzzle15.html' },
-      { id: 'lightsOut', name: 'ライツアウト', link: 'lightsOut.html' },
-      { id: 'soundMemory', name: '記憶ゲーム', link: 'soundMemory.html' }
-    ];
-
-
-    const template = document.getElementById('gameCardTemplate');
-    const gameList = document.getElementById('gameList');
-
-    games.forEach(game => {
-      const score = localStorage.getItem(`${game.id}`) || 0;
-      const clone = template.content.cloneNode(true);
-      const imagePath = `img/${game.id}.png`;
-      const gameImage = clone.querySelector('.gameImage');
-      gameImage.src = imagePath;
-      gameImage.alt = game.name;
-      clone.querySelector('.title').textContent = game.name;
-      const link = clone.querySelector('.link');
-      link.href = game.link;
-      link.textContent = '▶ GameStart';
-
-      clone.querySelector('.score').textContent = `HighScore：${score}`;
-
-      // 表示用に挿入
-      gameList.appendChild(clone);
-    });
-  </script>
+  <script src="javascript/gamePotal.js"></script>
 
 </body>
 
