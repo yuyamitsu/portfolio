@@ -78,6 +78,14 @@ const workDetails = {
     description: "グループ制作で役割分担やデザイン統一に注力。モーダルウインドウに初挑戦しました。",
     link: "works/others/taiwanTourism/index.html",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/others/taiwanTourism"
+  },
+  ccDonuts: {
+    title: "ドーナツのショッピングサイト",
+    duration: "作業時間：60時間1人",
+    description: "ログインの有無による画面遷移やセッション情報によるカート状態の更新などに注力しました。"+
+                 "また、PHPを使いデータベースを初導入しました。",
+    link: "works/others/ccdonuts/index.php",
+    github: "https://github.com/yuyamitsu/portfolio/tree/main/works/others/ccdonuts"
   }
 };
 
@@ -85,7 +93,7 @@ const workDetails = {
 const categoryMap = {
   Games: ["pokerGame", "memoryGame", "highLowGame", "puzzle15", "lightsOut", "soundMemory"],
   Utilities: ["calculator", "baseConverter", "prime"],
-  Others: ["designHouse", "taiwanTravel"]
+  Others: ["designHouse", "taiwanTravel","ccDonuts"]
 };
 
 // カードを生成して配置
