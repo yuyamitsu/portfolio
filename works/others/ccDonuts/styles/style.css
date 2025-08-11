@@ -1,0 +1,1262 @@
+@charset "utf-8";
+
+body {
+  width: 1366px;
+  margin: 0 auto;
+}
+
+/*//////////////////////////////////////////ヘッダ－//////////////////////////////////////////  */
+header {
+  display: flow-root;
+  background-color: #EDE0D4;
+  max-height: 182px;
+}
+
+#headerLogoArea {
+  display: flex;
+  width: 1176px;
+  height: 78px;
+  margin: 20px auto 20px auto;
+  justify-content: space-between;
+  align-items: center;
+  background-image: url(../images/headerLogoPc.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.loginCart {
+  display: flex;
+  gap: 40px;
+  width: fit-content;
+  justify-content: space-between;
+}
+
+.loginButton,
+.cartButton {
+  text-align: center;
+}
+
+.loginButton p,
+.cartButton p {
+  margin: 6px auto 0 auto;
+  color: #7F5539;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 12px
+}
+
+.drawerOpenButton {
+  width: 50px;
+  height: 50px;
+  background-image: url(../images/drawerOpenButtonPc.png);
+}
+
+.drawerCloseButton {
+  width: 54px;
+  height: 54px;
+  background-image: url(../images/drawerCloseButtonPc.png);
+  margin: 12px 0 0 1217px;
+}
+
+.drawerMenu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  position: absolute;
+  background-color: rgba(127, 85, 57, 0.75);
+  background-image: url(../images/headerLogoPc.png);
+  background-repeat: no-repeat;
+  background-position: center 20px;
+  width: 1366px;
+  height: 418px;
+
+}
+
+.drawerActive {
+  max-height: 488px;
+  opacity: 1;
+}
+
+.headerNavWrapper {
+  margin: 72px 0 0 0;
+}
+
+.headerNavList {
+  width: 560px;
+  margin: 0 auto 0 auto;
+  line-height: 24px;
+  font-size: 24px;
+}
+
+.headerNavList li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  border-bottom: #fff 1px solid;
+  color: #fff;
+}
+
+
+
+#searchArea {
+  display: flow-root;
+  height: 64px;
+  background-color: #B392AC;
+  text-align: end;
+}
+
+#searchArea form {
+  margin: 12px 95px 0 0;
+
+}
+
+#searchArea button[type="submit"] {
+  width: 40px;
+  height: 40px;
+  background-image: url(../images/searchIcon.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-color: #D9D9D9;
+  border: #7F5539 1px solid;
+}
+
+#searchArea input[type="text"] {
+  background-color: #fff;
+  width: 320px;
+  height: 40px;
+  border: #7F5539 1px solid;
+  text-align: start;
+}
+
+/*//////////////////////////////////////////トップページ//////////////////////////////////////////  */
+.welcomeText,
+.breadcrumbNav {
+  display: flex;
+  align-items: center;
+  padding-left: 103px;
+  height: 36px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 12px;
+  color: #7F5539;
+  border-bottom: #7F5539 1px solid;
+}
+
+.breadcrumbList {
+  display: flex;
+  list-style: none;
+  gap: 0.5em;
+  font-size: 14px;
+}
+
+.breadcrumbItem::after {
+  content: "＞";
+}
+
+.breadcrumbItem:last-child::after {
+  content: "";
+}
+
+.innerWrap {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.introductionFirstLine {
+  display: flex;
+  justify-content: space-between;
+  margin: 80px 0 0 0;
+  padding: 0 80px;
+}
+
+.newProductImage,
+.donutsLifeImage,
+.donutsListImage {
+  position: relative;
+}
+
+.eyeCatch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: #FF8877;
+  color: #fff;
+  font-size: 32px;
+  line-height: 32px;
+  font-weight: 500;
+}
+
+.newProductImageText {
+  position: absolute;
+  top: 432px;
+  left: 217px;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 36px;
+  color: #fff;
+}
+
+.donutsLifeImageText {
+  position: absolute;
+  top: 404px;
+  left: 78px;
+  font-size: 36px;
+  font-weight: bold;
+  line-height: 36px;
+  color: #fff;
+
+}
+
+.donutsListImage {
+  width: 1040px;
+  margin: 80px auto 0 auto;
+}
+
+.donutsListImageText {
+  position: absolute;
+  top: 197px;
+  left: 872px;
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 36px;
+  color: #7F5539;
+}
+
+.philosophyImage {
+  position: relative;
+  margin: 80px 0 0 0;
+}
+
+.philosophyText {
+  position: absolute;
+  text-align: center;
+  left: 580px;
+  top: 200px;
+  color: #fff;
+}
+
+.philosophyEnTitle {
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 36px;
+}
+
+.philosophyJaTitle {
+  margin: 20px 0 40px 0;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.philosophyCatch {
+  margin: 20px 0 0 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+}
+
+.h1Text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 80px auto 0 auto;
+  width: fit-content;
+  height: 72px;
+  font-size: 32px;
+  line-height: 32px;
+  border-bottom: #FFD233 1px solid;
+}
+
+.productsBoard {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 120px 60px;
+  margin: 120px auto 120px auto;
+  width: 1080px;
+}
+
+.productsBoardCard {
+  width: 320px;
+}
+
+.rank {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 0 auto;
+  font-size: 24px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.productsBoardCard figure {
+  margin: 20px 0 0 0;
+}
+
+.productsBoardCard figcaption {
+  height: 76.8px;
+  margin: 20px 0 0 0;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 38.4px;
+  color: #7F5539;
+}
+
+.productsItemPrice {
+  font-size: 24px;
+  line-height: 24px;
+  color: #BF0000;
+}
+
+.productsBoardCard .productsItemPrice {
+  margin: 20px 0 0 0;
+}
+
+.submitButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #7F5539;
+  width: 260px;
+  height: 52px;
+  font-size: 20px;
+  line-height: 20px;
+  color: #fff;
+}
+
+.productsBoardCard .submitButton {
+  margin: 20px auto 0 auto;
+}
+
+/*//////////////////////////////////////////商品一覧ページ//////////////////////////////////////////  */
+.mainMenuSection,
+.varietyMenuSection {
+  margin: 160px 0 0 0;
+}
+
+h2 {
+  /* margin: 80px 0 0 0; */
+  font-size: 24px;
+  line-height: 24px;
+  color: #7F5539;
+  text-align: center;
+}
+
+.mainMenuBoard {
+  width: 1080px;
+}
+
+/*//////////////////////////////////////////商品詳細ページ//////////////////////////////////////////  */
+.detailDisplay {
+  display: flex;
+  justify-content: space-between;
+  width: 1040px;
+  margin: 80px auto 0 auto;
+}
+
+.detailDisplay:last-child {
+  margin: 80px auto 140px auto;
+  ;
+}
+
+.detailImage {
+  width: 540px;
+  height: 540px;
+}
+
+.detailImage img {
+  width: 540px;
+  height: 540px;
+  object-fit: cover;
+}
+
+.detailIntroduction {
+  width: 460px;
+}
+
+.detailIntroduction .productsItemPrice {
+  margin: 40px 0 0 0;
+}
+
+.detailIntroductionTitle {
+  width: 460px;
+  padding-bottom: 20px;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: bold;
+  color: #7F5539;
+
+}
+
+.detailIntroductionCaption {
+  font-size: 24px;
+  line-height: 38.4px;
+  font-weight: 500;
+  color: #7F5539;
+  border-top: #E6CCB2 1px solid;
+  border-bottom: #E6CCB2 1px solid;
+  padding: 40px 21px 40px 4px;
+}
+
+.detailIntroduction form {
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0 0 0;
+}
+
+.countInput {
+  width: 80px;
+  height: 52px;
+  text-align: end;
+  border: #7F5539 1px solid;
+}
+
+.countInput+span {
+  margin: 0 0 0 8px;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 500;
+  text-align: end;
+}
+
+.countInputWrap {
+  display: flex;
+  align-items: flex-end;
+}
+
+.detailIntroductionSubmit {
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+
+}
+
+.detailIntroductionSubmit a {
+  display: block;
+  width: 52px;
+  height: 52px;
+  background-image: url(../images/heartPc.png);
+}
+
+/*//////////////////////////////////////////カートページ/////////////////////////////////////////  */
+.cartInfoDisplay {
+  width: 1040px;
+  margin: 80px auto 0 auto;
+  border: #FFD233 2px solid;
+}
+
+.cartInfoDisplay .submitButton {
+  margin: 40px auto 40px auto;
+  background-color: #BF0000;
+  color: #fff;
+}
+
+.cartPurchasedItems {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 24px;
+  color: #7F5539;
+}
+
+.cartPurchasedItems:nth-child(1) {
+  margin: 40px auto 0 auto;
+}
+
+.cartPurchasedItems:nth-child(2) {
+  margin: 20px auto 0 auto;
+}
+
+.cartInfoDisplay+.submitButton {
+  margin: 80px auto 120px auto;
+}
+
+.cartItemBoard {
+  width: 1040px;
+  margin: 80px auto 0 auto;
+}
+
+.cartItemList {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+
+}
+
+.cartItem {
+  display: flex;
+  gap: 40px;
+
+}
+
+.cartItemCaption {
+  width: 665px;
+  position: relative;
+  border-bottom: #E6CCB2 1px solid;
+}
+
+.cartItemName {
+  padding: 0 0 16px 0;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 24px;
+  color: #7F5539;
+  border-bottom: #E6CCB2 1px solid;
+}
+
+.cartItemPriceDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0 0 0;
+}
+
+.cartItemPrice {
+  color: #BF0000;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.cartItemCount>span {
+  margin: 0 0 0 8px;
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 500;
+}
+
+.recalculation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0 0 0;
+  width: 160px;
+  height: 36px;
+  background-color: #CCCCCC;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+.deleteForm {
+  position: absolute;
+  left: 585px;
+  top: 286px;
+  font-size: 20px;
+  line-height: 20px;
+}
+
+/*//////////////////////////////////////////ログインページ//////////////////////////////////////////  */
+.loginDisplay,
+.logOutDisplay {
+  width: 1040px;
+  margin: 80px auto 0 auto;
+  border: #F7D1CD 2px solid;
+  color: #7F5539;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.loginDisplay .submitButton {
+  margin: 40px auto 20px auto;
+}
+
+.logOutDisplay .submitButton {
+  margin: 40px auto 40px auto;
+}
+
+/*//////////////////////////////////////////会員登録ページ//////////////////////////////////////////  */
+.signUpForm {
+  margin: 80px 0 80px 0;
+}
+
+.formInputBlock {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0 0 0;
+  font-size: 24px;
+  line-height: 24px;
+  color: #7F5539;
+}
+
+.mustInput {
+  color: #FF0000;
+}
+
+.formInputBlock input {
+  display: block;
+  margin: 8px 0 0 0;
+  border: #7F5539 1px solid;
+}
+
+.postcordBlock {
+  display: flex;
+  gap: 8px;
+}
+
+#postcodeA {
+  width: 100px;
+}
+
+#postcodeB {
+  width: 150px;
+}
+
+.passwordFormText {
+  font-size: 16px;
+  color: #FF0000;
+}
+
+.signUpForm .submitButton {
+  margin: 40px auto 0 auto;
+
+}
+
+
+
+/*//////////////////////////////////////////会員登録確認ページ//////////////////////////////////////////  */
+.checkList {
+  width: 295px;
+  font-size: 24px;
+}
+
+.checkList dt {
+  margin: 20px 0 0 0;
+  font-weight: normal;
+  color: #7F5539;
+}
+
+.checkList dd {
+  border-left: #7F5539 1px solid;
+  margin: 12px 0 0 0;
+  padding: 0 0 0 8px;
+}
+
+.checkList+form {
+  width: 295px;
+  margin: 40px auto 80px auto;
+}
+
+.checkList+form .submitButton {
+  margin: 0 auto 0 auto;
+}
+
+/*//////////////////////////////////////////会員登録完了ページ//////////////////////////////////////////  */
+.completeInfoDisplay {
+  width: 1040px;
+  height: 170px;
+  margin: 80px auto 0 auto;
+  border: #F7D1CD 2px solid;
+  text-align: center;
+  color: #7F5539;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.completeInfoDisplay p {
+  margin: 40px 0 0 0;
+}
+
+.afterComplete {
+  width: 1040px;
+  margin: 40px auto 80px auto;
+  text-align: end;
+  color: #7F5539;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.afterComplete ul {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/*//////////////////////////////////////////購入確認（支払方法）ページ//////////////////////////////////////////  */
+.paymentDisplay {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 1040px;
+  margin: 60px auto 0 auto;
+  color: #7F5539;
+  font-size: 24px;
+  line-height: 24px;
+}
+
+.paymentDisplay .submitButton {
+  margin: 0 auto 80px auto;
+}
+
+.creditInputNav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 40px auto 80px auto;
+  padding: 20px 4px 20px 4px;
+  border-top: #F7D1CD 1px solid;
+  border-bottom: #F7D1CD 1px solid;
+  text-align: center;
+}
+
+.creditInputNav .submitButton {
+  margin: 0 auto 20px auto;
+}
+
+.paymentItemBoard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 40px auto 0 auto;
+  padding: 8px 4px 8px 4px;
+  border-top: #F7D1CD 1px solid;
+  border-bottom: #F7D1CD 1px solid;
+}
+
+.paymentItemBoard span,
+.resultBoard span {
+  display: inline-block;
+  margin: 0 0 0 20px;
+  padding: 0 0 0 12px;
+  border-left: #F7D1CD 2px solid;
+  color: #020202;
+}
+
+.resultBoard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 40px auto 0 auto;
+  padding: 8px 4px 8px 4px;
+  border-top: #F7D1CD 1px solid;
+  border-bottom: #F7D1CD 1px solid;
+  font-weight: bold
+}
+
+/*//////////////////////////////////////////クレジットカード登録ページ//////////////////////////////////////////  */
+.chooseBrand {
+  display: flex;
+  gap: 20px
+}
+
+.chooseBrand label {
+  display: flex;
+  align-items: end;
+  gap: 4px
+}
+
+.expirationBlock label {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.expirationBlock label input {
+  width: 120px;
+}
+
+/*//////////////////////////////////////////フッター//////////////////////////////////////////  */
+footer {
+  display: flow-root;
+  background-image: url(../images/footerLogoPc.png);
+  background-repeat: no-repeat;
+  background-position: center 124px;
+  background-color: #EDE0D4;
+  height: 448px;
+}
+
+.footerNavList {
+  display: flex;
+  margin: 20px 0 0 102px;
+}
+
+.footerNavList li {
+  display: flex;
+  align-items: center;
+  width: 170px;
+  height: 40px;
+  padding-left: 12px;
+  border-left: #B392AC 2px solid;
+  color: #7F5539;
+  font-size: 16px;
+  line-height: 16px;
+}
+
+.footerSocialIcons {
+  display: flex;
+  justify-content: space-between;
+  width: 183px;
+  margin: 264px 0 0 592px;
+
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 58px;
+  margin: 40px 0 0 0;
+  border-top: #7F5539 1px solid;
+  font-size: 12px;
+  line-height: 12px;
+  color: #7F5539;
+}
+
+
+
+/*//////////////////////////////////////////レスポンシブ対応//////////////////////////////////////////  */
+@media screen and (max-width: 768px) {
+  body {
+    width: 375px;
+  }
+
+  /*//////////////////////////////////////////レスポンシブヘッダ－//////////////////////////////////////////  */
+  .drawerOpenButton {
+    width: 25px;
+    height: 25px;
+    background-image: url(../images/drawerOpenButtonSp.png);
+  }
+
+  .drawerCloseButton {
+    width: 26px;
+    height: 26px;
+    margin: 12px 0 0 337px;
+    background-image: url(../images/drawerCloseButtonSp.png);
+  }
+
+  .drawerMenu {
+    background-image: url(../images/headerLogoSp.png);
+    background-position: 12px 12px;
+    width: 375px;
+    height: 488px;
+  }
+
+  .headerNavWrapper {
+    margin: 86px 0 0 0;
+  }
+
+  .headerNavList {
+    width: 375px;
+    line-height: 16px;
+    font-size: 16px;
+  }
+
+  .headerNavList li {
+    padding-left: 12.5px;
+    justify-content: left;
+  }
+
+  #headerLogoArea {
+    width: 375px;
+    height: 53px;
+    margin: 16px auto 16px auto;
+    padding: 0 12px;
+    background-image: url(../images/headerLogoSp.png);
+  }
+
+  .loginCart {
+    gap: 12px;
+  }
+
+  .loginButton p,
+  .cartButton p {
+    margin: 6px auto 0 auto;
+    color: #7F5539;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 10px
+  }
+
+  #searchArea {
+    display: flow-root;
+    height: 45px;
+    background-color: #EDE0D4;
+  }
+
+  #searchArea form {
+    margin: 0 12px 0 12px;
+  }
+
+  #searchArea input[type="text"] {
+    width: 300px;
+  }
+
+
+
+  /*//////////////////////////////////////////レスポンシブトップページ//////////////////////////////////////////  */
+  .welcomeText,
+  .breadcrumbNav {
+    padding-left: 12px;
+  }
+
+  .breadcrumbList {
+    font-size: 12px;
+  }
+
+  .innerWrap {
+    width: 375px;
+  }
+
+  .introductionFirstLine {
+    margin: 20px 0 0 0;
+    padding: 0 20px;
+  }
+
+  .newProductImage,
+  .donutsLifeImage {
+    position: relative;
+  }
+
+  .eyeCatch {
+    top: 4px;
+    left: 4px;
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+    line-height: 12px;
+    font-weight: 500;
+  }
+
+  .newProductImageText {
+    top: 141px;
+    left: 69.5px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .donutsLifeImageText {
+    top: 129px;
+    left: 25.5px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .donutsListImage {
+    width: 335px;
+    margin: 20px auto 0 auto;
+  }
+
+  .donutsListImageText {
+    top: 67px;
+    left: 287px;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+  }
+
+  .philosophyImage {
+    margin: 21px 0 0 0;
+  }
+
+  .philosophyText {
+    left: 75px;
+    top: 100px;
+  }
+
+  .philosophyEnTitle {
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .philosophyJaTitle {
+    margin: 20px 0 60px 0;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .philosophyCatch {
+    margin: 12px 0 0 0;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .h1Text {
+    margin: 19px auto 0 auto;
+    height: 44px;
+    font-size: 20px;
+    line-height: 20px;
+  }
+
+  .mainMenuSection,
+  .varietyMenuSection {
+    margin: 40px 0 0 0;
+  }
+
+  .productsBoardCard {
+    width: 157.5px;
+  }
+
+  .rank {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+
+  .productsBoard {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 80px 20px;
+    margin: 80px auto 120px auto;
+    width: 335px;
+  }
+
+
+  .productsBoardCard figcaption {
+    height: 51.2px;
+    font-size: 16px;
+    line-height: 25.6px;
+  }
+
+  .productsItemPrice {
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .submitButton {
+    width: 148px;
+    height: 36px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  /*//////////////////////////////////////////レスポンシブ商品詳細ページ//////////////////////////////////////////  */
+  .detailImage {
+    width: 335px;
+    height: 335px;
+  }
+
+  .detailImage img {
+    width: 335px;
+    height: 335px;
+    object-fit: cover;
+  }
+
+  .detailDisplay {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 375px;
+    margin: 20px auto 0 auto;
+  }
+
+  .detailDisplay:last-child {
+    margin: 20px auto 80px auto;
+  }
+
+  .detailIntroduction {
+    width: 355px;
+    margin: 20px 0 0 0;
+  }
+
+  .detailIntroductionTitle {
+    width: 355px;
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .detailIntroductionCaption {
+    font-size: 16px;
+    line-height: 25.6px;
+    padding: 20px 0px 20px 0px;
+  }
+
+  .detailIntroduction .productsItemPrice {
+    margin: 20px 0 0 0;
+  }
+
+  .countInput {
+    width: 56px;
+    height: 36px;
+  }
+
+  .detailIntroductionSubmit a {
+    width: 36px;
+    height: 36px;
+    background-image: url(../images/heartSp.png);
+  }
+
+  .detailIntroductionSubmit {
+    width: 255px;
+    justify-content: left;
+  }
+
+  /*//////////////////////////////////////////レスポンシブカートページ//////////////////////////////////////////  */
+  .cartInfoDisplay {
+    width: 335px;
+    margin: 60px auto 20px auto;
+    border: #FFD233 2px solid;
+  }
+
+  .cartInfoDisplay .submitButton {
+    margin: 20px auto 20px auto;
+  }
+
+  .cartPurchasedItems {
+    font-size: 16px;
+    line-height: 16px;
+  }
+
+  .cartPurchasedItems:nth-child(1) {
+    margin: 20px auto 0 auto;
+  }
+
+  .cartInfoDisplay+.submitButton {
+    margin: 40px auto 80px auto;
+  }
+
+  .cartItemBoard {
+    width: 335px;
+    margin: 80px auto 0 auto;
+  }
+
+  .cartItem {
+    display: block;
+  }
+
+  .cartItemCaption {
+    width: 335px;
+  }
+
+  .cartItemPriceDisplay {
+    display: block;
+    text-align: center;
+    margin: 20px 0 0 0;
+  }
+
+  .recalculation {
+    display: block;
+    margin: 24px auto;
+  }
+
+  .deleteForm {
+    left: 123.5px;
+  }
+
+  /*//////////////////////////////////////////レスポンシブ会員登録//////////////////////////////////////////  */
+  .signUpForm {
+    margin: 40px 40px 80px 40px;
+  }
+
+  .formInputBlock {
+    margin: 20px 0 0 0;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  #postcodeA {
+    width: 60px;
+  }
+
+  #postcodeB {
+    width: 100px;
+  }
+
+  .passwordFormText {
+    font-size: 8px;
+  }
+
+
+  /*//////////////////////////////////////////レスポンシブ会員登録確認ページ//////////////////////////////////////////  */
+  .checkList {
+    font-size: 12px;
+    margin: 0 auto 0 auto;
+  }
+
+  /*//////////////////////////////////////////レスポンシブ会員登録完了ページ//////////////////////////////////////////  */
+  .completeInfoDisplay {
+    width: 295px;
+    height: 84px;
+    margin: 60px auto 0 auto;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .completeInfoDisplay p {
+    margin: 20px 0 0 0;
+  }
+
+  .afterComplete {
+    width: 295px;
+    margin: 20px auto 80px auto;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .afterComplete ul {
+    gap: 12px;
+  }
+
+  /*//////////////////////////////////////////レスポンシブログインページ//////////////////////////////////////////  */
+  .loginDisplay,
+  .logOutDisplay {
+    width: 295px;
+    padding: 0 12px 0 12px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  /*//////////////////////////////////////////レスポンシブ購入確認（支払方法）ページ//////////////////////////////////////////  */
+  .paymentDisplay {
+    width: 335px;
+    margin: 60px auto 0 auto;
+    gap: 20px;
+    color: #7F5539;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .paymentDisplay h2 {
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .paymentItemBoard,
+  .creditInputNav {
+    margin: 20px auto 0 auto;
+  }
+
+  /*//////////////////////////////////////////レスポンシブフッタ－//////////////////////////////////////////  */
+  footer {
+    background-image: url(../images/footerLogoSp.png);
+    background-position: 291px 196px;
+    height: 303px;
+  }
+
+  .footerNavList {
+    flex-direction: column;
+    gap: 20px;
+    margin: 12px 0 0 12px;
+  }
+
+  .footerNavList li {
+    display: flex;
+    align-items: center;
+    width: 130px;
+    height: 20px;
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  .footerSocialIcons {
+    width: 143px;
+    margin: 32px 0 0 12px;
+
+  }
+
+  .copyright {
+    height: 34px;
+    margin: 92px 0 0 0;
+    font-size: 10px;
+    line-height: 10px;
+  }
+}
