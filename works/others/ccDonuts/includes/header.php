@@ -41,9 +41,9 @@ $imageMap = [
         <a href="<?= htmlspecialchars($linkHref) ?>">
           <button>
             <picture>
-              <source srcset="/ccdonuts/images/loginLogoPc.png" media="(min-width: 769px)">
-              <source srcset="/ccdonuts/images/loginLogoSp.png" media="(max-width: 768px)">
-              <img src="/ccdonuts/images/loginLogoSp.png" alt="<?= htmlspecialchars($linkText) ?>">
+              <source srcset="images/loginLogoPc.png" media="(min-width: 769px)">
+              <source srcset="images/loginLogoSp.png" media="(max-width: 768px)">
+              <img src="images/loginLogoSp.png" alt="<?= htmlspecialchars($linkText) ?>">
             </picture>
             <p>
               <?= htmlspecialchars($linkText) ?>
@@ -56,11 +56,11 @@ $imageMap = [
           <button>
             <picture>
               <!-- PC用画像 -->
-              <source srcset="/ccdonuts/images/cartLogoPc.png" media="(min-width: 769px)">
+              <source srcset="images/cartLogoPc.png" media="(min-width: 769px)">
               <!-- スマホ用画像 -->
-              <source srcset="/ccdonuts/images/cartLogoSp.png" media="(max-width: 768px)">
+              <source srcset="images/cartLogoSp.png" media="(max-width: 768px)">
               <!-- フォールバック(通常のimg)-->
-              <img src="/ccdonuts/images/cartLogoSp.png" alt="ショッピングカート">
+              <img src="images/cartLogoSp.png" alt="ショッピングカート">
             </picture>
             <p>カート</p>
           </button>
