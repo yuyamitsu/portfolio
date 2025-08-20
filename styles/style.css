@@ -120,6 +120,8 @@ header {
 
 /* ヒーローセクション */
 .heroSection {
+  max-width: 1000px;
+  margin: 0 auto;
   text-align: center;
   padding: 4rem 2rem;
   background-image: url('../images/heroBike.jpg');
