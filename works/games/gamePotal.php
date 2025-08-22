@@ -1,11 +1,6 @@
 <?php
   session_start();
-  if(!isset($_SESSION['player'])){
-    $_SESSION['player'] = [
-      'name' => 'ゲスト', // 将来的にプレイヤー名を追加できるようにしておく
-      'highScores' => [] // ゲームごとのハイスコアを保存する配列
-    ];
-  }
+  require_once __DIR__ . '/../../../../db.php';
 ?>
 <!DOCTYPE html>
 <html lang="ja">

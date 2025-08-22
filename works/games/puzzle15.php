@@ -1,0 +1,313 @@
+<?php
+  session_start();
+  require_once __DIR__ . '/../../../../db.php';
+?>
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles/reset.css">
+  <link rel="stylesheet" href="styles/common.css">
+  <title>15パズル</title>
+  <style>
+
+
+    #controls,
+    #info,
+    #imageSelector,
+    #hintToggle {
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+
+    #controls select,
+    #controls button {
+      font-size: 1rem;
+      padding: 0.4rem 0.6rem;
+      margin-left: 0.5rem;
+    }
+
+    #imageSelector label {
+      margin: 0 5px;
+    }
+
+    #imageInput {
+      margin-top: 5px;
+    }
+
+    #board {
+      display: grid;
+      gap: 4px;
+      margin: auto;
+      width: 90vw;
+      max-width: 600px;
+      aspect-ratio: 1 / 1;
+      touch-action: manipulation;
+    }
+
+    .tile {
+      width: 100%;
+      aspect-ratio: 1;
+      background-color: #ccc;
+      border-radius: 8px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      user-select: none;
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .blank {
+      background: #eee;
+    }
+
+    @media (max-width: 768px) {
+    }
+  </style>
+</head>
+
+<body class="puzzleGameStyle">
+  <header>
+    <h1>15パズル</h1>
+  </header>
+  <div id="controls">
+    <label for="sizeSelect">サイズ:</label>
+    <select id="sizeSelect"></select>
+    <button id="startBtn">スタート</button>
+  </div>
+
+  <div id="imageSelector">
+    <p>画像選択:</p>
+    <label><input type="radio" name="imageOption" value="img/sky.png" checked> 青空</label>
+    <label><input type="radio" name="imageOption" value="img/onsen.png"> 冬の温泉</label>
+    <label><input type="radio" name="imageOption" value="img/redman.png"> ホラー</label>
+    <label><input type="radio" name="imageOption" value="img/boy.jpg"> 男の子</label>
+    <label><input type="radio" name="imageOption" value="img/cats.png"> 子猫</label>
+    <label><input type="radio" name="imageOption" value="custom"> 自分の画像</label><br>
+    <input type="file" id="imageInput" accept="image/*" style="display:none;">
+  </div>
+
+  <div id="info">
+    手数: <span id="moveCount">0</span> / タイマー: <span id="timer">0</span>s
+  </div>
+
+  <div>
+    <label id="hintToggle">
+      <input type="checkbox" id="showHint"> 番号を表示
+    </label>
+    <label for="hintColor">文字色:</label>
+    <select id="hintColor">
+      <option value="white" selected>white</option>
+      <option value="black">black</option>
+      <option value="red">red</option>
+      <option value="blue">blue</option>
+      <option value="yellow">yellow</option>
+      <option value="navy">navy</option>
+      <option value="aqua">aqua</option>
+    </select>
+  </div>
+
+  <div id="board"></div>
+
+  <nav class="pageNav">
+    <h2 class="navTitle">他のゲームへ</h2>
+    <ul>
+      <li><a href="highLow.html">High&Low</a></li>
+      <li><a href="pokerGame.html">ポーカー</a></li>
+      <li><a href="memoryGame.html">神経衰弱</a></li>
+      <li><a href="puzzle15.html">画像8~224パズル</a></li>
+      <li><a href="lightsOut.html">ライツアウト</a></li>
+      <li><a href="soundMemory.html">soundMemory</a></li>
+      <li><a href="../../index.html">ポートフォリオトップへ</a></li>
+    </ul>
+  </nav>
+  <footer>
+    <p>&copy; 2025 Yuya Mitsugi</p>
+  </footer>
+  <script>
+    const sizeSelect = document.getElementById("sizeSelect");
+    const startBtn = document.getElementById("startBtn");
+    const boardEl = document.getElementById("board");
+    const moveCountEl = document.getElementById("moveCount");
+    const timerEl = document.getElementById("timer");
+    const imageInput = document.getElementById("imageInput");
+    const showHint = document.getElementById("showHint");
+    const hintColor = document.getElementById("hintColor");
+
+    let size = 4;
+    let board = [];
+    let moveCount = 0;
+    let timer = 0;
+    let timerInterval = null;
+    let selectedImageURL = "img/sky.png";
+    let hasJustCleared = false;
+    let gameCleared = false;
+
+    for (let i = 3; i <= 15; i++) {
+      const option = document.createElement("option");
+      option.value = i;
+      option.textContent = `${i}×${i}`;
+      if (i === 4) option.selected = true;
+      sizeSelect.append(option);
+    }
+
+    document.querySelectorAll("input[name='imageOption']").forEach(radio => {
+      radio.addEventListener("change", () => {
+        if (radio.value === "custom") {
+          imageInput.style.display = "inline";
+        } else {
+          imageInput.style.display = "none";
+          selectedImageURL = radio.value;
+        }
+      });
+    });
+
+    imageInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (!file) return;
+      if (!file.type.startsWith("image/")) {
+        alert("画像ファイルを選択してください（JPG/PNGなど）！");
+        this.value = "";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        selectedImageURL = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+
+    startBtn.addEventListener("click", () => {
+      size = parseInt(sizeSelect.value);
+      resetGame();
+    });
+
+    showHint.addEventListener("change", () => {
+      renderBoardWithImage(selectedImageURL);
+    });
+
+    hintColor.addEventListener("change", () => {
+      renderBoardWithImage(selectedImageURL);
+    });
+
+    function resetGame() {
+      clearInterval(timerInterval);
+      timer = 0;
+      moveCount = 0;
+      moveCountEl.textContent = "0";
+      timerEl.textContent = "0";
+      createSolvableBoard();
+      hasJustCleared = false;
+      gameCleared = false;
+      renderBoardWithImage(selectedImageURL);
+      timerInterval = setInterval(() => {
+        timer++;
+        timerEl.textContent = timer;
+      }, 1000);
+    }
+
+    function createSolvableBoard() {
+      do {
+        board = [...Array(size * size - 1).keys()].map(n => n + 1);
+        board.push(null);
+        shuffle(board);
+      } while (!isSolvable(board));
+    }
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    function isSolvable(arr) {
+      let invCount = 0;
+      const flat = arr.filter(n => n !== null);
+      for (let i = 0; i < flat.length - 1; i++) {
+        for (let j = i + 1; j < flat.length; j++) {
+          if (flat[i] > flat[j]) invCount++;
+        }
+      }
+      const blankIndex = arr.indexOf(null);
+      const rowFromTop = Math.floor(blankIndex / size);
+      const blankRowFromBottom = size - rowFromTop;
+
+      if (size % 2 === 1) {
+        return invCount % 2 === 0;
+      } else {
+        return (invCount + blankRowFromBottom) % 2 === 1;
+      }
+    }
+
+    function renderBoardWithImage(imgURL) {
+      boardEl.innerHTML = "";
+      boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+      board.forEach((val, i) => {
+        const tile = document.createElement("div");
+        tile.className = "tile";
+
+        const row = val !== null ? Math.floor((val - 1) / size) : size - 1;
+        const col = val !== null ? (val - 1) % size : size - 1;
+
+        if (val !== null || gameCleared) {
+          tile.style.backgroundImage = `url(${imgURL})`;
+          tile.style.backgroundSize = `${size * 100}% ${size * 100}%`;
+          tile.style.backgroundPosition = `${(col / (size - 1)) * 100}% ${(row / (size - 1)) * 100}%`;
+        }
+
+        if (val === null) {
+          tile.classList.add("blank");
+        } else {
+          tile.addEventListener("click", () => tryMove(i));
+          tile.addEventListener("touchstart", () => tryMove(i));
+          if (showHint.checked) {
+            tile.textContent = val;
+            tile.style.color = hintColor.value;
+          }
+        }
+
+        boardEl.appendChild(tile);
+      });
+    }
+
+    function tryMove(index) {
+      const blankIndex = board.indexOf(null);
+      const [r1, c1] = [Math.floor(index / size), index % size];
+      const [r2, c2] = [Math.floor(blankIndex / size), blankIndex % size];
+      if (Math.abs(r1 - r2) + Math.abs(c1 - c2) === 1) {
+        [board[index], board[blankIndex]] = [board[blankIndex], board[index]];
+        moveCount++;
+        moveCountEl.textContent = moveCount;
+        if (isSolved() && !hasJustCleared) {
+          hasJustCleared = true;
+          gameCleared = true;
+          clearInterval(timerInterval);
+          renderBoardWithImage(selectedImageURL);
+          setTimeout(() => alert("クリア！ 🎉"), 100);
+        } else {
+          renderBoardWithImage(selectedImageURL);
+        }
+      }
+    }
+
+    function isSolved() {
+      for (let i = 0; i < size * size - 1; i++) {
+        if (board[i] !== i + 1) return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+
+</html>

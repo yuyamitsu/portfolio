@@ -6,42 +6,42 @@ const workDetails = {
     title: "pokerGame",
     duration: "作業時間：30時間",
     description: "有名なゲームを参考に同じようにプレイできるように工夫しました。",
-    link: "works/games/pokerGame.html",
+    link: "works/games/pokerGame.php",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
   memoryGame: {
     title: "神経衰弱",
     duration: "作業時間：10時間",
     description: "カードを選択した時のアニメーションや、スマホ向けのレスポンシブ対応を工夫しました。",
-    link: "works/games/memoryGame.html",
+    link: "works/games/memoryGame.php",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
   highLowGame: {
     title: "High&Low",
     duration: "作業時間：20時間",
     description: "プレイヤーの選択に応じたセリフや演出を工夫し、操作性にも配慮しました。",
-    link: "works/games/highLow.html",
+    link: "works/games/highLow.php",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
   puzzle15: {
     title: "15パズルゲーム",
     duration: "作業時間：5時間",
     description: "ChatGPTでの作成の練習で作ったゲーム。ユーザビリティに配慮して作ってもらうよう工夫しました。",
-    link: "works/games/puzzle15.html",
+    link: "works/games/puzzle15.php",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
   lightsOut: {
     title: "ライツアウト",
     duration: "作業時間：2時間",
     description: "ChatGPTでの作成の練習で作ったゲーム。生成されたコードの意味を理解するのに時間がかかりました。",
-    link: "works/games/lightsOut.html",
+    link: "works/games/lightsOut.php",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
   soundMemory: {
     title: "soundMemory",
     duration: "作業時間：30時間",
     description: "気軽に遊べるサイモンゲーム。mp3ではなくWebAudioAPIを使っての制作に挑戦しました。難易度選択でのHzの調整等に苦労しました。",
-    link: "works/games/soundMemory.html",
+    link: "works/games/soundMemory.php",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
   calculator: {
@@ -82,8 +82,8 @@ const workDetails = {
   ccDonuts: {
     title: "ドーナツのショッピングサイト",
     duration: "作業時間：60時間1人",
-    description: "ログインの有無による画面遷移やセッション情報によるカート状態の更新などに注力しました。"+
-                 "また、PHPを使いデータベースを初導入しました。",
+    description: "ログインの有無による画面遷移やセッション情報によるカート状態の更新などに注力しました。" +
+      "また、PHPを使いデータベースを初導入しました。",
     link: "works/others/ccDonuts/index.php",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/others/ccDonuts"
   }
@@ -93,7 +93,7 @@ const workDetails = {
 const categoryMap = {
   Games: ["pokerGame", "memoryGame", "highLowGame", "puzzle15", "lightsOut", "soundMemory"],
   Utilities: ["calculator", "baseConverter", "prime"],
-  Others: ["designHouse", "taiwanTravel","ccDonuts"]
+  Others: ["designHouse", "taiwanTravel", "ccDonuts"]
 };
 
 // カードを生成して配置
@@ -170,6 +170,35 @@ document.addEventListener('click', e => {
   if (detail && img) {
     openModal(detail, img.src, img.alt);
   }
+});
+
+
+// HTML要素を取得
+const bgm = document.getElementById('bgm');
+const bgmToggle = document.querySelector('.bgmToggle');
+
+// ボタンのクリックイベントリスナーを追加
+bgmToggle.addEventListener('click', () => {
+  if (bgm.paused) {
+    // 音楽が停止している場合は再生
+    bgm.play();
+    bgmToggle.innerHTML='BGM<br>ON';
+    bgmToggle.classList.toggle("bgmToggleOn");
+    console.log('BGMを再生しました。');
+  } else {
+    // 音楽が再生中の場合は停止
+    bgm.pause();
+    console.log('BGMを停止しました。');
+    bgmToggle.innerHTML='BGM<br>OFF';
+    bgmToggle.classList.toggle("bgmToggleOn");
+  }
+});
+
+// BGMの再生が終了したら次の曲イベントリスナー
+bgm.addEventListener('ended', () => {
+
+  bgm.currentTime = 0; // 再生位置を0秒に戻す
+  bgm.play(); // 再生
 });
 
 // ハンバーガーメニュー処理

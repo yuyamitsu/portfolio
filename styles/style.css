@@ -228,6 +228,23 @@ header {
   text-align: right;
 }
 
+.bgmToggle {
+  position: fixed;
+  width: 50px;
+  height: 50px;
+  border: #e0f7fa;
+  border-radius: 50%;
+  bottom: 4px;
+  background-color: #ddd;
+  right: calc((100% - 1000px) / 2 + 20px);
+  text-align: center;
+}
+
+.bgmToggleOn {
+  background-color: aqua;
+
+}
+
 
 /* フッター */
 footer {
@@ -382,5 +399,9 @@ footer {
     display: block;
     padding: 1rem;
     text-align: center;
+  }
+
+  .bgmToggle {
+    right: calc((100% - 375px) / 2 + 20px);
   }
 }

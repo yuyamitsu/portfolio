@@ -1,10 +1,10 @@
-<?php 
+<?php
   session_start();
   $pdo = null;
   $config = require('includes/config.php');
   $pdo = new PDO($config['dsn'], $config['user'], $config['password']);
   if (!isset($_SESSION['cart'])) {
-      $_SESSION['cart'] = [];
+    $_SESSION['cart'] = [];
   }
 
   if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'removeItem') {
@@ -12,7 +12,7 @@
 
     if ($productIdToRemove !== false && $productIdToRemove > 0) {
       if (isset($_SESSION['cart'][$productIdToRemove])) {
-        unset($_SESSION['cart'][$productIdToRemove]); 
+        unset($_SESSION['cart'][$productIdToRemove]);
         header('Location: cart.php');
         exit;
       }
@@ -42,9 +42,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST['action'] === 'addToCart')) {
     $productId = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
     $count = filter_input(INPUT_POST, 'count', FILTER_VALIDATE_INT);
-    if ($productId === false || $productId <= 0 || $count === false || $count <= 0 || $count > 10) {   
+    if ($productId === false || $productId <= 0 || $count === false || $count <= 0 || $count > 10) {
         echo "<script>
-                'use strict' 
+                'use strict'
                 window.alert('無効な商品IDまたは数量が指定されました。')
               </script>";
     } else {
@@ -54,20 +54,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
             $product = $stmt->fetch();
 
           if ($product) {
-              $productName = $product['name'];
-              $productPrice = $product['price'];
-              if (isset($_SESSION['cart'][$productId])) {
-                $_SESSION['cart'][$productId]['count'] += $count;
-              } else {
-                  $_SESSION['cart'][$productId] = [
-                    'id' => $productId,
-                    'name' => $productName,
-                    'price' => $productPrice,
-                    'count' => $count
-                  ];
-              }
-              header('Location: cart.php'); // 商品追加後はリダイレクト
-              exit;
+            $productName = $product['name'];
+            $productPrice = $product['price'];
+            if (isset($_SESSION['cart'][$productId])) {
+              $_SESSION['cart'][$productId]['count'] += $count;
+            } else {
+                $_SESSION['cart'][$productId] = [
+                  'id' => $productId,
+                  'name' => $productName,
+                  'price' => $productPrice,
+                  'count' => $count
+                ];
+            }
+            header('Location: cart.php'); // 商品追加後はリダイレクト
+            exit;
           } else {
             echo "<script>
               'use strict'
@@ -133,7 +133,7 @@ if (!empty($_SESSION['cart'])) {
         <div class="cartItemList">
           <?php foreach ($_SESSION['cart'] as $productId => $item): ?>
           <?php
-            $imgBase = isset($imageMap[$item['id']]) ? $imageMap[$item['id']] : 'defaultImage'; 
+            $imgBase = isset($imageMap[$item['id']]) ? $imageMap[$item['id']] : 'defaultImage';
           ?>
           <div class="cartItem">
             <div class="cartItemImage">
