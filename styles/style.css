@@ -32,9 +32,12 @@ button:hover {
 
 /* ヘッダー */
 header {
+  max-width: 1200px;
+  min-width: 375px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 0 auto;
   padding: 1rem 2rem;
   background-color: #fff;
   border-bottom: 1px solid #ddd;
@@ -120,7 +123,7 @@ header {
 
 /* ヒーローセクション */
 .heroSection {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   text-align: center;
   padding: 4rem 2rem;
@@ -236,7 +239,7 @@ header {
   border-radius: 50%;
   bottom: 4px;
   background-color: #ddd;
-  right: calc((100% - 1000px) / 2 + 20px);
+  right: calc((100% - 1200px) / 2 + 20px);
   text-align: center;
 }
 
@@ -348,7 +351,6 @@ footer {
 /* レスポンシブ対応 */
 @media screen and (max-width: 768px) {
   header {
-    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
