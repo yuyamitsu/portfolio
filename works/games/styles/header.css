@@ -11,28 +11,15 @@ header {
   color: cadetblue;
 }
 
+header h1 {
+  font-size: 2em;
+  width: fit-content;
+}
+
 .welcomeText {
   display: flex;
   align-items: center;
   gap: inherit;
-}
-
-.drawerMenu {
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: max-height 0.5s ease, opacity 0.5s ease;
-  position: absolute;
-  top: 100%;
-  left: 0px;
-  right: 0px;
-  background-color: rgba(127, 85, 57, 0.75);
-  max-width: 1200px;
-}
-
-.drawerActive {
-  max-height: 488px;
-  opacity: 1;
 }
 
 .hamburgerBtn {
@@ -71,7 +58,53 @@ header {
   transform: translateY(-8px) rotate(-45deg);
 }
 
-h1 {
-  font-size: 2em;
-  width: fit-content;
+.drawerMenu {
+  max-width: 1200px;
+  max-height: 0;
+  padding: 1rem;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  right: 0px;
+  background-color: rgb(48 246 79 / 75%);
+  color: #222;
+  z-index: 150;
+}
+
+.drawerActive {
+  max-height: 488px;
+  opacity: 1;
+}
+
+.signUpMenu {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-size: 20px;
+}
+
+.signUpMenu li {
+  list-style: none;              /* ・を消す */
+  background-color: #fff;        /* 白ベース */
+  color: #222;                   /* 文字は濃いめで読みやすく */
+  padding: 10px 15px;            /* 余白でボタンっぽく */
+  border: 2px solid #222;        /* 枠線で締まりを出す */
+  border-radius: 8px;            /* 角丸 */
+  text-align: center;            /* 文字を中央寄せ */
+  cursor: pointer;               /* ホバー時にポインタ表示 */
+  transition: all 0.2s ease;     /* アニメーション */
+}
+
+.signUpMenu li:hover {
+  background-color: #222;        /* ホバー時に反転 */
+  color: #fff;                   /* 文字は白に */
+}
+
+
+.nameInfo {
+  margin: 30px 0 0 0;
+  font-size: 24px;
 }
