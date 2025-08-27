@@ -1,0 +1,77 @@
+@charset "utf-8";
+
+header {
+  display: flex;
+  gap: 20px;
+  padding: 1rem;
+  position: relative;
+  justify-content: space-between;
+  align-items: center;
+  background-color: cyan;
+  color: cadetblue;
+}
+
+.welcomeText {
+  display: flex;
+  align-items: center;
+  gap: inherit;
+}
+
+.drawerMenu {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+  position: absolute;
+  top: 100%;
+  left: 0px;
+  right: 0px;
+  background-color: rgba(127, 85, 57, 0.75);
+  max-width: 1200px;
+}
+
+.drawerActive {
+  max-height: 488px;
+  opacity: 1;
+}
+
+.hamburgerBtn {
+  --size: 28px;
+  --thickness: 2px;
+  width: var(--size);
+  height: var(--size);
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  display: inline-grid;
+  place-content: center;
+  gap: 6px;
+  z-index: 200;
+}
+
+.hamburgerBtn .bar {
+  width: var(--size);
+  height: var(--thickness);
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease, width 0.25s ease;
+}
+
+/* 変形（open時に×へ） */
+.hamburgerBtn.open .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburgerBtn.open .bar:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburgerBtn.open .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+h1 {
+  font-size: 2em;
+  width: fit-content;
+}

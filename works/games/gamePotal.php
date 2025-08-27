@@ -7,18 +7,13 @@
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="styles/reset.css">
+  <?php require_once __DIR__ . '/includes/headCommon.php';?>
   <link rel="stylesheet" href="styles/gamePotal.css">
   <title><?=$title?></title>
 </head>
 
 <body>
-  <?php require_once __DIR__ . '/includes/welcomeText.php';?>
-<div>
-  <button id="addNameBtn" onclick="addName()">名前を登録する</button>
-</div>
+  <?php require_once __DIR__ . '/includes/header.php';?>
 
   <div class="innerWrap">
     <template id="gameCardTemplate">

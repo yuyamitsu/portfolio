@@ -3,7 +3,7 @@
 const games = [
   { id: '1', name: 'pokerGame', link: 'pokerGame.php' },
   { id: '2', name: 'memoryGame', link: 'memoryGame.php' },
-  { id: '3', name: 'highLowGame', link: 'highlow.php' },
+  { id: '3', name: 'highLowGame', link: 'highLow.php' },
   { id: '4', name: 'puzzle15', link: 'puzzle15.php' },
   { id: '5', name: 'lightsOut', link: 'lightsOut.php' },
   { id: '6', name: 'soundMemory', link: 'soundMemory.php' }
@@ -31,8 +31,3 @@ games.forEach(game => {
   gameList.appendChild(clone);
 });
 
-const addNameBtn = document.getElementById("addNameBtn");
-
-function addName() {
-localStorage.setItem("userName" , window.prompt("名前を登録してください"));
-}
