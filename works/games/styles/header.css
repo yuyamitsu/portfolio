@@ -72,11 +72,13 @@ header h1 {
   background-color: rgb(48 246 79 / 75%);
   color: #222;
   z-index: 150;
+  pointer-events: none;
 }
 
 .drawerActive {
   max-height: 488px;
   opacity: 1;
+  pointer-events: auto;
 }
 
 .signUpMenu {
@@ -87,24 +89,40 @@ header h1 {
 }
 
 .signUpMenu li {
-  list-style: none;              /* ・を消す */
-  background-color: #fff;        /* 白ベース */
-  color: #222;                   /* 文字は濃いめで読みやすく */
-  padding: 10px 15px;            /* 余白でボタンっぽく */
-  border: 2px solid #222;        /* 枠線で締まりを出す */
-  border-radius: 8px;            /* 角丸 */
-  text-align: center;            /* 文字を中央寄せ */
-  cursor: pointer;               /* ホバー時にポインタ表示 */
-  transition: all 0.2s ease;     /* アニメーション */
+  background-color: #fff;
+  /* 白ベース */
+  color: #222;
+  /* 文字は濃いめで読みやすく */
+  padding: 10px 15px;
+  /* 余白でボタンっぽく */
+  border: 2px solid #222;
+  /* 枠線で締まりを出す */
+  border-radius: 8px;
+  /* 角丸 */
+  text-align: center;
+  /* 文字を中央寄せ */
+  cursor: pointer;
+  /* ホバー時にポインタ表示 */
+  transition: all 0.2s ease;
+  /* アニメーション */
 }
 
 .signUpMenu li:hover {
-  background-color: #222;        /* ホバー時に反転 */
-  color: #fff;                   /* 文字は白に */
+  background-color: #222;
+  /* ホバー時に反転 */
+  color: #fff;
+  /* 文字は白に */
 }
 
 
 .nameInfo {
   margin: 30px 0 0 0;
   font-size: 24px;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+  }
 }

@@ -9,19 +9,18 @@
 <head>
   <?php require_once __DIR__ . '/includes/headCommon.php';?>
   <link rel="stylesheet" href="styles/gamePotal.css">
-  <title><?=$title?></title>
 </head>
 
 <body>
   <?php require_once __DIR__ . '/includes/header.php';?>
-
+  <h2>ゲームポータル</h2>
   <div class="innerWrap">
     <template id="gameCardTemplate">
       <div class="gameCard">
         <img class="gameImage" src="" alt="">
-        <h2 class="title"></h2>
-        <a class="link">▶ ゲームスタート</a>
+        <h3 class="gameTitle"></h3>
         <div class="score"></div>
+        <a class="link"></a>
       </div>
     </template>
     <div class="gameList" id="gameList">

@@ -4,8 +4,13 @@
   display: none;
 }
 
-.layoutWrap {
-  max-width: 1240px;
+body {
+  max-width: 1200px;
+  min-width: 375px;
+  margin: 0 auto;
+}
+
+.cardGameLayoutWrap {
   margin: 0 auto;
 }
 
@@ -13,22 +18,23 @@
   background-color: #a3d5f7;
 }
 
-.cardGameStyle header {
+/* .cardGameStyle header {
   text-align: center;
   color: #002244;
   background-color: #a3d5f7;
   font-size: 2rem;
   font-weight: bold;
   padding: 0.5rem 0;
-}
+} */
 
-.cardGameStyle header h1 {
+.cardGameStyle h2 {
   font-family: 'Comic Sans MS', 'Rounded Mplus 1c', cursive;
   font-size: 2.2rem;
   color: #4b4b4b;
   text-shadow: 1px 1px 0 #ffffff;
   background: linear-gradient(to right, #ffffffaa, #f7faffaa);
-  display: inline-block;
+  width: fit-content;
+  margin: 1rem auto;
   padding: 0.5em 1em;
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -39,6 +45,7 @@
   text-align: center;
   background-color: #fdfdfd;
 }
+
 .puzzleGameStyle header {
   text-align: center;
   color: #002244;
@@ -46,6 +53,7 @@
   font-size: 2rem;
   font-weight: bold;
 }
+
 .puzzleGameStyle h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
@@ -106,8 +114,8 @@ footer {
 }
 
 /* 共通スタイル：セレクトとボタンに統一感を */
-select,
-button {
+.cardGameLayoutWrap select,
+.cardGameLayoutWrap button {
   font-size: 1rem;
   padding: 0.5em 1em;
   border: 2px solid #444;
@@ -120,38 +128,34 @@ button {
   box-shadow: 0 3px 0 #aaa;
 }
 
-select:hover,
-button:hover {
+.cardGameLayoutWrap select:hover,
+.cardGameLayoutWrap button:hover {
   background-color: #f0f0f0;
 }
 
-select:focus,
-button:focus {
+.cardGameLayoutWrap select:focus,
+.cardGameLayoutWrap button:focus {
   outline: none;
   border-color: #336699;
   box-shadow: 0 0 5px #99c;
 }
 
-button {
+.cardGameLayoutWrap button {
   background-color: #4caf50;
   color: #fff;
   box-shadow: 0 3px 0 #388e3c;
 }
 
-button:hover {
+.cardGameLayoutWrap button:hover {
   background-color: #45a049;
 }
 
-button:active {
+.cardGameLayoutWrap button:active {
   transform: translateY(2px);
   box-shadow: 0 1px 0 #2e7d32;
 }
 
 @media screen and (max-width: 768px) {
-  .layoutWrap {
-    min-width: 375px;
-  }
-
   .pageNav ul {
     display: block;
     text-align: center;

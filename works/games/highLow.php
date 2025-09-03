@@ -21,7 +21,7 @@
   <header>
     <h1>High&Low</h1>
   </header>
-  <div class="layoutWrap">
+  <div class="cardGameLayoutWrap">
     <main>
       <div id="chipStatus">
         <p>所持チップ: <span id="chipTotal">100</span></p>

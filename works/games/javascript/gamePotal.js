@@ -1,33 +1,32 @@
 'use strict';
 
-const games = [
-  { id: '1', name: 'pokerGame', link: 'pokerGame.php' },
-  { id: '2', name: 'memoryGame', link: 'memoryGame.php' },
-  { id: '3', name: 'highLowGame', link: 'highLow.php' },
-  { id: '4', name: 'puzzle15', link: 'puzzle15.php' },
-  { id: '5', name: 'lightsOut', link: 'lightsOut.php' },
-  { id: '6', name: 'soundMemory', link: 'soundMemory.php' }
-];
+const gameIds = {
+  1: { name: 'pokerGame', title: 'ポーカー', link: 'pokerGame.php' },
+  2: { name: 'memoryGame', title: '神経衰弱', link: 'memoryGame.php' },
+  3: { name: 'highLowGame', title: 'ハイ＆ロー', link: 'highLow.php' },
+  4: { name: 'puzzle15', title: '15パズル', link: 'puzzle15.php' },
+  5: { name: 'lightsOut', title: 'ライツアウト', link: 'lightsOut.php' },
+  6: { name: 'soundMemory', title: 'サウンド記憶ゲーム', link: 'soundMemory.php' }
+};
 
 
 const template = document.getElementById('gameCardTemplate');
 const gameList = document.getElementById('gameList');
 
-games.forEach(game => {
-  const score = 0;
+for (const id in gameIds) {
+  const game = gameIds[id];
+  const score = Number(localStorage.getItem(game.name + "Score")) || 0;
   const clone = template.content.cloneNode(true);
   const imagePath = `img/${game.name}.png`;
   const gameImage = clone.querySelector('.gameImage');
   gameImage.src = imagePath;
   gameImage.alt = game.name;
-  clone.querySelector('.title').textContent = game.name;
+  clone.querySelector('.gameTitle').textContent = game.title;
   const link = clone.querySelector('.link');
   link.href = game.link;
-  link.textContent = '▶ GameStart';
-
+  link.textContent = 'GameStart';
   clone.querySelector('.score').textContent = `HighScore：${score}`;
 
-  // 表示用に挿入
   gameList.appendChild(clone);
-});
+}
 

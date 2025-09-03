@@ -1,28 +1,25 @@
 <?php
   session_start();
   require_once __DIR__ . '/../../../../db.php';
+  $title = "ポーカーゲーム";
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="styles/reset.css">
+  <?php require_once __DIR__ . '/includes/headCommon.php';?>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/common.css">
   <link rel="stylesheet" href="styles/pokerGame.css">
-  <title>ポーカーゲーム</title>
 </head>
 
 <body class="cardGameStyle">
-  <header>
-    <h1>ポーカー</h1>
-  </header>
-  <div class="layoutWrap">
-    <main>
+  <?php require_once __DIR__ . '/includes/header.php';?>
+  <h2>ポーカー</h2>
+  <div class="cardGameLayoutWrap">
+    <main >
       <div id="settingSheet">
         <div>
           <ul id="scoreSheet">
@@ -49,7 +46,7 @@
           </ul>
         </div>
       </div>
-      <h2 id="roleName" class="pop"></h2>
+      <h3 id="roleName" class="pop"></h3>
       <div id="gameTable" class="none">
         <label class="cardLabel none">
           <input type="checkbox" class="cardCheck" data-index="0">
@@ -84,13 +81,13 @@
       </div>
     </main>
     <nav class="pageNav">
-      <h2 class="navTitle">他のゲームへ</h2>
+      <h3 class="navTitle">他のゲームへ</h3>
       <ul>
-        <li><a href="highLow.html">High&Low</a></li>
-        <li><a href="memoryGame.html">神経衰弱</a></li>
-        <li><a href="puzzle15.html">15パズル</a></li>
-        <li><a href="lightsOut.html">ライツアウト</a></li>
-        <li><a href="soundMemory.html">soundMemory</a></li>
+        <li><a href="highLow.php">High&Low</a></li>
+        <li><a href="memoryGame.php">神経衰弱</a></li>
+        <li><a href="puzzle15.php">15パズル</a></li>
+        <li><a href="lightsOut.php">ライツアウト</a></li>
+        <li><a href="soundMemory.php">サウンド記憶ゲーム</a></li>
         <li><a href="../../index.html">ポートフォリオトップへ</a></li>
       </ul>
     </nav>
