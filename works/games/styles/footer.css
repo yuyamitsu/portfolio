@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+footer {
+  background-color: #222;      /* ダークカラーで画面を引き締め */
+  color: #fff;                 /* 文字は白でコントラスト */
+  text-align: center; 
+  margin: 20px 0 0 0;         /* 中央揃え */
+  padding: 1rem 0;             /* 上下に余白 */
+  font-size: 0.9rem;           /* 少し小さめ */
+}
+
+footer p {
+  margin: 0;
+}
