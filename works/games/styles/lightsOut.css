@@ -51,3 +51,10 @@
   font-size: 1rem;
   color: #555;
 }
+
+/* 無効化時の盤面見た目 */
+#board.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+  background-color: rgba(128, 128, 128, 0.2);
+}

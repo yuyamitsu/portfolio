@@ -1,5 +1,6 @@
 'use strict';
 
+const gameName = "highLow";
 const gameTable = document.getElementById("gameTable");
 const startBtn = document.getElementById("startBtn");
 const highBtn = document.getElementById("highBtn");
@@ -341,6 +342,7 @@ function dropOut() {
     ? messageTypes[currentType].drop[Math.floor(Math.random() * messageTypes[currentType].drop.length)]
     : messageTypes[currentType].drop || "冷静な判断です。";
   // const dropMessage = messageTypes[currentType]?.drop || `${potentialWin}チップ獲得しました！`;
+  if(updateHighScore(gameName,potentialWin)) alert("ハイスコアを更新しました");
   resultMessage.textContent = `${dropMessage}（${potentialWin}チップ獲得）`;
   resultMessage.className = "drop";
   totalChips += potentialWin;

@@ -1,24 +1,21 @@
 <?php
   session_start();
   require_once __DIR__ . '/../../../../db.php';
+  $title = "ライツアウト";
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<link rel="stylesheet" href="styles/reset.css">
+  <?php require_once __DIR__ . '/includes/headCommon.php';?>
 	<link rel="stylesheet" href="styles/common.css">
 	<link rel="stylesheet" href="styles/lightsOut.css">
-	<title>Lights Out Game</title>
 </head>
 
 <body class="puzzleGameStyle">
-	<header>
-		<h1>Lights Out</h1>
-	</header>
-	<div class="innerWrap">
+  <?php require_once __DIR__ . '/includes/header.php';?>
+  <h2><?=$title?></h2>
+	<div class="innerWrap puzzleGameLayoutWrap">
 		<div id="controls">
 			<label for="gridSize">サイズ選択:</label>
 			<select id="gridSize"></select>
@@ -29,28 +26,15 @@
 		<p id="message"></p>
 		<p id="minStep"></p>
 		<p id="stepCounter"></p>
-		<nav class="pageNav">
-			<h2 class="navTitle">他のゲームへ</h2>
-			<ul>
-				<li><a href="highLow.html">High&Low</a></li>
-				<li><a href="pokerGame.html">ポーカー</a></li>
-				<li><a href="memoryGame.html">神経衰弱</a></li>
-				<li><a href="puzzle15.html">15パズル</a></li>
-				<li><a href="soundMemory.html">soundMemory</a></li>
-				<li><a href="../../index.html">ポートフォリオトップへ</a></li>
-			</ul>
-		</nav>
+    <?php require 'includes/pageNav.php';?>
 	</div>
-	<footer>
-		<p>&copy; 2025 Yuya Mitsugi</p>
-	</footer>
+  	<?php require 'includes/footer.php';?>
 
 	<script>
 		let size = 3;
 		let board = [];
 		let hintOn = false;
 		let currentSolution = [];
-
 		const boardElem = document.getElementById('board');
 		const gridSizeSelect = document.getElementById('gridSize');
 		const messageElem = document.getElementById('message');
@@ -58,7 +42,9 @@
 		const stepCounterElem = document.getElementById('stepCounter');
 		const toggleHintBtn = document.getElementById('toggleHintBtn');
 		let stepCounter = 0;
+		let cleared = false; // クリア状態管理
 
+		// サイズ選択肢を追加
 		for (let i = 1; i <= 10; i++) {
 			const option = document.createElement('option');
 			option.value = i;
@@ -66,19 +52,24 @@
 			gridSizeSelect.append(option);
 		}
 
+		// スタートボタン
 		document.getElementById('startBtn').addEventListener('click', () => {
 			size = Number(gridSizeSelect.value);
 			createSolvableBoard(size);
 			stepCounter = 0;
 			stepCounterElem.textContent = `現在ステップ数${stepCounter}手`;
+			cleared = false;
+			boardElem.classList.remove('disabled'); // 盤面を再有効化
 		});
 
+		// ヒントボタン
 		toggleHintBtn.addEventListener('click', () => {
 			hintOn = !hintOn;
 			toggleHintBtn.textContent = hintOn ? 'ヒント ON' : 'ヒント OFF';
 			updateHintDisplay();
 		});
 
+		// 初期盤面生成
 		function createSolvableBoard(n) {
 			const solution = Array(n * n).fill(0).map(() => Math.random() < 0.35 ? 1 : 0);
 			const state = applyMoves(solution, n);
@@ -86,6 +77,7 @@
 			renderBoard(state, solution, n);
 		}
 
+		// 盤面描画
 		function renderBoard(state, hintIndexes, n) {
 			board = [];
 			boardElem.innerHTML = '';
@@ -95,7 +87,6 @@
 				const cell = document.createElement('div');
 				cell.classList.add('cell');
 				if (state[i]) cell.classList.add('on');
-				if (hintIndexes[i]) cell.classList.add('hint');
 				cell.dataset.index = i;
 				boardElem.appendChild(cell);
 				board.push(cell);
@@ -103,9 +94,11 @@
 
 			board.forEach((cell, index) => {
 				cell.addEventListener('click', () => {
+					if (cleared) return; // クリア後は無効化
 					toggle(index, n);
 					stepCounterElem.textContent = `現在ステップ数${++stepCounter}手`;
 					checkClear();
+					updateHintDisplay();
 				});
 			});
 
@@ -115,6 +108,7 @@
 			updateHintDisplay();
 		}
 
+		// セル反転処理
 		function toggle(index, n) {
 			const r = Math.floor(index / n);
 			const c = index % n;
@@ -128,13 +122,17 @@
 			});
 		}
 
+		// クリア判定
 		function checkClear() {
 			const isCleared = board.every(cell => !cell.classList.contains('on'));
 			if (isCleared) {
 				messageElem.textContent = 'クリア！✨';
+				cleared = true;
+				boardElem.classList.add('disabled'); // 無効化＋グレーアウト
 			}
 		}
 
+		// 初期状態に反映する関数群
 		function applyMoves(moves, n) {
 			const state = Array(n * n).fill(0);
 			moves.forEach((val, idx) => {
@@ -152,6 +150,7 @@
 			return state;
 		}
 
+		// 行列生成
 		function generateMatrix(n) {
 			const A = [];
 			for (let i = 0; i < n * n; i++) {
@@ -169,6 +168,7 @@
 			return A;
 		}
 
+		// GF(2) 解法
 		function solveGF2(A, b) {
 			const n = b.length;
 			const mat = A.map(row => [...row]);
@@ -203,12 +203,26 @@
 			return x;
 		}
 
+		// 現在の盤面取得
+		function getCurrentBoardState(n) {
+			return board.map(cell => cell.classList.contains('on') ? 1 : 0);
+		}
+
+		// ヒント表示更新
 		function updateHintDisplay() {
+			board.forEach(cell => cell.classList.remove('hint'));
+			if (!hintOn || cleared) return;
+
+			const n = size;
+			const A = generateMatrix(n);
+			const b = getCurrentBoardState(n);
+			const solution = solveGF2(A, b);
+
+			if (!solution) return;
+
 			board.forEach((cell, index) => {
-				if (currentSolution[index]) {
-					cell.classList.toggle('hint', hintOn);
-				} else {
-					cell.classList.remove('hint');
+				if (solution[index] === 1) {
+					cell.classList.add('hint');
 				}
 			});
 		}
@@ -218,5 +232,4 @@
 		createSolvableBoard(3);
 	</script>
 </body>
-
 </html>

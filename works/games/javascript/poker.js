@@ -18,7 +18,7 @@ let cardDeck = makeDeck();
 let pokerHands = dealingCards();
 const defaultPokerChip = 10;
 const maxrate = 10;
-let rate = 2;
+let rate = 5;
 let score = 0;
 let rank = 0;
 
@@ -32,6 +32,20 @@ changeBtn.addEventListener("click", CardChange);
 scorePoints.forEach(scorePoint => {
   const point = parseInt(scorePoint.dataset.score);
   scorePoint.textContent = (point * rate);
+});
+
+const betPointSelect = document.getElementById("betPointSelect");
+
+betPointSelect.addEventListener("change", () => {
+  rate = parseInt(betPointSelect.value, 10);
+
+  // スコア倍率を反映
+  scorePoints.forEach(scorePoint => {
+    const point = parseInt(scorePoint.dataset.score, 10);
+    scorePoint.textContent = point * rate;
+  });
+
+  console.log(`現在のレート: ${rate}`);
 });
 
 /////////////////カードクリックにイベントを追加する関数/////////////////

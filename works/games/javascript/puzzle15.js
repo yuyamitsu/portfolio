@@ -1,17 +1,21 @@
 'use strict'
-
 const sizeSelect = document.getElementById("sizeSelect");
 const startBtn = document.getElementById("startBtn");
 const boardEl = document.getElementById("board");
 const moveCountEl = document.getElementById("moveCount");
 const timerEl = document.getElementById("timer");
-const rankingList = document.getElementById("rankingList");
+const imageInput = document.getElementById("imageInput");
+const showHint = document.getElementById("showHint");
+const hintColor = document.getElementById("hintColor");
 
 let size = 4;
 let board = [];
 let moveCount = 0;
 let timer = 0;
 let timerInterval = null;
+let selectedImageURL = "img/sky.png";
+let hasJustCleared = false;
+let gameCleared = false;
 
 for (let i = 3; i <= 15; i++) {
   const option = document.createElement("option");
@@ -21,9 +25,43 @@ for (let i = 3; i <= 15; i++) {
   sizeSelect.append(option);
 }
 
+document.querySelectorAll("input[name='imageOption']").forEach(radio => {
+  radio.addEventListener("change", () => {
+    if (radio.value === "custom") {
+      imageInput.style.display = "inline";
+    } else {
+      imageInput.style.display = "none";
+      selectedImageURL = radio.value;
+    }
+  });
+});
+
+imageInput.addEventListener("change", function () {
+  const file = this.files[0];
+  if (!file) return;
+  if (!file.type.startsWith("image/")) {
+    alert("画像ファイルを選択してください（JPG/PNGなど）！");
+    this.value = "";
+    return;
+  }
+  const reader = new FileReader();
+  reader.onload = function (e) {
+    selectedImageURL = e.target.result;
+  };
+  reader.readAsDataURL(file);
+});
+
 startBtn.addEventListener("click", () => {
   size = parseInt(sizeSelect.value);
   resetGame();
+});
+
+showHint.addEventListener("change", () => {
+  renderBoardWithImage(selectedImageURL);
+});
+
+hintColor.addEventListener("change", () => {
+  renderBoardWithImage(selectedImageURL);
 });
 
 function resetGame() {
@@ -33,7 +71,9 @@ function resetGame() {
   moveCountEl.textContent = "0";
   timerEl.textContent = "0";
   createSolvableBoard();
-  renderBoard();
+  hasJustCleared = false;
+  gameCleared = false;
+  renderBoardWithImage(selectedImageURL);
   timerInterval = setInterval(() => {
     timer++;
     timerEl.textContent = timer;
@@ -43,7 +83,7 @@ function resetGame() {
 function createSolvableBoard() {
   do {
     board = [...Array(size * size - 1).keys()].map(n => n + 1);
-    board.push(null); // 空白
+    board.push(null);
     shuffle(board);
   } while (!isSolvable(board));
 }
@@ -63,30 +103,45 @@ function isSolvable(arr) {
       if (flat[i] > flat[j]) invCount++;
     }
   }
-
   const blankIndex = arr.indexOf(null);
-  const blankRowFromBottom = size - Math.floor(blankIndex / size);
+  const rowFromTop = Math.floor(blankIndex / size);
+  const blankRowFromBottom = size - rowFromTop;
 
   if (size % 2 === 1) {
     return invCount % 2 === 0;
   } else {
-    return (invCount + blankRowFromBottom) % 2 === 0;
+    return (invCount + blankRowFromBottom) % 2 === 1;
   }
 }
 
-function renderBoard() {
+function renderBoardWithImage(imgURL) {
   boardEl.innerHTML = "";
   boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
   board.forEach((val, i) => {
     const tile = document.createElement("div");
     tile.className = "tile";
+
+    const row = val !== null ? Math.floor((val - 1) / size) : size - 1;
+    const col = val !== null ? (val - 1) % size : size - 1;
+
+    if (val !== null || gameCleared) {
+      tile.style.backgroundImage = `url(${imgURL})`;
+      tile.style.backgroundSize = `${size * 100}% ${size * 100}%`;
+      tile.style.backgroundPosition = `${(col / (size - 1)) * 100}% ${(row / (size - 1)) * 100}%`;
+    }
+
     if (val === null) {
       tile.classList.add("blank");
     } else {
-      tile.textContent = val;
       tile.addEventListener("click", () => tryMove(i));
       tile.addEventListener("touchstart", () => tryMove(i));
+      if (showHint.checked) {
+        tile.textContent = val;
+        tile.style.color = hintColor.value;
+      }
     }
+
     boardEl.appendChild(tile);
   });
 }
@@ -95,18 +150,18 @@ function tryMove(index) {
   const blankIndex = board.indexOf(null);
   const [r1, c1] = [Math.floor(index / size), index % size];
   const [r2, c2] = [Math.floor(blankIndex / size), blankIndex % size];
-  const isAdjacent = Math.abs(r1 - r2) + Math.abs(c1 - c2) === 1;
-
-  if (isAdjacent) {
+  if (Math.abs(r1 - r2) + Math.abs(c1 - c2) === 1) {
     [board[index], board[blankIndex]] = [board[blankIndex], board[index]];
     moveCount++;
     moveCountEl.textContent = moveCount;
-    renderBoard();
-    if (isSolved()) {
+    if (isSolved() && !hasJustCleared) {
+      hasJustCleared = true;
+      gameCleared = true;
       clearInterval(timerInterval);
-      alert("クリア！ 🎉");
-      saveScore();
-      showRanking();
+      renderBoardWithImage(selectedImageURL);
+      setTimeout(() => alert("クリア！ 🎉"), 100);
+    } else {
+      renderBoardWithImage(selectedImageURL);
     }
   }
 }
@@ -116,24 +171,4 @@ function isSolved() {
     if (board[i] !== i + 1) return false;
   }
   return true;
-}
-
-function saveScore() {
-  const record = { size, moveCount, timer, date: new Date().toLocaleString() };
-  const key = `ranking_${size}x${size}`;
-  const ranking = JSON.parse(localStorage.getItem(key)) || [];
-  ranking.push(record);
-  ranking.sort((a, b) => a.moveCount - b.moveCount);
-  localStorage.setItem(key, JSON.stringify(ranking.slice(0, 10)));
-}
-
-function showRanking() {
-  const key = `ranking_${size}x${size}`;
-  const ranking = JSON.parse(localStorage.getItem(key)) || [];
-  rankingList.innerHTML = "";
-  ranking.forEach(score => {
-    const li = document.createElement("li");
-    li.textContent = `${score.moveCount} 手 (${score.timer}s) - ${score.date}`;
-    rankingList.appendChild(li);
-  });
 }

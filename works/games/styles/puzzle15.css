@@ -1,48 +1,61 @@
 @charset "utf-8";
 
-body {
-  font-family: sans-serif;
-  text-align: center;
-  margin: 1rem;
-}
 
-#controls {
+
+#controls,
+#info,
+#imageSelector,
+#hintToggle {
   margin: 1rem 0;
-}
-
-#info {
-  margin-bottom: 1rem;
   font-size: 1.1rem;
 }
 
-.board {
+#controls select,
+#controls button {
+  font-size: 1rem;
+  padding: 0.4rem 0.6rem;
+  margin-left: 0.5rem;
+}
+
+#imageSelector label {
+  margin: 0 5px;
+}
+
+#imageInput {
+  margin-top: 5px;
+}
+
+#board {
   display: grid;
   gap: 4px;
   margin: auto;
-  max-width: 90vw;
+  width: 90vw;
+  max-width: 600px;
+  aspect-ratio: 1 / 1;
   touch-action: manipulation;
 }
 
 .tile {
-  background-color: #3498db;
-  color: white;
-  font-weight: bold;
+  width: 100%;
+  aspect-ratio: 1;
+  background-color: #ccc;
+  border-radius: 8px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  user-select: none;
   font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  aspect-ratio: 1;
-  border-radius: 8px;
-  user-select: none;
   transition: background-color 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.tile.blank {
-  background-color: #ecf0f1;
+.blank {
+  background: #eee;
 }
 
-@media (max-width: 600px) {
-  .tile {
-    font-size: 1.2rem;
-  }
-}
+@media (max-width: 768px) {}

@@ -2,11 +2,11 @@
 
 // 作品データ
 const workDetails = {
-  pokerGame: {
-    title: "pokerGame",
+  poker: {
+    title: "poker",
     duration: "作業時間：30時間",
     description: "有名なゲームを参考に同じようにプレイできるように工夫しました。",
-    link: "works/games/pokerGame.php",
+    link: "works/games/poker.php",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
   },
   memoryGame: {
@@ -91,7 +91,7 @@ const workDetails = {
 
 // カテゴリ分け
 const categoryMap = {
-  Games: ["pokerGame", "memoryGame", "highLowGame", "puzzle15", "lightsOut", "soundMemory"],
+  Games: ["poker", "memoryGame", "highLowGame", "puzzle15", "lightsOut", "soundMemory"],
   Utilities: ["calculator", "baseConverter", "prime"],
   Others: ["designHouse", "taiwanTravel", "ccDonuts"]
 };

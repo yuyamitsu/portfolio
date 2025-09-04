@@ -1,37 +1,37 @@
 <?php
   session_start();
   require_once __DIR__ . '/../../../../db.php';
+  $title = "サウンド記憶ゲーム";
 ?>
 <!DOCTYPE html>
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <?php require_once __DIR__ . '/includes/headCommon.php';?>
+	<link rel="stylesheet" href="styles/common.css">
   <link rel="stylesheet" href="styles/soundMemory.css">
-
-  <title>音記憶ゲーム</title>
 </head>
 
 <body class="puzzleGameStyle">
+  <?php require_once __DIR__ . '/includes/header.php';?>
+  <h2><?=$title?></h2>
   <div class="innerWrap">
-    <header>
-      <h1>音の順番を覚えよう！</h1>
-    </header>
-    <form class="soundType">
+    <div class="soundType">
+      音の種類:
       <select id="waveSelect">
-        <option value="sine" selected>sine（やさしい）</option>
+        <option value="sine" selected>sine（シンプル音）</option>
         <option value="square">square（ピコピコ）</option>
         <option value="triangle">triangle（少し硬い）</option>
         <option value="sawtooth">sawtooth（金属的）</option>
       </select>
+      難易度:
       <select name="difficulty" id="difficultySelect">
         <option value="easy">簡単</option>
         <option value="nomal" selected>普通</option>
         <option value="hard">難しい</option>
         <option value="veryHard">激ムズ</option>
       </select>
-    </form>
+    </div>
 
     <div id="soudsButtonsArea">
     </div>
@@ -47,7 +47,9 @@
       <p>現在<span id="currentScoreMessage"></span>連勝中</p>
       <p>最高記録:<span id="maxScoreMessage"></span>連勝</p>
     </div>
+    <?php require 'includes/pageNav.php';?>
   </div>
+  	<?php require 'includes/footer.php';?>
   <script src="javascript/soundMemory.js"></script>
 </body>
 

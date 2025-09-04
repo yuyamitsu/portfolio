@@ -12,12 +12,12 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DotGothic16&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/common.css">
-  <link rel="stylesheet" href="styles/pokerGame.css">
+  <link rel="stylesheet" href="styles/poker.css">
 </head>
 
 <body class="cardGameStyle">
   <?php require_once __DIR__ . '/includes/header.php';?>
-  <h2>ポーカー</h2>
+  <h2><?=$title?></h2>
   <div class="cardGameLayoutWrap">
     <main >
       <div id="settingSheet">
@@ -40,6 +40,10 @@
             <li>ベットするpt
               <span id="betPoints">
                 <select name="betPoint" id="betPointSelect">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="5" selected>5</option>
+                  <option value="10">10</option>
                 </select>
               </span>
             </li>
@@ -80,11 +84,11 @@
         <button id="reset" class="none">もういちどチャレンジ!</button>
       </div>
     </main>
-  <?php require 'includes/pageNav.php';?>
+    <?php require 'includes/pageNav.php';?>
   </div>
   <?php require 'includes/footer.php';?>
-  <script src="javascript/common.js"></script>
-  <script src="javascript/pokerGame.js"></script>
+  <script src="javascript/deckInit.js"></script>
+  <script src="javascript/poker.js"></script>
 </body>
 
 </html>

@@ -1,23 +1,19 @@
-'use strict'
+'use strict';
 
-function makeDeck() {
-  const suits = ['S', 'H', 'D', 'C'];
-  let deck = [];
-  for (let i = 0; i < suits.length; i++) {
-    for (let j = 1; j < 14; j++) {
-      deck.push(suits[i] + j);
-    }
-  }
-  return deck;
+function getHighScore(gameName) {
+  const score = localStorage.getItem(`${gameName}HS`);
+  return score ? Number(score) : 0;
 }
 
-function shuffleCards() { // ランダムに入れ替えた52枚配列を返す
-  let randomDeck = [];
-  for (let i = 0; i < numberOfCards; ++i) {
-    let index = Math.floor(Math.random() * cardDeck.length); //0~52の数字を生成　1ループごとに51，50と減る
-    console.log(index);
-    randomDeck.push(cardDeck[index]);
-    cardDeck.splice(index, 1);
-  };
-  return randomDeck;
+function updateHighScore(gameName, newScore) {
+  const currentHigh = getHighScore(gameName);
+  if (newScore > currentHigh) {
+    localStorage.setItem(`${gameName}HS`, newScore);
+    return true; // 更新された
+  }
+  return false; // 更新されなかった
+}
+
+function resetHighScore(gameName) {
+  localStorage.removeItem(`${gameName}HS`);
 }
