@@ -1,7 +1,7 @@
 'use strict';
 
 const gameIds = {
-  1: { name: 'poker', title: 'ポーカー', link: 'pokerGame.php' },
+  1: { name: 'poker', title: 'ポーカー', link: 'poker.php' },
   2: { name: 'memoryGame', title: '神経衰弱', link: 'memoryGame.php' },
   3: { name: 'highLow', title: 'ハイ＆ロー', link: 'highLow.php' },
   4: { name: 'puzzle15', title: '15パズル', link: 'puzzle15.php' },

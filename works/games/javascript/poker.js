@@ -1,5 +1,6 @@
 'use strict';
 
+const gameName = "poker";
 const gameTable = document.getElementById("gameTable");
 const roleName = document.getElementById("roleName");
 const cardsDislay = document.querySelectorAll('.cardLabel');
@@ -73,6 +74,7 @@ function startGame() {
   });
   displayCards(pokerHands);
   setupCardCheckboxListeners();
+  betPointSelect.disabled = true;
 
 }
 
@@ -117,6 +119,9 @@ function CardChange() {
     changeBtn.classList.add("none");
     resetBtn.classList.remove("none");
     roleName.textContent = judgeHandRank(pokerHands);
+    highlightScore(roleName.textContent);
+    if(updateHighScore(gameName, (getScoreForRank(roleName.textContent.trim())*rate))) alert("ハイスコアを更新しました");
+    betPointSelect.disabled = false;
   }, 500);
 }
 
@@ -171,6 +176,7 @@ function displayCards(pokerHands) {
       cardImages[index].src = `img/${card}.png`;
     });
     roleName.textContent = judgeHandRank(pokerHands);
+    highlightScore(roleName.textContent);
   }, totalDelay);
 }
 
@@ -201,6 +207,19 @@ function judgeHandRank(hand) {
   if (countValues === "2,1,1,1") return 'ワンペア';
   return '役無し';
 }
+
+
+/////////////////役を点滅させる関数/////////////////
+function highlightScore(rankName) {
+  scoreNames.forEach(li => {
+    if (li.textContent.includes(rankName)) {
+      li.classList.add('highlight');
+    } else {
+      li.classList.remove('highlight');
+    }
+  });
+}
+
 /////////////////最初の手札を配る関数/////////////////
 function dealingCards() { // ランダムに5枚の手札配列を返す
   let pokerHands = [];
@@ -211,4 +230,20 @@ function dealingCards() { // ランダムに5枚の手札配列を返す
     cardDeck.splice(index, 1);
   };
   return pokerHands;
+}
+
+/////////////////役から基礎得点を返す関数/////////////////
+function getScoreForRank(rankName) {
+  switch(rankName) {
+    case 'ロイヤルストレートフラッシュ': return 100;
+    case 'ストレートフラッシュ': return 50;
+    case 'フォーカード': return 10;
+    case 'フルハウス': return 5;
+    case 'フラッシュ': return 4;
+    case 'ストレート': return 3;
+    case 'スリーカード': return 2;
+    case 'ツーペア': return 2;
+    case 'ワンペア': return 1;
+    default: return 0;
+  }
 }

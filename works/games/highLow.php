@@ -83,7 +83,6 @@
     <?php require 'includes/pageNav.php';?>
   </div>
   <?php require 'includes/footer.php';?>
-  <script src="javascript/common.js"></script>
   <script src="javascript/deckInit.js"></script>
   <script src="javascript/highLow.js"></script>
 </body>

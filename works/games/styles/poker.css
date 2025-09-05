@@ -63,11 +63,36 @@ main {
   color: #5a4a42;
 }
 
+/* poker.css の末尾に追加 */
+@keyframes blinkHighlight {
+  0% {
+    background-color: #ffeb3b;
+  }
+
+  50% {
+    background-color: #fff176;
+  }
+
+  100% {
+    background-color: #ffeb3b;
+  }
+}
+
+.scoreName.highlight {
+  background-color: #ffeb3b;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 2px 6px;
+  animation: blinkHighlight 1s infinite;
+  /* 1秒間隔で点滅 */
+}
+
 .scorePoint::after {
   content: "pt";
   font-size: 0.9rem;
   color: #8b7e6b;
 }
+
 
 #roleName {
   font-family: 'Rounded Mplus 1c', 'Hiragino Maru Gothic ProN', sans-serif;

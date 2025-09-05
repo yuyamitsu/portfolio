@@ -27,8 +27,7 @@
     </div>
   </div>
   <?php require 'includes/footer.php';?>
-  <script src="javascript/common.js"></script>
-  <script src="javascript/gamePotal.js"></script>
+  <script src="javascript/gamePotal.js" defer></script>
 
 </body>
 

@@ -52,10 +52,10 @@ function setBrowserId() {
     localStorage.setItem("browserId4digits", id.slice(0, 4));
   }
 }
-function clearScore() {
+function clearScore(gameName) {
   if (window.confirm("本当にスコアを削除しますか？")) {
     // OK を押したとき
-    // localStorage.removeItem("");
+    localStorage.removeItem(gameName + "HS");
     // localStorage.removeItem("");
     alert("削除しました");
     location.reload();
