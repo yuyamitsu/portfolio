@@ -1,4 +1,6 @@
-'use strict'
+'use strict';
+
+// --- 要素取得 ---
 const sizeSelect = document.getElementById("sizeSelect");
 const startBtn = document.getElementById("startBtn");
 const boardEl = document.getElementById("board");
@@ -17,6 +19,7 @@ let selectedImageURL = "img/sky.png";
 let hasJustCleared = false;
 let gameCleared = false;
 
+// --- サイズ選択 ---
 for (let i = 3; i <= 15; i++) {
   const option = document.createElement("option");
   option.value = i;
@@ -25,6 +28,7 @@ for (let i = 3; i <= 15; i++) {
   sizeSelect.append(option);
 }
 
+// --- 画像選択 ---
 document.querySelectorAll("input[name='imageOption']").forEach(radio => {
   radio.addEventListener("change", () => {
     if (radio.value === "custom") {
@@ -51,11 +55,13 @@ imageInput.addEventListener("change", function () {
   reader.readAsDataURL(file);
 });
 
+// --- ゲームスタート ---
 startBtn.addEventListener("click", () => {
   size = parseInt(sizeSelect.value);
   resetGame();
 });
 
+// --- ヒント表示 ---
 showHint.addEventListener("change", () => {
   renderBoardWithImage(selectedImageURL);
 });
@@ -64,6 +70,15 @@ hintColor.addEventListener("change", () => {
   renderBoardWithImage(selectedImageURL);
 });
 
+
+// --- スコア計算（速さ重視） ---
+function calculateScore(size, moveCount, time) {
+  if (time === 0) return 0;
+  const base = size * size * 100;
+  return Math.floor(base / time);
+}
+
+// --- ゲームリセット ---
 function resetGame() {
   clearInterval(timerInterval);
   timer = 0;
@@ -80,6 +95,7 @@ function resetGame() {
   }, 1000);
 }
 
+// --- 盤面生成 ---
 function createSolvableBoard() {
   do {
     board = [...Array(size * size - 1).keys()].map(n => n + 1);
@@ -106,7 +122,6 @@ function isSolvable(arr) {
   const blankIndex = arr.indexOf(null);
   const rowFromTop = Math.floor(blankIndex / size);
   const blankRowFromBottom = size - rowFromTop;
-
   if (size % 2 === 1) {
     return invCount % 2 === 0;
   } else {
@@ -114,6 +129,7 @@ function isSolvable(arr) {
   }
 }
 
+// --- 盤面描画 ---
 function renderBoardWithImage(imgURL) {
   boardEl.innerHTML = "";
   boardEl.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
@@ -146,6 +162,7 @@ function renderBoardWithImage(imgURL) {
   });
 }
 
+// --- タイル移動 ---
 function tryMove(index) {
   const blankIndex = board.indexOf(null);
   const [r1, c1] = [Math.floor(index / size), index % size];
@@ -154,18 +171,30 @@ function tryMove(index) {
     [board[index], board[blankIndex]] = [board[blankIndex], board[index]];
     moveCount++;
     moveCountEl.textContent = moveCount;
+
     if (isSolved() && !hasJustCleared) {
       hasJustCleared = true;
       gameCleared = true;
       clearInterval(timerInterval);
       renderBoardWithImage(selectedImageURL);
-      setTimeout(() => alert("クリア！ 🎉"), 100);
+
+      const score = calculateScore(size, moveCount, timer);
+      const updated = updateHighScore("puzzle15", score);
+      const highScore = getHighScore("puzzle15");
+
+      setTimeout(() => {
+        let msg = `クリア！ 🎉\n時間: ${timer}秒\n手数: ${moveCount}\nスコア: ${score}`;
+        if (updated) msg += `\n✨ハイスコア更新！✨`;
+        msg += `\n現在のハイスコア: ${highScore}`;
+        alert(msg);
+      }, 100);
     } else {
       renderBoardWithImage(selectedImageURL);
     }
   }
 }
 
+// --- 完成判定 ---
 function isSolved() {
   for (let i = 0; i < size * size - 1; i++) {
     if (board[i] !== i + 1) return false;

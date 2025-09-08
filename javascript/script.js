@@ -2,6 +2,13 @@
 
 // 作品データ
 const workDetails = {
+  gamePotal: {
+    title: "ゲームポータルページ",
+    duration: "作業時間：60時間",
+    description: "各ゲームへのリンクと、ハイスコアをローカルストレージに保存し表示できるようにしました。",
+    link: "works/games/gamePotal.php",
+    github: "https://github.com/yuyamitsu/portfolio/tree/main/works/games"
+  },
   poker: {
     title: "poker",
     duration: "作業時間：30時間",
@@ -91,7 +98,7 @@ const workDetails = {
 
 // カテゴリ分け
 const categoryMap = {
-  Games: ["poker", "memoryGame", "highLowGame", "puzzle15", "lightsOut", "soundMemory"],
+  Games: ["gamePotal","poker", "memoryGame", "highLowGame", "puzzle15", "lightsOut", "soundMemory"],
   Utilities: ["calculator", "baseConverter", "prime"],
   Others: ["designHouse", "taiwanTravel", "ccDonuts"]
 };

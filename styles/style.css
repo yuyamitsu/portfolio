@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+
 html {
   scroll-behavior: smooth;
 }
@@ -275,7 +276,7 @@ footer {
   padding: 2rem;
   border-radius: 10px;
   width: 90%;
-  max-width: 500px;
+  max-width: 700px;
   position: relative;
 }
 

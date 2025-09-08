@@ -1,5 +1,7 @@
 'use strict'
 
+const gameName = "soundMemory";
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
 const checkButton = document.getElementById("checkButton");
@@ -10,6 +12,12 @@ const difficulty = {
   hard: [261.63, 293.66, 349.23, 392.00, 493.90, 523.25],
   veryHard: [261.63, 293.66, 329.63, 349.23, 392.00, 440, 493.90, 523.25]
 }
+const scoreMultiplier = {
+  easy: 1,
+  nomal: 2,
+  hard: 3,
+  veryHard: 4
+};
 const soundNames = {
   easy: ['ド（C）', '高いド（C）'],
   nomal: ['ド（C）', 'ミ（E）', 'ソ（G）', '高いド（C）'],
@@ -27,15 +35,17 @@ let gameCount = firstGameCount;
 let score = 0;
 let currentFrequencies = difficulty.nomal;
 let currentSoundNames = soundNames.nomal; // 現在の音名配列を保持する変数
+let currentMultiplier = scoreMultiplier.nomal; // デフォルト
 
 difficultySelect.addEventListener("change", (e) => {
   const selectedKey = e.target.value;
   currentFrequencies = difficulty[selectedKey];
   currentSoundNames = soundNames[selectedKey];
+  currentMultiplier = scoreMultiplier[selectedKey];
   updateSoundButtons();
 })
 
-maxScoreMessage.textContent = localStorage.getItem("maxScore");
+maxScoreMessage.textContent = localStorage.getItem("soundMemoryHS") || 0;
 currentScoreMessage.textContent = score;
 message.textContent = "音が鳴って光った順にボタンをおしてね！";
 
@@ -57,48 +67,45 @@ function updateSoundButtons() {
   });
 }
 
-// 難易度が変わったときの処理
-difficultySelect.addEventListener("change", (e) => {
-  const selectedKey = e.target.value;
-  currentFrequencies = difficulty[selectedKey];
-  updateSoundButtons();
-});
-
 function playTone(frequency) {
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
   const selectedWave = document.getElementById('waveSelect').value;
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
 
   osc.type = selectedWave;
-  osc.frequency.setValueAtTime(frequency, ctx.currentTime);
+  osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
 
   osc.connect(gain);
-  gain.connect(ctx.destination);
+  gain.connect(audioCtx.destination);
 
-  gain.gain.setValueAtTime(1.0, ctx.currentTime);
-  gain.gain.linearRampToValueAtTime(0.0, ctx.currentTime + 0.4);
+  gain.gain.setValueAtTime(1.0, audioCtx.currentTime);
+  gain.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + 0.4);
 
   osc.start();
-  osc.stop(ctx.currentTime + 0.4);
+  osc.stop(audioCtx.currentTime + 0.4);
 }
 function playFailureSound() {
-  const ctx = new (window.AudioContext || window.webkitAudioContext)();
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
 
   // 低い周波数（失敗感のある音）
-  osc.frequency.setValueAtTime(100, ctx.currentTime);
+  osc.frequency.setValueAtTime(100, audioCtx.currentTime);
   osc.type = 'sawtooth';
 
   osc.connect(gain);
-  gain.connect(ctx.destination);
+  gain.connect(audioCtx.destination);
 
-  gain.gain.setValueAtTime(0.5, ctx.currentTime); // 少し音量を下げる
-  gain.gain.linearRampToValueAtTime(0.0, ctx.currentTime + 0.3); // 短く減衰させる
+  gain.gain.setValueAtTime(0.5, audioCtx.currentTime); // 少し音量を下げる
+  gain.gain.linearRampToValueAtTime(0.0, audioCtx.currentTime + 0.3); // 短く減衰させる
 
   osc.start();
-  osc.stop(ctx.currentTime + 0.3); // 短くする
+  osc.stop(audioCtx.currentTime + 0.3); // 短くする
 }
 
 
@@ -110,6 +117,7 @@ function startGame() {
   checkButton.classList.add("none");
   message.textContent = '再生中… ';
   currentScoreMessage.textContent = score;
+  difficultySelect.disabled = true;
 
   // ランダムに音を選ぶ（重複あり）
   for (let i = 0; i < gameCount; i++) {
@@ -136,9 +144,11 @@ function resetGame() {
   startButton.classList.remove("none");
   resetButton.classList.add("none");
   checkButton.classList.add("none");
+  difficultySelect.disabled = false;
   gameCount = firstGameCount;
   score = 0;
   currentScoreMessage.textContent = score;
+  message.textContent = "音が鳴って光った順にボタンをおしてね！";
 }
 
 function userInput(index) {
@@ -165,14 +175,12 @@ function userInput(index) {
     message.textContent = '🎉 正解！！';
     inputEnabled = false;
     gameCount++;
-    score++;
+    score += currentMultiplier;
     currentScoreMessage.textContent = score;
     // 最大スコアを更新（score が maxScore を超えたら）
-    const maxScore = Number(localStorage.getItem("maxScore")) || 0;
-    if (score > maxScore) {
-      localStorage.setItem("maxScore", score);
-      maxScoreMessage.textContent = localStorage.getItem("maxScore");
-    }
+    updateHighScore(gameName, score);
+    maxScoreMessage.textContent = localStorage.getItem("soundMemoryHS") || 0;
+
     startButton.classList.remove("none");
     startButton.textContent = "次のゲームへ";
   }

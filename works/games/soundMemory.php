@@ -44,8 +44,8 @@
 
     <div id="messageDisplay">
       <p id="message"></p>
-      <p>現在<span id="currentScoreMessage"></span>連勝中</p>
-      <p>最高記録:<span id="maxScoreMessage"></span>連勝</p>
+      <p>現在<span id="currentScoreMessage"></span>得点</p>
+      <p>最高記録:<span id="maxScoreMessage"></span>得点</p>
     </div>
     <?php require 'includes/pageNav.php';?>
   </div>
