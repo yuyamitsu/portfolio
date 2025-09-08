@@ -208,6 +208,24 @@ bgm.addEventListener('ended', () => {
   bgm.play(); // 再生
 });
 
+// セレクトボックス要素
+const bgmSelect = document.getElementById('bgmSelect');
+
+// BGM切り替えイベント
+bgmSelect.addEventListener('change', () => {
+  const newSrc = bgmSelect.value;
+  bgm.src = newSrc;
+  bgm.currentTime = 0; // 曲の先頭から
+  if (!bgm.paused) {
+    bgm.play(); // 再生中なら切り替えてそのまま再生
+  }
+  console.log(`BGMを切り替えました: ${newSrc}`);
+});
+
+
+
+
+
 // ハンバーガーメニュー処理
 const navToggle = document.querySelector('.navToggle');
 const navWrapper = document.querySelector('.navWrapper');
