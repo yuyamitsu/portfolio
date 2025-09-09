@@ -98,10 +98,19 @@ const workDetails = {
 
 // カテゴリ分け
 const categoryMap = {
-  Games: ["gamePotal","poker", "memoryGame", "highLowGame", "puzzle15", "lightsOut", "soundMemory"],
+  Games: ["gamePotal", "poker", "memoryGame", "highLowGame", "puzzle15", "lightsOut", "soundMemory"],
   Utilities: ["calculator", "baseConverter", "prime"],
   Others: ["designHouse", "taiwanTravel", "ccDonuts"]
 };
+
+// BGMリストを配列で管理（ここに追加すれば自動で反映）
+const bgmList = [
+  { src: "music/playingCard.mp3", name: "♪Playing Card" },
+  { src: "music/Drowsy_Afternoon.mp3", name: "♪Drowsy_Afternoon" },
+  { src: "music/emakimono.mp3", name: "♪emakimono" },
+  { src: "music/夜想ラヂオ.mp3", name: "♪夜想ラヂオ" },
+  { src: "music/RAINY_GARDEN.mp3", name: "♪RAINY_GARDEN" }
+];
 
 // カードを生成して配置
 Object.entries(categoryMap).forEach(([categoryName, ids]) => {
@@ -183,45 +192,54 @@ document.addEventListener('click', e => {
 // HTML要素を取得
 const bgm = document.getElementById('bgm');
 const bgmToggle = document.querySelector('.bgmToggle');
+const bgmSelect = document.getElementById("bgmSelect");
+
+
 
 // ボタンのクリックイベントリスナーを追加
 bgmToggle.addEventListener('click', () => {
   if (bgm.paused) {
-    // 音楽が停止している場合は再生
     bgm.play();
-    bgmToggle.innerHTML='BGM<br>ON';
-    bgmToggle.classList.toggle("bgmToggleOn");
+    setBgmButton(true); // ← 状態を明示
     console.log('BGMを再生しました。');
   } else {
-    // 音楽が再生中の場合は停止
     bgm.pause();
+    setBgmButton(false); // ← 状態を明示
     console.log('BGMを停止しました。');
-    bgmToggle.innerHTML='BGM<br>OFF';
-    bgmToggle.classList.toggle("bgmToggleOn");
   }
 });
 
-// BGMの再生が終了したら次の曲イベントリスナー
-bgm.addEventListener('ended', () => {
-
-  bgm.currentTime = 0; // 再生位置を0秒に戻す
-  bgm.play(); // 再生
+// option を自動生成
+bgmList.forEach(track => {
+  const option = document.createElement("option");
+  option.value = track.src;
+  option.textContent = track.name;
+  if (track.src === bgm.src) {
+    option.selected = true;
+  }
+  bgmSelect.appendChild(option);
 });
 
-// セレクトボックス要素
-const bgmSelect = document.getElementById('bgmSelect');
-
-// BGM切り替えイベント
+// BGM切り替え（必ず再生）
 bgmSelect.addEventListener('change', () => {
   const newSrc = bgmSelect.value;
   bgm.src = newSrc;
-  bgm.currentTime = 0; // 曲の先頭から
-  if (!bgm.paused) {
-    bgm.play(); // 再生中なら切り替えてそのまま再生
-  }
-  console.log(`BGMを切り替えました: ${newSrc}`);
+  bgm.currentTime = 0;
+  bgm.play();               // ← 必ず再生
+  setBgmButton(true);       // ← ボタンもON表示に
+  console.log(`BGMを切り替えて再生しました: ${newSrc}`);
 });
 
+// BGMボタン表示を更新する関数
+function setBgmButton(isPlaying) {
+  if (isPlaying) {
+    bgmToggle.innerHTML = 'BGM<br>ON';
+    bgmToggle.classList.add("bgmToggleOn");
+  } else {
+    bgmToggle.innerHTML = 'BGM<br>OFF';
+    bgmToggle.classList.remove("bgmToggleOn");
+  }
+}
 
 
 

@@ -20,12 +20,14 @@
         <img class="gameImage" src="" alt="">
         <h3 class="gameTitle"></h3>
         <div class="score"></div>
+        <button class="clearScore">スコアの初期化</button>
         <a class="link" target="_blank"></a>
       </div>
     </template>
     <div class="gameList" id="gameList">
     </div>
   </div>
+  <?php require 'includes/bgm.php';?>
   <?php require 'includes/footer.php';?>
   <script src="javascript/gamePotal.js" defer></script>
 

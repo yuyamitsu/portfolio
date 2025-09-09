@@ -14,6 +14,11 @@ function updateHighScore(gameName, newScore) {
   return false; // 更新されなかった
 }
 
-function resetHighScore(gameName) {
-  localStorage.removeItem(`${gameName}HS`);
+function clearScore(gameName,gameTitle) {
+  if (window.confirm(`本当に${gameTitle}のスコアを削除しますか?`)) {
+    // OK を押したとき
+    localStorage.removeItem(gameName + "HS");
+    alert("削除しました");
+    location.reload();
+  }
 }

@@ -25,7 +25,9 @@ for (const id in gameIds) {
   link.href = game.link;
   link.textContent = 'GameStart';
   clone.querySelector('.score').textContent = `HighScore：${score}`;
+  // スコア初期化ボタン
+  const clearBtn = clone.querySelector('.clearScore');
+  clearBtn.addEventListener('click', () => clearScore(game.name,game.title));
 
   gameList.appendChild(clone);
 }
-

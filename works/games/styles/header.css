@@ -114,6 +114,13 @@ header h1 {
   /* 文字は白に */
 }
 
+.signUpMenu li a,
+.signUpMenu li button {
+  display: block;
+  width: 100%;           /* liの幅いっぱいに広げる */
+  padding: 0.5em 1em;    /* クリックしやすい余白 */
+}
+
 
 .nameInfo {
   margin: 30px 0 0 0;

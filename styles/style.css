@@ -237,6 +237,8 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 5px;
+  max-width: 100px;
   position: fixed;
   bottom: 4px;
   right: calc((100% - 1200px) / 2 + 20px);
@@ -254,7 +256,13 @@ header {
 
 .bgmToggleOn {
   background-color: aqua;
+}
 
+#bgmSelect {
+  text-align: center;
+  font-size: 0.7rem;
+  background-color: whitesmoke;
+  max-width: 100px;
 }
 
 
@@ -289,16 +297,14 @@ footer {
   width: 90%;
   max-width: 700px;
   position: relative;
+  font-size: 1.5rem;
 }
 
 .closeModal {
   position: absolute;
   top: 0.5rem;
   right: 1rem;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
+  font-size: 3rem;
 }
 
 .modalImage {
@@ -310,7 +316,7 @@ footer {
 
 
 .modalTitle {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin-bottom: 1rem;
 }
 
@@ -322,6 +328,7 @@ footer {
 .modalGitHub {
   margin-top: 0.5rem;
   color: #007acc;
+  font-size: 1.8rem;
 }
 
 .modalShow {
@@ -416,6 +423,6 @@ footer {
   }
 
   .bgmChange {
-    right: calc((100% - 375px) / 2 + 20px);
+    right: calc((100% - 375px) / 2);
   }
 }

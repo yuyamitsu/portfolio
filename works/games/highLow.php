@@ -82,6 +82,7 @@
     </main>
     <?php require 'includes/pageNav.php';?>
   </div>
+  <?php require 'includes/bgm.php';?>
   <?php require 'includes/footer.php';?>
   <script src="javascript/deckInit.js"></script>
   <script src="javascript/highLow.js"></script>

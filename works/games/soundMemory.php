@@ -49,7 +49,8 @@
     </div>
     <?php require 'includes/pageNav.php';?>
   </div>
-  	<?php require 'includes/footer.php';?>
+  <?php require 'includes/bgm.php';?>
+  <?php require 'includes/footer.php';?>
   <script src="javascript/soundMemory.js"></script>
 </body>
 

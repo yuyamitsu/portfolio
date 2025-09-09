@@ -23,13 +23,6 @@ if (playerName) {
   });
 }
 
-//  else {
-//   // 名前が未登録の場合（ゲスト扱い）
-//   nameDisplayElements.forEach(el => {
-//     el.textContent = "ゲスト";
-//   });
-// }
-
 function addName() {
   const inputName = window.prompt("名前を10文字以内で入力してください\n入力した名前+idがユーザー名となります");
   if (inputName !== null) {
@@ -50,15 +43,6 @@ function setBrowserId() {
     id = crypto.randomUUID();
     localStorage.setItem("browserId", id);
     localStorage.setItem("browserId4digits", id.slice(0, 4));
-  }
-}
-function clearScore(gameName) {
-  if (window.confirm("本当にスコアを削除しますか？")) {
-    // OK を押したとき
-    localStorage.removeItem(gameName + "HS");
-    // localStorage.removeItem("");
-    alert("削除しました");
-    location.reload();
   }
 }
 function deleteAll() {

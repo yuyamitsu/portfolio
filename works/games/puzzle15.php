@@ -57,6 +57,7 @@
     <div id="board"></div>
     <?php require 'includes/pageNav.php';?>
   </div>
+  <?php require 'includes/bgm.php';?>
   <?php require 'includes/footer.php';?>
   <script src="javascript/puzzle15.js"></script>
 </body>
