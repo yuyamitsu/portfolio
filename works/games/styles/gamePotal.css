@@ -9,23 +9,41 @@ body {
   text-align: center;
 }
 
-
-
+/* h2タイトル（アニメーション） */
 h2 {
-  font-size: 2.5rem;
-  font-weight: bold;
+  font-size: 2.8rem;
+  font-weight: 900;
   color: #007acc;
-  text-shadow: 2px 2px 0 #00e6ff, -2px -2px 0 #00e6ff;
-  margin: 40px 0 40px 0;
+  text-decoration: none;
+  transition: color 0.3s ease;
   position: relative;
   display: inline-block;
-  padding: 10px 20px;
-  background: linear-gradient(135deg, #00f0ff, #00c0ff);
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  margin: 40px auto 50px auto;
 }
 
+h2::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: -10px;
+  left: 0;
+  background-color: #00c0ff;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s ease-out;
+}
 
+body:hover h2 {
+  color: #00e6ff;
+}
+
+body:hover h2::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* ゲームポータルセクション */
 .gameList {
   display: flex;
   flex-wrap: wrap;
@@ -37,13 +55,13 @@ h2 {
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  width: 320px; /* 少しコンパクトに */
+  width: 320px;
   padding: 15px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px; /* 要素間の縦スペース */
+  gap: 10px;
   transition: transform 0.2s;
 }
 
@@ -51,44 +69,48 @@ h2 {
   transform: translateY(-5px);
 }
 
-.gameCard a {
-  display: block;
-  width: 80%;
-  text-align: center;
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #fff;
-  background-color: #007acc;
-  padding: 12px 0;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.gameCard a:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 8px rgba(0,0,0,0.3);
-}
-
 .gameImage {
   width: 100%;
   height: auto;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* ゲームタイトル */
 .gameTitle {
   font-size: 2rem;
   font-weight: bold;
-  color: #007acc; /* カードの青系と統一 */
-  text-shadow: 1px 1px 0 #00e6ff, -1px -1px 0 #00e6ff; /* 立体感 */
+  color: #007acc;
+  text-shadow: 1px 1px 0 #00e6ff, -1px -1px 0 #00e6ff;
   margin: 15px 0 10px 0;
+  position: relative;
+  display: inline-block;
+  transition: color 0.3s ease;
 }
 
-/* ハイスコア表示 */
+.gameCard:hover .gameTitle {
+  color: #00e6ff;
+}
+
+.gameTitle::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -5px;
+  left: 0;
+  background-color: #00c0ff;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s ease-out;
+}
+
+.gameCard:hover .gameTitle::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
 .score {
+  width: 80%;
   font-size: 1.2rem;
   font-weight: bold;
   color: #333;
@@ -96,44 +118,118 @@ h2 {
   border-radius: 8px;
   padding: 5px 10px;
   display: inline-block;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
-  margin-bottom: 10px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* ボタン共通スタイル */
+.link,
+.registerBtn,
 .clearScore {
   display: block;
   width: 80%;
   text-align: center;
-  font-size: 1.1rem;
   font-weight: bold;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+}
+
+.registerBtn,
+.clearScore {
+  border: none;
+  cursor: pointer;
+}
+
+.link:hover,
+.registerBtn:hover,
+.clearScore:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.25);
+}
+
+.link:active,
+.registerBtn:active,
+.clearScore:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 各ボタン個別スタイル */
+.link {
+  font-size: 1.4rem;
+  color: #fff;
+  background-color: #007acc;
+  padding: 12px 0;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.link:active {
+  background-color: #005fa3;
+}
+
+.clearScore {
+  font-size: 1.1rem;
   color: #fff;
   background-color: #e63946;
   padding: 10px 0;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
-  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
 }
 
 .clearScore:hover {
   background-color: #d62839;
-  transform: translateY(-3px);
-  box-shadow: 0 6px 8px rgba(0,0,0,0.25);
 }
-
 
 .clearScore:active {
   background-color: #ba1b1d;
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
+.registerBtn {
+  font-size: 1.1rem;
+  color: #fff;
+  background-color: #00b894;
+  padding: 10px 0;
+  margin-top: 5px;
+}
 
+.registerBtn:hover {
+  background-color: #019874;
+}
 
+.registerBtn:active {
+  background-color: #01755f;
+}
 
+/* ランキングリンク */
+.rankingLink {
+  margin: 60px auto;
+  text-align: center;
+  display: inline-block;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: #007acc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+  position: relative;
+}
 
+.rankingLink::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  bottom: -10px;
+  left: 0;
+  background-color: #00c0ff;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s ease-out;
+}
 
+.rankingLink:hover {
+  color: #00e6ff;
+}
 
-@media (max-width: 768px) {
+.rankingLink:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }

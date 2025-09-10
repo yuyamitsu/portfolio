@@ -342,11 +342,11 @@ function dropOut() {
     ? messageTypes[currentType].drop[Math.floor(Math.random() * messageTypes[currentType].drop.length)]
     : messageTypes[currentType].drop || "冷静な判断です。";
   // const dropMessage = messageTypes[currentType]?.drop || `${potentialWin}チップ獲得しました！`;
-  if(updateHighScore(gameName,potentialWin)) alert("ハイスコアを更新しました");
   resultMessage.textContent = `${dropMessage}（${potentialWin}チップ獲得）`;
   resultMessage.className = "drop";
   totalChips += potentialWin;
   chipTotal.textContent = totalChips;
+  if(updateHighScore(gameName,totalChips)) alert("ハイスコアを更新しました");
   potentialWin = 0;
   chipPotential.textContent = "0";
   highBtn.classList.add("none");

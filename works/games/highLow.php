@@ -17,7 +17,7 @@
 
 <body class="cardGameStyle">
   <?php require_once __DIR__ . '/includes/header.php';?>
-  <h2>ハイ＆ロー</h2>
+  <h2><?=$title?></h2>
   <div class="cardGameLayoutWrap">
     <main>
       <div id="chipStatus">

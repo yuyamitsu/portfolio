@@ -9,28 +9,42 @@ hamburgerBtn.addEventListener('click', () => {
   hamburgerBtn.classList.toggle('open');
 });
 
-// localStorageから名前を取得
-const playerName = localStorage.getItem("playerName");
+// ドロワー以外クリックで閉じる
+document.addEventListener('click', (event) => {
+  const isClickInsideDrawer = drawerMenu.contains(event.target);
+  const isClickOnButton = hamburgerBtn.contains(event.target);
+
+  if (!isClickInsideDrawer && !isClickOnButton && drawerMenu.classList.contains('drawerActive')) {
+    drawerMenu.classList.remove('drawerActive');
+    hamburgerBtn.classList.remove('open');
+  }
+});
+
+
+// localStorageから名前とブラウザIDを取得
+const playerName = localStorage.getItem("playerName") || "";
+const browserId = localStorage.getItem("browserId4digits") || "";
 const nameDisplayElements = document.querySelectorAll(".nameDisplay");
 
-// 名前が登録されている場合
-if (playerName) {
-  const id = localStorage.getItem("browserId4digits") || "";
-  const displayName = `${playerName}【${id}】`;
-
+// 表示名を作成
+if (playerName || browserId) {
+  // playerNameが空でもIDは表示
+  const displayName = playerName ? `${playerName}_${browserId}` : `_${browserId}`;
   nameDisplayElements.forEach(el => {
     el.textContent = displayName;
   });
 }
 
 function addName() {
-  const inputName = window.prompt("名前を10文字以内で入力してください\n入力した名前+idがユーザー名となります");
+  const inputName = window.prompt(
+    "名前を10文字以内で入力してください\n入力した名前+idがユーザー名となります"
+  );
   if (inputName !== null) {
     if (inputName.trim().length > 10) {
       alert("名前は10文字以内で入力してください");
     } else {
-      setBrowserId()
-      localStorage.setItem("playerName", inputName)
+      setBrowserId();
+      localStorage.setItem("playerName", inputName);
       location.reload();
     }
   }
@@ -45,9 +59,11 @@ function setBrowserId() {
     localStorage.setItem("browserId4digits", id.slice(0, 4));
   }
 }
+
 function deleteAll() {
-  if (window.confirm("名前・id・スコアをすべて削除します。\n本当に削除しますか？")) {
-    // OK を押したとき
+  if (window.confirm(
+    "名前・id・スコアをすべて削除します。(ランキングは削除されません)\n本当に削除しますか？"
+  )) {
     localStorage.clear();
     alert("削除しました");
     location.reload();

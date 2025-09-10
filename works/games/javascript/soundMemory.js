@@ -167,24 +167,33 @@ function userInput(index) {
     checkButton.classList.remove("none");
     resetButton.classList.remove("none");
 
+    // 不正解時 → ハイスコアを確定チェック
+    if (updateHighScore(gameName, score)) {
+      maxScoreMessage.textContent = getHighScore(gameName);
+    }
     return;
   }
 
-  // 全部正しく入力できた？
+  // 全部正しく入力できた？（＝クリア）
   if (userSequence.length === sequence.length) {
-    message.textContent = '🎉 正解！！';
     inputEnabled = false;
     gameCount++;
     score += currentMultiplier;
     currentScoreMessage.textContent = score;
-    // 最大スコアを更新（score が maxScore を超えたら）
-    updateHighScore(gameName, score);
-    maxScoreMessage.textContent = localStorage.getItem("soundMemoryHS") || 0;
+
+    // ハイスコアを更新した場合
+    if (updateHighScore(gameName, score)) {
+      maxScoreMessage.textContent = getHighScore(gameName);
+      message.textContent = '🎉 ハイスコア更新！';
+    } else {
+      message.textContent = '🎉 正解！！';
+    }
 
     startButton.classList.remove("none");
     startButton.textContent = "次のゲームへ";
   }
 }
+
 
 function flashButton(index) {
   const buttons = document.querySelectorAll(".soundButton");
