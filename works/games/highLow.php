@@ -53,13 +53,15 @@
         <button id="dropBtn" class="none">おりる</button>
         <button id="reset" class="none">もういちどチャレンジ！</button>
       </div>
-
-      <p id="resultMessage">次のカードの数が「たかい」か「ひくい」か選ぶゲームです！(Aが一番たかくて2が一番ひくいです)</p>
+      <div id="promptArea">
+        <div id="characterImageArea"></div>
+        <p id="resultMessage">次のカードの数が「たかい」か「ひくい」か選ぶゲームです！(Aが一番たかくて2が一番ひくいです)</p>
+      </div>
       <div id="messageSelect">
         <input type="radio" id="typeDefault" name="messageType" value="default" checked>
         <label for="typeDefault">デフォルト</label>
         <input type="radio" id="typeFunny" name="messageType" value="funny">
-        <label for="typeFunny">おもしろ</label>
+        <label for="typeFunny">自称おもしろ</label>
         <input type="radio" id="typeEnglish" name="messageType" value="english">
         <label for="typeEnglish">英語</label>
         <input type="radio" id="typeBodybuilding" name="messageType" value="bodybuilding">
@@ -76,8 +78,8 @@
         <label for="typeGrandma">おばあちゃん風</label>
         <input type="radio" id="typeChuuni" name="messageType" value="chuuni">
         <label for="typeChuuni">厨二病風</label>
-        <input type="radio" id="typeHiroyuki" name="messageType" value="hiroyuki">
-        <label for="typeHiroyuki">ひ〇ゆき風</label>
+        <input type="radio" id="typeHiromaru" name="messageType" value="hiromaru">
+        <label for="typeHiromaru">ひ〇ゆき風</label>
       </div>
     </main>
     <?php require 'includes/pageNav.php';?>

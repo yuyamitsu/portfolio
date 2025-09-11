@@ -2,9 +2,9 @@
 
 #chipStatus {
   background: linear-gradient(to bottom, #ffffff, #e0f0ff);
-  padding: 16px 24px;
+  padding: 8px 24px;
   border-radius: 16px;
-  margin-bottom: 20px;
+  margin: 0px auto;
   font-family: 'Rounded Mplus 1c', sans-serif;
   font-size: 1.1rem;
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
@@ -13,8 +13,6 @@
   gap: 12px;
   justify-content: center;
   max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 #chipStatus p {
@@ -218,9 +216,9 @@
 
 
 #resultMessage {
+  width: 100%;
   min-height: 2em;
   padding: 10px 15px;
-  margin-top: 10px;
   border: 2px solid #6c5ce7;
   /* 少し落ち着いた紫系 */
   border-radius: 10px;
@@ -233,6 +231,10 @@
   /* 落ち着きのある文字色 */
   box-shadow: 0 0 6px rgba(108, 92, 231, 0.3);
   transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+  margin: 0;
+  white-space: pre-line; /* 改行を活かす */
+  font-size: 1.2rem;
+  line-height: 1.5;
 }
 
 .tie {
@@ -265,6 +267,7 @@ main {
   width: 100%;
   margin: 0 auto;
 }
+
 /* ラジオボタン群の装飾 */
 #messageSelect {
   padding: 1rem;
@@ -312,7 +315,52 @@ main {
   margin-bottom: 0.5rem;
 }
 
+#characterImageArea {
+  text-align: center;
+}
 
+.characterImage {
+  max-width: 200px;
+  height: auto;
+  display: inline-block;
+}
+
+
+#promptArea {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: 'DotGothic16', monospace; /* ドラクエっぽいドットフォント */
+  background-color: black; /* 黒背景 */
+  color: white; /* 白文字 */
+  border: 4px solid white; /* 枠線 */
+  border-radius: 0; /* 四角いウィンドウ風 */
+  padding: 12px;
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  box-shadow: 4px 4px 0 #333; /* 影でレトロ感 */
+  border: 4px double white;
+}
+
+#promptArea p {
+  margin: 0;
+  white-space: pre-line; /* 改行を活かす */
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+#characterImageArea {
+  margin-bottom: 10px;
+}
+
+.characterImage {
+  max-width: 140px;
+  min-width: 140px;
+  min-height: 140px;
+  height: auto;
+  display: block;
+}
 
 
 @media screen and (max-width: 768px) {
@@ -355,4 +403,13 @@ main {
     font-size: 1rem;
     text-align: center;
   }
+
+  #promptArea {
+    flex-direction: column;
+  }
+  .characterImage {
+    max-width: 120px;
+    min-width: 120px;
+    min-height: 120px;
+}
 }

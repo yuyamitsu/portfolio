@@ -30,7 +30,7 @@
       <label><input type="radio" name="imageOption" value="img/boy.jpg"> 男の子</label>
       <label><input type="radio" name="imageOption" value="img/dotPower.png"> ドット戦士</label>
       <label><input type="radio" name="imageOption" value="img/cats.png"> 子猫</label>
-      <label><input type="radio" name="imageOption" value="custom"> 自分の画像</label><br>
+      <label><input type="radio" name="imageOption" value="custom"> 自分の画像を選択(1,000kb以下推奨)</label><br>
       <input type="file" id="imageInput" accept="image/*" style="display:none;">
     </div>
 

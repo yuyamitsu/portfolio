@@ -87,6 +87,8 @@ function playTone(frequency) {
   osc.start();
   osc.stop(audioCtx.currentTime + 0.4);
 }
+
+
 function playFailureSound() {
   if (audioCtx.state === "suspended") {
     audioCtx.resume();

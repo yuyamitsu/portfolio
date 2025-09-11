@@ -12,7 +12,7 @@ $rankings = [];
 
 foreach ($games as $game) {
   $stmt = $pdo->prepare(
-    "SELECT user_name, best_score
+    "SELECT user_name, best_score, updated_at
      FROM best_scores
      WHERE game_id = :game_id
      ORDER BY best_score DESC, updated_at ASC
@@ -21,6 +21,7 @@ foreach ($games as $game) {
   $stmt->execute([':game_id' => $game['id']]);
   $rankings[$game['id']] = $stmt->fetchAll();
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -42,6 +43,7 @@ foreach ($games as $game) {
           <th>順位</th>
           <th>ユーザー名</th>
           <th>スコア</th>
+          <th>更新日時</th>
         </tr>
       </thead>
       <tbody>
@@ -51,6 +53,7 @@ foreach ($games as $game) {
               <td><?= $index + 1 ?></td>
               <td><?= htmlspecialchars($row['user_name']) ?></td>
               <td><?= $row['best_score'] ?></td>
+              <td><?= date("Y-m-d H:i", strtotime($row['updated_at'])) ?></td>
             </tr>
           <?php endforeach; ?>
         <?php else: ?>

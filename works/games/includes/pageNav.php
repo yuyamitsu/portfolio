@@ -9,5 +9,6 @@
         <li><a href="soundMemory.php" target="_blank">サウンド記憶ゲーム</a></li>
         <li><a href="../../index.html" target="_blank">ポートフォリオトップへ</a></li>
         <li><a href="gamePotal.php" target="_blank">ゲームポータルトップへ</a></li>
+        <li><a href="ranking.php" target="_blank">ランキングページへ</a></li>
       </ul>
     </nav>

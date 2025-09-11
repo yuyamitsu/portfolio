@@ -6,9 +6,8 @@ body {
   min-width: 375px;
   margin: 0 auto;
   font-family: sans-serif;
-  background: #eaf6ff; /* 薄めの水色に変更 */
+  background: #eaf6ff;
   text-align: center;
-  padding: 40px 20px;
   color: #333; /* 文字色を濃いグレーに統一 */
 }
 

@@ -1,7 +1,7 @@
 <?php
   echo <<<HTML
   <header>
-    <h1>YuyaGames</h1>
+    <h1><a href="gamePotal.php" target="_blank">YuyaGames</a></h1>
     <div class="welcomeText">
       <p>ようこそ <span class="nameDisplay">ゲスト</span>さん</p>
       <button class="hamburgerBtn" aria-label="メニュー">
