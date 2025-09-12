@@ -90,7 +90,7 @@ const workDetails = {
     title: "ドーナツのショッピングサイト",
     duration: "作業時間：60時間1人",
     description: "ログインの有無による画面遷移やセッション情報によるカート状態の更新などに注力しました。" +
-      "また、PHPを使いデータベースを初導入しました。",
+      "また、PHPを使いデータベースを初導入しました。(セキュリティの為データベース削除済み)",
     link: "works/others/ccDonuts/index.php",
     github: "https://github.com/yuyamitsu/portfolio/tree/main/works/others/ccDonuts"
   }
