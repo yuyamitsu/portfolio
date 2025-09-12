@@ -96,7 +96,7 @@ checkboxes.forEach((checkbox, index) => {
 // --- ゲームクリア判定 ---
 function checkGameClear() {
   const allHidden = Array.from(cardImages).every(img => img.style.visibility === "hidden");
-  if (allHidden) {
+  if (debugMode || allHidden) {
     clearInterval(timerInterval);
     const numberOfPairs = numberOfCards / 2;
     const score = calculateScore(numberOfPairs, moveCount, timer);
@@ -117,7 +117,8 @@ function displayCards(randomDeck) {
   randomDeck.forEach((card, index) => {
     cardImages[index].classList.remove("slide-in");
     setTimeout(() => {
-      cardImages[index].src = "img/cardBack.png";
+      // デバッグモードなら表向き、通常は裏向き
+      cardImages[index].src = debugMode ? `img/${card}.png` : "img/cardBack.png";
       cardImages[index].style.visibility = "visible";
       cardImages[index].classList.add("slide-in");
     }, index * delayPerCard);

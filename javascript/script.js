@@ -166,6 +166,18 @@ function openModal(detail, imgSrc, imgAlt) {
   modal.classList.add("modalShow");
 }
 
+// モーダルの外側クリックで閉じる
+modal.addEventListener('click', e => {
+  if (e.target === modal) {  // 背景(modal)自身をクリックしたときだけ閉じる
+    modal.classList.replace("modalShow", "modalHide");
+    setTimeout(() => {
+      modal.classList.remove("modalHide");
+      modal.style.display = "none";
+    }, 500);
+  }
+});
+
+
 modal.querySelector('.closeModal').addEventListener('click', () => {
   modal.classList.replace("modalShow", "modalHide");
   setTimeout(() => {

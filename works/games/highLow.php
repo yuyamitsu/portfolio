@@ -1,6 +1,19 @@
 <?php
   session_start();
   require_once __DIR__ . '/../../../../db.php';
+
+  const DEBUG_PASSWORD = 'uusshmhmba';
+
+  // デバッグモード OFF
+  if (isset($_GET['debugOff'])) {
+      unset($_SESSION['debugMode']);
+  }
+
+  // デバッグモード ON
+  if (!empty($_POST['debugPass']) && trim($_POST['debugPass']) === DEBUG_PASSWORD) {
+      $_SESSION['debugMode'] = true;
+  }
+
   $title = "ハイ＆ロー";
 ?>
 <!DOCTYPE html>
@@ -86,6 +99,21 @@
   </div>
   <?php require 'includes/bgm.php';?>
   <?php require 'includes/footer.php';?>
+
+  <?php if (!empty($_SESSION['debugMode'])): ?>
+    
+  <!-- デバッグモード中だけ出すUI -->
+   <p>デバッグ中だよん　　　<a href="?debugOff=1">デバッグモード終了</a></p>
+  <?php else: ?>
+    <!-- デバッグモードに入るフォーム -->
+    <form method="post">
+      <input type="password" autocomplete="off" name="debugPass" placeholder="……">
+      <button type="submit">？？？</button>
+    </form>
+  <?php endif; ?>
+  <script>
+    const debugMode = <?php echo !empty($_SESSION['debugMode']) ? 'true' : 'false'; ?>;
+  </script>
   <script src="javascript/deckInit.js"></script>
   <script src="javascript/highLow.js"></script>
 </body>

@@ -312,7 +312,7 @@ function judge(choice) {
   lowBtn.disabled = true;
   dropBtn.disabled = true;
 
-  const isCorrect =
+  const isCorrect = debugMode ? true :
     (choice === "high" && currValue > prevValue) ||
     (choice === "low" && currValue < prevValue);
 
